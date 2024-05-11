@@ -5,6 +5,7 @@ public class Board {
     protected ArrayList<? extends Player> playerList;
     private String nextPlayerAction;
     private int gameDirection;
+    private Deck deck;
 
     protected static class Deck {
         Stack<Playable> drawPile;
@@ -56,66 +57,61 @@ public class Board {
         }
     }
 
-    public Board() {
+    public Board(Collection<Playable> cards) {
+        deck = new Deck(cards);
+        startGame();
+        gameDirection = 1;
+    }
+
+    private void startGame() {
+        // rozdać karty playerom
+    }
+
+    public void addPlayer(Player player) {
 
     }
-    public void addPlayer(Player player){}
-    public void removePlayer(String name){}
-    public void notifyPlayer(String name){}
-    public String toString(){
-        return null;
+
+    public void removePlayer(String name) {
+
     }
+
+    public void notifyPlayer(String name) {
+
+    }
+
+    @Override
+    public String toString() {
+        return deck.getTopCard().toString();
+    }
+
     public void playOnBoard(Playable card) {
+        deck.play(card);
+    }
+
+    public Playable drawFromPile() throws NoMoreCardsInDeck {
+        try {
+            return deck.draw();
+        } catch (NoMoreCardsInDeck e) {
+            if (deck.refillDrawPile()) {
+                return deck.draw();
+            }
+            throw new NoMoreCardsInDeck();
+        }
+    }
+
+    public void setNextPlayerAction(String action) {
 
     }
-    public Playable drawFromPile() {
-        return null;
-    }
-    public void setNextPlayerAction(String actiom) {
 
-    }
     public String getNextPlayerAction() {
         return null;
     }
-    public Playable getTopCard() {
-        return null;
-    }
-    public void reverseGameDirection() {
 
+    public Playable getTopCard() {
+        return deck.getTopCard();
+    }
+
+    public void reverseGameDirection() {
+        gameDirection = -1;
     }
 }
-//
-//
-//package core;
-//
-//import java.util.*;
-//
-//public class Board {
-//    public class Deck {
-//        private Stack<Playable> draw;
-//        private Stack<Playable> play;
-//        private ArrayList<? extends Playable> cards = new ArrayList<>();
-//        Deck() {
-//            draw = shuffleAndStack(cards);
-//            play = new Stack<>();
-//        }
-//
-//        private Stack<Playable> shuffleAndStack(ArrayList<? extends Playable> cards) {
-//            Collections.shuffle(cards);
-//            Stack<Playable> stack = new Stack<>();
-//            for (Playable card: cards)
-//                stack.push(card);
-//            return stack;
-//        }
-//
-//        public Playable draw() {
-//            return draw.pop();
-//        }
-//
-//        public void play(Playable card) {
-//            play.push(card);
-//        }
-//    }
-//    private List<Player> players = new ArrayList<>();
-//    private int direction; // kierunek kolejki 1 lub -1
-//}
