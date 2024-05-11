@@ -1,28 +1,33 @@
 package core;
 
 public class Card implements Playable{
-    protected int number;
-    protected String color;
-    public Card(int number, String color) {
-        this.number = number;
+    private String symbol;
+    private String color;
+    public Card(String symbol, String color) {
+        this.symbol = symbol;
         this.color = color;
     }
 
-    public int getNumber() {
-        return number;
+    public String getSymbol() {
+        return symbol;
     }
     public String getColor() {
         return color;
     }
 
     @Override
-    public boolean isPlayable(String color, int number) {
-        if(this.color.equals(color) || this.number == number) {
+    public boolean isPlayable(String color, String symbol) {
+        if(this.color.equals(color) || this.symbol.equals(symbol)) {
             return true;
         }
         return false;
     }
-    public void play(Board board) {
-
+    public boolean play(Board board) {
+        Playable currentCard = board.getTopCard();
+        if(isPlayable(currentCard.getColor(), currentCard.getSymbol())) {
+            board.playOnBoard(this);
+            return true;
+        }
+        return false;
     }
 }

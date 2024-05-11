@@ -1,9 +1,10 @@
 package core;
+//symbole : 0-9 cyfry
 
 public interface Playable {
-    public boolean isPlayable(String color, int  number);
-    public void play(Board board);
+    public boolean isPlayable(String color, String symbol);
+    public boolean play(Board board);
     public String getColor();
-    public int getNumber();
+    public String getSymbol();
 
 }

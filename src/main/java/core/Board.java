@@ -7,8 +7,9 @@ import java.util.Stack;
 import java.util.Collections;
 //TODO zaimplementowac wszystkie metody i zastanowic sie czy czegos nie brakuje
 public class Board {
-    ArrayList<? extends Player> playerList;
-    int gameDirection;
+    protected ArrayList<? extends Player> playerList;
+    private String nextPlayerAction;
+    private int gameDirection;
     protected static class Deck {
         Stack<? extends Playable> drawPile;
         Stack<? extends Playable> playPile;
@@ -29,7 +30,7 @@ public class Board {
         }
         public void play(Playable card) {
         }
-        public Playable getFirst(){
+        public Playable getTopCard(){
             return null;
         }
     }
@@ -47,5 +48,17 @@ public class Board {
     }
     public Playable drawFromPile() {
         return null;
+    }
+    public void setNextPlayerAction(String actiom) {
+
+    }
+    public String getNextPlayerAction() {
+        return null;
+    }
+    public Playable getTopCard() {
+        return null;
+    }
+    public void reverseGameDirection() {
+
     }
 }
