@@ -20,8 +20,9 @@ public class Card implements Playable{
         if(this.color.equals(color) || this.number == number) {
             return true;
         }
-        if(color.equals("black")) {
-            return true;
-        }
+        return false;
+    }
+    public void play(Board board) {
+
     }
 }
