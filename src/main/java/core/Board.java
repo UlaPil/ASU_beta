@@ -2,7 +2,7 @@ package core;
 
 import java.util.*;
 public class Board {
-    protected ArrayList<? extends Player> playerList;
+    protected ArrayList<Player> playerList;
     private String nextPlayerAction;
     private int gameDirection;
     private Deck deck;
@@ -57,22 +57,23 @@ public class Board {
         }
     }
 
-    public Board(Collection<Playable> cards) {
+    public Board(Collection<Playable> cards, Player ... players) {
         deck = new Deck(cards);
         startGame();
         gameDirection = 1;
+        playerList = new ArrayList<>(List.of(players));
     }
 
     private void startGame() {
-        // rozdać karty playerom
-    }
-
-    public void addPlayer(Player player) {
-
+        for (Player player: playerList) {
+            player.draw(7);
+        }
     }
 
     public void removePlayer(String name) {
-
+        for (Player player: playerList) {
+            if (player.name == name) playerList.remove(player);
+        }
     }
 
     public void notifyPlayer(String name) {
