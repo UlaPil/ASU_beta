@@ -18,8 +18,11 @@ public class Hand {
     public void putInHand(Playable card) {
         cards.add(card);
     }
-    public Playable removeFromHand(int index) {
-        Playable temp =
+    public Playable getFromHand(int index) {
+        return cards.get(index);
+    }
+    public void removeFromHand(int index) {
+        cards.remove(index);
     }
 
 }

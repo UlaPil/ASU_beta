@@ -22,6 +22,18 @@ public class RealPlayer implements Player {
     public void draw(int count) throws NoMoreCardsInDeck {
         myHand.putInHand(myBoard.drawFromPile());
     }
+
+    @Override
+    public boolean play(int index) {
+        Playable topCard = myBoard.getTopCard();
+        if(myHand.getFromHand(index).isPlayable(topCard.getColor(), topCard.getSymbol())) {
+            myBoard.playOnBoard(myHand.getFromHand(index));
+            return true;
+        }
+        return false;
+
+    }
+
     // Asu i po  asu
 
     public String toString() {
