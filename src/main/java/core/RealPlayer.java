@@ -1,26 +1,28 @@
 package core;
 
-public class RealPlayer implements Player{
-    public RealPlayer(String name) {
+public class RealPlayer implements Player {
+    public RealPlayer(String name, Board board) {
         this.name = name;
         myHand = new Hand();
+        myBoard = board;
     }
     private String name;
     private Hand myHand;
+    private Board myBoard;
     public String getName() {
         return name;
     }
 
     @Override
     public boolean didIWin() {
-        if(myHand.getSize()==0) return true;
-        return false;
+        return myHand.getSize() == 0;
     }
 
     @Override
-    public boolean draw(int count) {
-        return false;
+    public void draw(int count) throws NoMoreCardsInDeck {
+        myHand.putInHand(myBoard.drawFromPile());
     }
+    // Asu i po  asu
 
     public String toString() {
         return myHand.toString();

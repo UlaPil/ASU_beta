@@ -12,7 +12,7 @@ public class AutomaticPlayer implements Player {
     }
 
     @Override
-    public boolean draw(int count) {
+    public boolean draw(int count) throws NoMoreCardsInDeck {
         return false;
     }
 }
