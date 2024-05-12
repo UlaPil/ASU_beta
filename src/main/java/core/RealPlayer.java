@@ -5,10 +5,12 @@ public class RealPlayer implements Player {
         this.name = name;
         myHand = new Hand();
         myBoard = board;
+        cardControl = new CardControl(board);
     }
-    private String name;
+    private final String name;
     private Hand myHand;
     private Board myBoard;
+    private final CardControl cardControl;
     public String getName() {
         return name;
     }
@@ -28,10 +30,11 @@ public class RealPlayer implements Player {
         Playable topCard = myBoard.getTopCard();
         if(myHand.getFromHand(index).isPlayable(topCard.getColor(), topCard.getSymbol())) {
             myBoard.playOnBoard(myHand.getFromHand(index));
+            cardControl.onPlay(myHand.getFromHand(index));
+            myHand.removeFromHand(index);
             return true;
         }
         return false;
-
     }
 
     // Asu i po  asu

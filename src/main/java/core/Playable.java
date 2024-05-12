@@ -3,7 +3,7 @@ package core;
 
 public interface Playable {
     public boolean isPlayable(String color, String symbol);
-    public boolean play(Board board);
+
     public String getColor();
     public String getSymbol();
 
