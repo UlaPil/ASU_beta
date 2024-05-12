@@ -20,9 +20,9 @@ public class Play {
         board = new Board(cards);
         playerList = new ArrayList<>();
         Player player1 = new RealPlayer(players[0], board);
-        Player player2 = new AutomaticPlayer();
-        Player player3 = new AutomaticPlayer();
-        Player player4 = new AutomaticPlayer();
+        Player player2 = new AutomaticPlayer("Bot1", board);
+        Player player3 = new AutomaticPlayer("Bot2", board);
+        Player player4 = new AutomaticPlayer("Bot3", board);
     }
 
     private void startGame() throws NoMoreCardsInDeck {
@@ -56,7 +56,7 @@ public class Play {
                 System.out.println("Now it's your turn. ");
                 System.out.println("Which card would you like to play? ");
                 System.out.println(play.currentPlayer); // wypisuje karty w ręce
-                System.out.print("Enter number or \"draw\" to draw a card from pile: ");
+                System.out.print("Enter number or \"draw\" to draw a card from the pile: ");
                 String choice = scanner.nextLine();
                 // TODO: wykonać ruch gracza (on chyba nie ma metody i trzeba to zrobić manualnie)
                 System.out.println("You've finished your move. Now the top card is: ");
@@ -77,7 +77,7 @@ public class Play {
             // TODO: UWAGA!!! ustalilismy że w play obsługujemy wyjatek ktory rzuva draw noMoreCards
             //  wiec trzeba ko obsłużyć kończąc whila i wypisujac remis
         }
-        // TODO: wypisać kto wygrał 
+        // TODO: wypisać kto wygrał
 
         scanner.close();
     }
