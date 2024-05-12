@@ -3,7 +3,8 @@ package core;
 public interface Player {
     String getName();
     boolean didIWin();
-    boolean draw(int count);
+    void draw(int count) throws NoMoreCardsInDeck;
+    boolean play(int index);
     String toString();
 
 }
