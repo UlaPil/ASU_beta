@@ -18,7 +18,7 @@ public class RealPlayer implements Player{
     }
 
     @Override
-    public boolean draw() {
+    public boolean draw(int count) {
         return false;
     }
 
