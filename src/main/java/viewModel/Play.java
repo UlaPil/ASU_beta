@@ -96,7 +96,8 @@ public class Play {
         else {
             for (Player player : play.playerList) {
                 if (player.didIWin()) {
-                    System.out.println("Congratulations! The winner is: " + player.getName() + ".");
+                    if(player==play.playerList.get(0)) System.out.println("Congratulations! You're the winner!");
+                    else System.out.println("Not this time :(  The winner is " + player.getName() + ".");
                     break;
                 }
             }
