@@ -59,9 +59,9 @@ public class Board {
 
     public Board(Collection<Playable> cards, Player ... players) {
         deck = new Deck(cards);
+        playerList = new ArrayList<>(List.of(players));
         startGame();
         gameDirection = 1;
-        playerList = new ArrayList<>(List.of(players));
     }
 
     private void startGame() {
@@ -70,10 +70,8 @@ public class Board {
         }
     }
 
-    public void removePlayer(String name) {
-        for (Player player: playerList) {
-            if (player.name == name) playerList.remove(player);
-        }
+    public void removePlayer(Player player) {
+        playerList.remove(player);
     }
 
     public void notifyPlayer(String name) {
