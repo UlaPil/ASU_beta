@@ -3,7 +3,6 @@ package core;
 import java.util.*;
 public class Board {
     protected ArrayList<Player> playerList;
-    private String nextPlayerAction;
     private int gameDirection;
     private Deck deck;
 
@@ -57,25 +56,18 @@ public class Board {
         }
     }
 
-    public Board(Collection<Playable> cards, Player ... players) {
+    public Board(Collection<Playable> cards) {
         deck = new Deck(cards);
-        playerList = new ArrayList<>(List.of(players));
-        startGame();
         gameDirection = 1;
-    }
-
-    private void startGame() {
-        for (Player player: playerList) {
-            player.draw(7);
-        }
     }
 
     public void removePlayer(Player player) {
         playerList.remove(player);
     }
 
-    public void notifyPlayer(String name) {
-
+    public void notifyPlayers(String name) {
+        // notyfikuje wszystkich graczy jaką kartę wystawił gracz kończący swoją turę
+        // czyli informuje o aktualnych zmianach na stole
     }
 
     @Override
@@ -98,19 +90,15 @@ public class Board {
         }
     }
 
-    public void setNextPlayerAction(String action) {
-
-    }
-
-    public String getNextPlayerAction() {
-        return null;
-    }
-
     public Playable getTopCard() {
         return deck.getTopCard();
     }
 
     public void reverseGameDirection() {
         gameDirection = -1;
+    }
+
+    public int getGameDirection() {
+        return gameDirection;
     }
 }

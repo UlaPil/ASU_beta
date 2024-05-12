@@ -7,16 +7,6 @@ public class ReverseCard implements Playable {
 
     }
     @Override
-    public boolean play(Board board) {
-        boolean status = card.play(board);
-        if(status) {
-            board.reverseGameDirection();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public boolean isPlayable(String color, String symbol) {
         return card.isPlayable(color, symbol);
     }

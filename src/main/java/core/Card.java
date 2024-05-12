@@ -22,15 +22,7 @@ public class Card implements Playable{
         }
         return false;
     }
-    @Override
-    public boolean play(Board board) {
-        Playable currentCard = board.getTopCard();
-        if(isPlayable(currentCard.getColor(), currentCard.getSymbol())) {
-            board.playOnBoard(this);
-            return true;
-        }
-        return false;
-    }
+
     @Override
     public String toString() {
         return "(" + color + " ," + symbol + ")";

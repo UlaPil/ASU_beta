@@ -8,7 +8,7 @@ public class Hand {
     public String toString() {
         StringBuilder a = new StringBuilder();
         for(int i = 0 ; i < cards.size() ; i++) {
-            a.append(i).append(':').append(cards.get(i)).append(", ");
+            a.append(i + 1).append(':').append(cards.get(i)).append(", ");
         }
         return a.toString();
     }
