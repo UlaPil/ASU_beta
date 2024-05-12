@@ -27,6 +27,7 @@ public class RealPlayer implements Player {
 
     @Override
     public boolean play(int index) {
+        if(index <= 0 || index > myHand.getSize()) {throw new RuntimeException("out of bound");}
         Playable topCard = myBoard.getTopCard();
         if(myHand.getFromHand(index).isPlayable(topCard.getColor(), topCard.getSymbol())) {
             myBoard.playOnBoard(myHand.getFromHand(index));
@@ -38,7 +39,7 @@ public class RealPlayer implements Player {
     }
 
     // Asu i po  asu
-
+    @Override
     public String toString() {
         return myHand.toString();
     }
