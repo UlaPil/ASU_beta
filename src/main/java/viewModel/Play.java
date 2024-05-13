@@ -95,6 +95,7 @@ public class Play {
     }
 
     public static void main(String[] args) {
+        boolean dumpFlag = false;
         System.out.print("Welcome to ASU game! Enter your name: ");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
@@ -132,7 +133,10 @@ public class Play {
                                     break;
                                 }
                                 try {
-                                    if (play.currentPlayer.playCard(number)) break;
+                                    if (play.currentPlayer.playCard(number)) {
+                                        if (play.board.getTopCard().getSymbol().equals("block")) dumpFlag = true;
+                                        break;
+                                    }
                                     else {
                                         System.out.print("You can't play this card. Try again: ");
                                     }
@@ -154,12 +158,17 @@ public class Play {
                         continue;
                     }
                     try {
-                        play.currentPlayer.playCard(0);
+                        if (play.currentPlayer.playCard(0) && play.board.getTopCard().getSymbol().equals("block"))
+                            dumpFlag = true;
                     } catch (IncorrectInput e) {
                         throw new RuntimeException(e);
                     }
                     System.out.println(play.currentPlayer.getName() + " has finished his move. Now the top card is: ");
                     System.out.println(play.board.getTopCard());
+                }
+                if (play.board.getTopCard().getSymbol().equals("block") && dumpFlag) {
+                    play.currentIndex += play.board.getGameDirection();
+                    dumpFlag = false;
                 }
                 play.currentIndex += play.board.getGameDirection();
                 if (play.currentIndex < 0) play.currentIndex += play.modulo;
