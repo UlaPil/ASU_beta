@@ -4,7 +4,7 @@ public interface Player {
     String getName();
     boolean didIWin();
     void draw(int count) throws NoMoreCardsInDeck;
-    boolean playCard(int index);
+    boolean playCard(int index) throws IncorrectInput;
     String toString();
 
 }
