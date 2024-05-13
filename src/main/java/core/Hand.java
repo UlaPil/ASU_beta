@@ -11,9 +11,9 @@ public class Hand {
         for(int i = 0 ; i < cards.size() ; i++) {
             a.append(i + 1).append(": ").append(cards.get(i)).append("\n");
         }
+        a.deleteCharAt(a.length()-1);
         return a.toString();
     }
-
     public int getSize() {
         return cards.size();
     }
