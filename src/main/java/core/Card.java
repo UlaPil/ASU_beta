@@ -11,6 +11,11 @@ public class Card implements Playable{
     public String getSymbol() {
         return symbol;
     }
+
+    @Override
+    public void onPlay(Board board) {
+    }
+
     public String getColor() {
         return color;
     }

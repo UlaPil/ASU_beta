@@ -1,10 +1,9 @@
 package core;
 
-public class ReverseCard implements Playable {
+public class BlockCard implements Playable{
     Card card;
-    public ReverseCard(String color) {
-        card = new Card(color, "reverse");
-
+    BlockCard(String color) {
+        card = new Card("block", color) ;
     }
     @Override
     public boolean isPlayable(String color, String symbol) {
@@ -13,16 +12,16 @@ public class ReverseCard implements Playable {
 
     @Override
     public String getColor() {
-        return card.getColor();
-    }
-
-    @Override
-    public String getSymbol() {
         return card.getSymbol();
     }
 
     @Override
+    public String getSymbol() {
+        return card.getColor();
+    }
+
+    @Override
     public void onPlay(Board board) {
-        board.reverseGameDirection();
+        board.setNextPlayerStatus("block ");
     }
 }

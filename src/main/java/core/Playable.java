@@ -6,5 +6,5 @@ public interface Playable {
 
     public String getColor();
     public String getSymbol();
-
+    public void onPlay(Board  board);
 }
