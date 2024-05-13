@@ -28,10 +28,9 @@ public class AutomaticPlayer implements Player {
                 if(player.playCard(i)) {
                     return true;
                 }
+                i++;
             } catch(RuntimeException e) {
-                try {
-                    draw(1);
-                } catch(NoMoreCardsInDeck exception) {return false;}
+                try{draw(1); player.playCard(i);} catch (Exception x) {return false;}
             }
         }
     }
