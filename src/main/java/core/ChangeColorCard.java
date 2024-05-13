@@ -2,7 +2,7 @@ package core;
 
 public class ChangeColorCard implements Playable{
     Card card;
-    public ChangeColorCard() { card = new Card("changecolor", "black") ; }
+    public ChangeColorCard() { card = new Card("changeColor", "black") ; }
 
     @Override
     public boolean isPlayable(String color, String symbol) { return true; }

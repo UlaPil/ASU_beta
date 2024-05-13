@@ -160,8 +160,13 @@ public class Play {
                         continue;
                     }
                     try {
-                        if (play.currentPlayer.playCard(0) && play.board.getTopCard().getSymbol().equals("block")) {
-                            dumpFlag = true;
+                        if (play.currentPlayer.playCard(0)) {
+                            if (play.board.getTopCard().getSymbol().equals("block")) dumpFlag = true;
+                            if (play.board.getTopCard().getSymbol().equals("changeColor")) {
+                                System.out.print("Chose a color: ");
+                                String newColor = scanner.next();
+                                play.board.setTopColor(newColor);
+                            }
                         }
                     } catch (IncorrectInput e) {
                         throw new RuntimeException(e);
