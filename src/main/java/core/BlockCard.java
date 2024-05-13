@@ -12,12 +12,12 @@ public class BlockCard implements Playable{
 
     @Override
     public String getColor() {
-        return card.getSymbol();
+        return card.getColor();
     }
 
     @Override
     public String getSymbol() {
-        return card.getColor();
+        return card.getSymbol();
     }
 
     @Override

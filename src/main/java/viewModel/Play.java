@@ -134,7 +134,9 @@ public class Play {
                                 }
                                 try {
                                     if (play.currentPlayer.playCard(number)) {
-                                        if (play.board.getTopCard().getSymbol().equals("block")) dumpFlag = true;
+                                        if (play.board.getTopCard().getSymbol().equals("block")) {
+                                            dumpFlag = true;
+                                        }
                                         break;
                                     }
                                     else {
@@ -158,8 +160,9 @@ public class Play {
                         continue;
                     }
                     try {
-                        if (play.currentPlayer.playCard(0) && play.board.getTopCard().getSymbol().equals("block"))
+                        if (play.currentPlayer.playCard(0) && play.board.getTopCard().getSymbol().equals("block")) {
                             dumpFlag = true;
+                        }
                     } catch (IncorrectInput e) {
                         throw new RuntimeException(e);
                     }
