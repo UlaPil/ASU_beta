@@ -20,14 +20,14 @@ public class RealPlayer implements Player {
 
     @Override
     public void draw(int count) throws NoMoreCardsInDeck {
-        for(int i=0 ; i<count ; i++) myHand.putInHand(myBoard.drawFromPile());
+        for(int i = 0 ; i < count ; i++) myHand.putInHand(myBoard.drawFromPile());
     }
 
     @Override
     public boolean playCard(int index) throws IncorrectInput {
         if(index <= 0 || index > myHand.getSize()) {throw new IncorrectInput();}
         Playable topCard = myBoard.getTopCard();
-        if(myHand.getFromHand(index).isPlayable(topCard.getColor(), topCard.getSymbol())) {
+        if(myHand.getFromHand(index - 1).isPlayable(topCard.getColor(), topCard.getSymbol())) {
             myBoard.playOnBoard(myHand.getFromHand(index - 1));
             myBoard.getTopCard().onPlay(myBoard);
             myHand.removeFromHand(index - 1);
