@@ -25,4 +25,7 @@ public class ReverseCard implements Playable {
     public void onPlay(Board board) {
         board.reverseGameDirection();
     }
+
+    @Override
+    public String toString () { return card.toString(); }
 }

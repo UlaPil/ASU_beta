@@ -53,7 +53,7 @@ public class Board {
         }
 
         public Playable getTopCard() {
-            return playPile.firstElement();
+            return playPile.lastElement();
         }
     }
 
