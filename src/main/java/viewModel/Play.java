@@ -61,14 +61,10 @@ public class Play {
         draw = false;
         board = new Board(cards);
         playerList = new ArrayList<>();
-        Player player1 = new RealPlayer(players[0], board);
-        Player player2 = new AutomaticPlayer("Bot1", board);
-        Player player3 = new AutomaticPlayer("Bot2", board);
-        Player player4 = new AutomaticPlayer("Bot3", board);
-        playerList.add(player1);
-        playerList.add(player2);
-        playerList.add(player3);
-        playerList.add(player4);
+        playerList.add(new RealPlayer(players[0], board));
+        playerList.add(new AutomaticPlayer("Bot1", board));
+        playerList.add(new AutomaticPlayer("Bot2", board));
+        playerList.add(new AutomaticPlayer("Bot3", board));
 
     }
 
