@@ -1,4 +1,5 @@
 package viewModel;
+import java.util.Random;
 import java.util.Scanner;
 
 import core.*;
@@ -137,6 +138,11 @@ public class Play {
                                         if (play.board.getTopCard().getSymbol().equals("block")) {
                                             dumpFlag = true;
                                         }
+                                        if (play.board.getTopCard().getSymbol().equals("changeColor")) {
+                                            System.out.print("Chose a color: ");
+                                            String newColor = scanner.next();
+                                            play.board.setTopColor(newColor);
+                                        }
                                         break;
                                     }
                                     else {
@@ -163,8 +169,10 @@ public class Play {
                         if (play.currentPlayer.playCard(0)) {
                             if (play.board.getTopCard().getSymbol().equals("block")) dumpFlag = true;
                             if (play.board.getTopCard().getSymbol().equals("changeColor")) {
-                                System.out.print("Chose a color: ");
-                                String newColor = scanner.next();
+                                String[] colors = {"red", "green", "blue", "yellow"};
+                                Random random = new Random();
+                                int randomIndex = random.nextInt(colors.length);
+                                String newColor = colors[randomIndex];
                                 play.board.setTopColor(newColor);
                             }
                         }
