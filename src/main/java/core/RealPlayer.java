@@ -32,7 +32,7 @@ public class RealPlayer implements Player {
         Playable topCard = myBoard.getTopCard();
         if(myHand.getFromHand(index - 1).isPlayable(topCard.getColor(), topCard.getSymbol())) {
             myBoard.playOnBoard(myHand.getFromHand(index - 1));
-            myBoard.getTopCard().onPlay(myBoard);
+            myHand.getFromHand(index - 1).onPlay(myBoard);
             myHand.removeFromHand(index - 1);
             return true;
         }
