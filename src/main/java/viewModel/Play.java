@@ -120,9 +120,11 @@ public class Play {
                                 if (play.currentPlayer.playCard(choice - 1)) break;
                                 else {
                                     System.out.println("You can't play this card. Try again: ");
+                                    choice = scanner.nextInt();
                                 }
                             } catch (IncorrectInput e) {
                                 System.out.println("Wrong number. There's not such card in your hand. Try again: ");
+                                choice = scanner.nextInt();
                             }
                         }
                     }
@@ -131,7 +133,7 @@ public class Play {
                 } else {
                     System.out.println("Now it's " + play.currentPlayer.getName() + "'s turn...");
                     try {
-                        TimeUnit.SECONDS.sleep(5);
+                        TimeUnit.SECONDS.sleep(2);
                     } catch (InterruptedException e) {
                         continue;
                     }
