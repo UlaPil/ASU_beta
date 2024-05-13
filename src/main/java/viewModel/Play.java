@@ -65,6 +65,11 @@ public class Play {
         Player player2 = new AutomaticPlayer("Bot1", board);
         Player player3 = new AutomaticPlayer("Bot2", board);
         Player player4 = new AutomaticPlayer("Bot3", board);
+        playerList.add(player1);
+        playerList.add(player2);
+        playerList.add(player3);
+        playerList.add(player4);
+
     }
 
     private void startGame() throws NoMoreCardsInDeck {
