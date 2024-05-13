@@ -30,6 +30,6 @@ public class Card implements Playable{
 
     @Override
     public String toString() {
-        return "(" + color + " ," + symbol + ")";
+        return "(" + color + ", " + symbol + ")";
     }
 }
