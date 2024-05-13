@@ -53,6 +53,7 @@ public class Board {
 
         public void play(Playable card) {
             playPile.push(card);
+            topColor = card.getColor();
         }
 
         public Playable getTopCard() {
