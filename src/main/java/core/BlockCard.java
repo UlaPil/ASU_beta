@@ -24,4 +24,6 @@ public class BlockCard implements Playable{
     public void onPlay(Board board) {
         board.setNextPlayerStatus("block");
     }
+
+    public String toString() { return card.toString(); }
 }

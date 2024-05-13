@@ -17,4 +17,6 @@ public class ChangeColorCard implements Playable{
     public void onPlay(Board board) {
         //board.setNextPlayerStatus("changecolor");
     }
+
+    public String toString() { return card.toString(); }
 }
