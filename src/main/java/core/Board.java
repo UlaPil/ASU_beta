@@ -23,7 +23,9 @@ public class Board {
             shuffle();
             // wyłożenie pierwszej karty na play pile
             try {
-                play(draw());
+                do {
+                    play(draw());
+                } while (Objects.equals(getTopCard().getSymbol(), "block") || Objects.equals(getTopCard().getSymbol(), "changeColor") || Objects.equals(getTopCard().getSymbol(), "reverse"));
             } catch (NoMoreCardsInDeck e) {
                 throw new RuntimeException(e);
             }
@@ -101,7 +103,7 @@ public class Board {
     }
 
     public void reverseGameDirection() {
-        gameDirection = -1;
+        gameDirection = -1 * gameDirection;
     }
 
     public int getGameDirection() {
