@@ -117,7 +117,7 @@ public class Play {
                                 return;
                             }
                             try {
-                                if (play.currentPlayer.playCard(choice)) break;
+                                if (play.currentPlayer.playCard(choice - 1)) break;
                                 else {
                                     System.out.println("You can't play this card. Try again: ");
                                 }
