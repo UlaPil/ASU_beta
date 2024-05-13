@@ -92,6 +92,8 @@ public class Play {
         String name = scanner.nextLine();
         System.out.println("Hello " + name + "! Let's play!");
         Play play = new Play(name);
+        System.out.println("The first top card is: ");
+        System.out.println(play.board.getTopCard());
         try {
             play.startGame();
         } catch (NoMoreCardsInDeck e) {
@@ -110,7 +112,24 @@ public class Play {
                     }
                     int choice = scanner.nextInt();
                     if (choice == 0) play.currentPlayer.draw(1);
-                    else play.currentPlayer.playCard(choice);
+                    else {
+                        int nuberOfTries = 0;
+                        while (true) {
+                            nuberOfTries++;
+                            if (nuberOfTries == 10) {
+                                System.out.println("Sorry to many tries. Next time try to make correct choice in less then 10 tries.");
+                                return;
+                            }
+                            try {
+                                if (play.currentPlayer.playCard(choice)) break;
+                                else {
+                                    System.out.println("You can't play this card. Try again: ");
+                                }
+                            } catch (IncorectInput) {
+                                System.out.println("Wrong number. There's not such card in your hand. Try again: ");
+                            }
+                        }
+                    }
                     System.out.println("You've finished your move. Now the top card is: ");
                     System.out.println(play.board.getTopCard());
                 } else {
