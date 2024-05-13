@@ -6,5 +6,6 @@ public interface Player {
     void draw(int count) throws NoMoreCardsInDeck;
     boolean playCard(int index) throws IncorrectInput;
     String toString();
-
+    boolean ifBlocked();
+    void setBlocked(int amount);
 }
