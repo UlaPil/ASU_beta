@@ -26,13 +26,13 @@ public class RealPlayer implements Player {
     }
 
     @Override
-    public boolean play(int index) {
+    public boolean playCard(int index) {
         if(index <= 0 || index > myHand.getSize()) {throw new RuntimeException("out of bound");}
         Playable topCard = myBoard.getTopCard();
         if(myHand.getFromHand(index).isPlayable(topCard.getColor(), topCard.getSymbol())) {
-            myBoard.playOnBoard(myHand.getFromHand(index));
-            cardControl.onPlay(myHand.getFromHand(index));
-            myHand.removeFromHand(index);
+            myBoard.playOnBoard(myHand.getFromHand(index - 1));
+            myBoard.getTopCard().onPlay(myBoard);
+            myHand.removeFromHand(index - 1);
             return true;
         }
         return false;

@@ -5,6 +5,7 @@ public class Board {
     protected ArrayList<Player> playerList;
     private int gameDirection;
     private Deck deck;
+    private String nextPlayerStatus;
 
     protected static class Deck {
         Stack<Playable> drawPile;
@@ -100,5 +101,11 @@ public class Board {
 
     public int getGameDirection() {
         return gameDirection;
+    }
+    public void setNextPlayerStatus(String status) {
+        nextPlayerStatus = status;
+    }
+    public String getNextPlayerStatus() {
+        return nextPlayerStatus;
     }
 }

@@ -21,15 +21,17 @@ public class AutomaticPlayer implements Player {
     }
 
     @Override
-    public boolean play(int index){
+    public boolean playCard(int index){
         int i = 1;
         while(true) {
             try {
-                if(player.play(i)) {
+                if(player.playCard(i)) {
                     return true;
                 }
             } catch(RuntimeException e) {
-                return false;
+                try {
+                    draw(1);
+                } catch(NoMoreCardsInDeck exception) {return false;}
             }
         }
     }
