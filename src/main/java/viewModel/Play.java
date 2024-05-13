@@ -103,28 +103,32 @@ public class Play {
                     System.out.println("Which card would you like to play? ");
                     System.out.println(play.currentPlayer); // wypisuje karty w ręce
                     System.out.print("Enter number from above to chose a card or 0 to draw a card from the pile: ");
-                    while (!scanner.hasNextInt()) {
-                        System.out.println("That's not a number. Enter number from above to chose a card or 0 to draw a card from the pile: ");
-                    }
-                    int choice = scanner.nextInt();
-                    if (choice == 0) play.currentPlayer.draw(1);
-                    else {
-                        int nuberOfTries = 0;
-                        while (true) {
-                            nuberOfTries++;
-                            if (nuberOfTries == 10) {
-                                System.out.println("Sorry to many tries. Next time try to make correct choice in less then 10 tries.");
-                                return;
-                            }
+                    String choice;
+                    int nuberOfTries = 0;
+                    while (true) {
+                        nuberOfTries++;
+                        if (nuberOfTries == 10) {
+                            System.out.println("Sorry to many tries. Next time try to make correct choice in less then 10 tries.");
+                            return;
+                        }
+                        if (scanner.hasNext()) {
+                            choice = scanner.next();
                             try {
-                                if (play.currentPlayer.playCard(choice)) break;
-                                else {
-                                    System.out.print("You can't play this card. Try again: ");
-                                    choice = scanner.nextInt();
+                                int number = Integer.parseInt(choice);
+                                if (number == 0) {
+                                    play.currentPlayer.draw(1);
+                                    break;
                                 }
-                            } catch (IncorrectInput e) {
-                                System.out.print("Wrong number. There's not such card in your hand. Try again: ");
-                                choice = scanner.nextInt();
+                                try {
+                                    if (play.currentPlayer.playCard(number)) break;
+                                    else {
+                                        System.out.print("You can't play this card. Try again: ");
+                                    }
+                                } catch (IncorrectInput e) {
+                                    System.out.print("Wrong number. There's not such card in your hand. Try again: ");
+                                }
+                            } catch(NumberFormatException e) {
+                                System.out.print("That's not a number. Enter number from above to chose a card or 0 to draw a card from the pile: ");
                             }
                         }
                     }
