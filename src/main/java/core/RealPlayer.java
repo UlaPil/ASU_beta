@@ -5,12 +5,10 @@ public class RealPlayer implements Player {
         this.name = name;
         myHand = new Hand();
         myBoard = board;
-        cardControl = new CardControl(board);
     }
     private final String name;
     private Hand myHand;
     private Board myBoard;
-    private final CardControl cardControl;
     public String getName() {
         return name;
     }
