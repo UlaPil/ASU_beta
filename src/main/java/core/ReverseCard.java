@@ -3,7 +3,7 @@ package core;
 public class ReverseCard implements Playable {
     Card card;
     public ReverseCard(String color) {
-        card = new Card(color, "reverse");
+        card = new Card("reverse", color);
 
     }
     @Override
