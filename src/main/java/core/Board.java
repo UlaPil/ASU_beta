@@ -6,6 +6,7 @@ public class Board {
     private int gameDirection;
     private Deck deck;
     private String nextPlayerStatus;
+    private int howMany;
 
     protected static class Deck {
         Stack<Playable> drawPile;
@@ -60,6 +61,8 @@ public class Board {
     public Board(Collection<Playable> cards) {
         deck = new Deck(cards);
         gameDirection = 1;
+        howMany=0;
+        nextPlayerStatus="";
     }
 
     public void removePlayer(Player player) {
@@ -101,6 +104,7 @@ public class Board {
     public void setNextPlayerStatus(String status) {
         nextPlayerStatus = status;
     }
+
     public String getNextPlayerStatus() {
         return nextPlayerStatus;
     }
