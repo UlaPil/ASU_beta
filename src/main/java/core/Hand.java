@@ -9,7 +9,7 @@ public class Hand {
     public String toString() {
         StringBuilder a = new StringBuilder();
         for(int i = 0 ; i < cards.size() ; i++) {
-            a.append(i + 1).append(':').append(cards.get(i)).append("\n");
+            a.append(i + 1).append(": ").append(cards.get(i)).append("\n");
         }
         return a.toString();
     }
