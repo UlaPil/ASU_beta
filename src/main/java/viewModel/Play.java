@@ -64,9 +64,13 @@ public class Play {
                     System.out.println("Now it's your turn. ");
                     System.out.println("Which card would you like to play? ");
                     System.out.println(play.currentPlayer); // wypisuje karty w ręce
-                    System.out.print("Enter number or \"draw\" to draw a card from the pile: ");
-                    String choice = scanner.nextLine();
-                    // TODO: wykonać ruch gracza (on chyba nie ma metody i trzeba to zrobić manualnie)
+                    System.out.print("Enter number from above to chose a card or 0 to draw a card from the pile: ");
+                    while (!scanner.hasNextInt()) {
+                        System.out.println("That's not a number. Enter number from above to chose a card or 0 to draw a card from the pile: ");
+                    }
+                    int choice = scanner.nextInt();
+                    if (choice == 0) play.currentPlayer.draw(1);
+                    else play.currentPlayer.playCard(choice);
                     System.out.println("You've finished your move. Now the top card is: ");
                     System.out.println(play.board.getTopCard());
                 } else {
@@ -76,22 +80,19 @@ public class Play {
                     } catch (InterruptedException e) {
                         continue;
                     }
-                    // TODO: wykonać ruch bota (on chyba ma do tego metode)
+                    play.currentPlayer.playCard(0);
                     System.out.println(play.currentPlayer.getName() + " has finished his move. Now the top card is: ");
                     System.out.println(play.board.getTopCard());
                 }
-                // TODO: ustawić current player na kolejnego z arraylisty playerów
-                play.currentIndex++;
+                play.currentIndex += play.board.getGameDirection();
+                if (play.currentIndex < 0) play.currentIndex += play.modulo;
                 play.currentIndex = play.currentIndex % play.modulo;
                 play.currentPlayer = play.playerList.get(play.currentIndex);
-                // TODO: UWAGA!!! ustalilismy że w play obsługujemy wyjatek ktory rzuva draw noMoreCards
-                //  wiec trzeba ko obsłużyć kończąc whila i wypisujac remis
             } catch (NoMoreCardsInDeck n) {
                 play.draw=true;
                 break;
             }
         }
-        // TODO: wypisać kto wygrał
         if(play.draw) System.out.println("It is a draw! There is no winner.");
         else {
             for (Player player : play.playerList) {
