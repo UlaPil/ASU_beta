@@ -119,11 +119,11 @@ public class Play {
                             try {
                                 if (play.currentPlayer.playCard(choice)) break;
                                 else {
-                                    System.out.println("You can't play this card. Try again: ");
+                                    System.out.print("You can't play this card. Try again: ");
                                     choice = scanner.nextInt();
                                 }
                             } catch (IncorrectInput e) {
-                                System.out.println("Wrong number. There's not such card in your hand. Try again: ");
+                                System.out.print("Wrong number. There's not such card in your hand. Try again: ");
                                 choice = scanner.nextInt();
                             }
                         }
