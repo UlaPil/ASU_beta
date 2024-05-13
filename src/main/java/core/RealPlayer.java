@@ -5,10 +5,13 @@ public class RealPlayer implements Player {
         this.name = name;
         myHand = new Hand();
         myBoard = board;
+        blocked=0;
     }
     private final String name;
     private Hand myHand;
     private Board myBoard;
+    private int blocked;
+
     public String getName() {
         return name;
     }
@@ -41,4 +44,19 @@ public class RealPlayer implements Player {
     public String toString() {
         return myHand.toString();
     }
+
+    @Override
+    public boolean ifBlocked() {
+        if(blocked > 0) {
+            blocked--;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void setBlocked(int amount) {
+        blocked = amount;
+    }
+
 }

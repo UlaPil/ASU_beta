@@ -34,4 +34,10 @@ public class AutomaticPlayer implements Player {
             }
         }
     }
+
+    @Override
+    public boolean ifBlocked() { return player.ifBlocked();}
+
+    @Override
+    public void setBlocked(int amount) { player.setBlocked(amount);}
 }
