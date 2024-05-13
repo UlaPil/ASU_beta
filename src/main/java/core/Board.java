@@ -12,7 +12,6 @@ public class Board {
         Stack<Playable> drawPile;
         Stack<Playable> playPile;
         String topColor;
-        String topSymbol;
 
         //inicjalizacja dwoch stackow które mamy;
         Deck(Collection<Playable> cards) {
@@ -57,7 +56,7 @@ public class Board {
         }
 
         public Playable getTopCard() {
-            return new Card(topSymbol, topColor);
+            return new Card(playPile.lastElement().getSymbol(), topColor);
         }
     }
 
