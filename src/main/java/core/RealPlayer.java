@@ -20,7 +20,7 @@ public class RealPlayer implements Player {
 
     @Override
     public void draw(int count) throws NoMoreCardsInDeck {
-        myHand.putInHand(myBoard.drawFromPile());
+        for(int i=0 ; i<count ; i++) myHand.putInHand(myBoard.drawFromPile());
     }
 
     @Override
