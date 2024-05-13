@@ -125,7 +125,7 @@ public class Play {
                                 else {
                                     System.out.println("You can't play this card. Try again: ");
                                 }
-                            } catch (IncorectInput) {
+                            } catch (IncorrectInput e) {
                                 System.out.println("Wrong number. There's not such card in your hand. Try again: ");
                             }
                         }
@@ -139,7 +139,11 @@ public class Play {
                     } catch (InterruptedException e) {
                         continue;
                     }
-                    play.currentPlayer.playCard(0);
+                    try {
+                        play.currentPlayer.playCard(0);
+                    } catch (IncorrectInput e) {
+                        throw new RuntimeException(e);
+                    }
                     System.out.println(play.currentPlayer.getName() + " has finished his move. Now the top card is: ");
                     System.out.println(play.board.getTopCard());
                 }
