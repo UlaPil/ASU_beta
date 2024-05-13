@@ -30,7 +30,7 @@ public class AutomaticPlayer implements Player {
                 }
                 i++;
             } catch(IncorrectInput e) {
-                try{draw(1); player.playCard(i);return true;} catch (Exception x) {return false;}
+                try{draw(1); player.playCard(i); return false;} catch (Exception x) {return false;}
             }
         }
     }

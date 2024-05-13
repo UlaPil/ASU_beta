@@ -39,18 +39,30 @@ public class Play {
         for(int i=0 ; i<2 ; i++) {
             Playable reversecard = new ReverseCard("red");
             cards.add(reversecard);
+            Playable blockcard = new BlockCard("red");
+            cards.add(blockcard);
         }
         for(int i=0 ; i<2 ; i++) {
             Playable reversecard = new ReverseCard("blue");
             cards.add(reversecard);
+            Playable blockcard = new BlockCard("blue");
+            cards.add(blockcard);
         }
         for(int i=0 ; i<2 ; i++) {
             Playable reversecard = new ReverseCard("yellow");
             cards.add(reversecard);
+            Playable blockcard = new BlockCard("yellow");
+            cards.add(blockcard);
         }
         for(int i=0 ; i<2 ; i++) {
             Playable reversecard = new ReverseCard("green");
             cards.add(reversecard);
+            Playable blockcard = new BlockCard("green");
+            cards.add(blockcard);
+        }
+        for(int i=0 ; i<4 ; i++) {
+            Playable changecolorcard = new ChangeColorCard();
+            cards.add(changecolorcard);
         }
     }
 

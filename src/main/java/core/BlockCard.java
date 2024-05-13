@@ -2,7 +2,7 @@ package core;
 
 public class BlockCard implements Playable{
     Card card;
-    BlockCard(String color) {
+    public BlockCard(String color) {
         card = new Card("block", color) ;
     }
     @Override
@@ -23,6 +23,5 @@ public class BlockCard implements Playable{
     @Override
     public void onPlay(Board board) {
         board.setNextPlayerStatus("block");
-        
     }
 }

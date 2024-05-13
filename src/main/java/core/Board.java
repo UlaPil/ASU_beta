@@ -6,7 +6,7 @@ public class Board {
     private int gameDirection;
     private Deck deck;
     private String nextPlayerStatus;
-    private int howMany;
+    private int howManySpecialCards;
 
     protected static class Deck {
         Stack<Playable> drawPile;
@@ -61,7 +61,7 @@ public class Board {
     public Board(Collection<Playable> cards) {
         deck = new Deck(cards);
         gameDirection = 1;
-        howMany=0;
+        howManySpecialCards =0;
         nextPlayerStatus="";
     }
 
@@ -107,5 +107,13 @@ public class Board {
 
     public String getNextPlayerStatus() {
         return nextPlayerStatus;
+    }
+
+    public int getHowMany() {
+        return howManySpecialCards;
+    }
+
+    public void incrementSpecialCard() {
+        howManySpecialCards++;
     }
 }
