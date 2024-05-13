@@ -11,11 +11,13 @@ public class Board {
     protected static class Deck {
         Stack<Playable> drawPile;
         Stack<Playable> playPile;
+        String topColor;
 
         //inicjalizacja dwoch stackow które mamy;
         Deck(Collection<Playable> cards) {
             drawPile = new Stack<>();
             playPile = new Stack<>();
+
             for (Playable card: cards)
                 drawPile.push(card);
             shuffle();
@@ -51,10 +53,11 @@ public class Board {
 
         public void play(Playable card) {
             playPile.push(card);
+            topColor = card.getColor();
         }
 
         public Playable getTopCard() {
-            return playPile.lastElement();
+            return new Card(playPile.lastElement().getSymbol(), topColor);
         }
     }
 
@@ -63,6 +66,10 @@ public class Board {
         gameDirection = 1;
         howManySpecialCards =0;
         nextPlayerStatus="";
+    }
+
+    public void setTopColor(String color) {
+        deck.topColor = color;
     }
 
     public void removePlayer(Player player) {
