@@ -66,11 +66,6 @@ public class Board {
         playerList.remove(player);
     }
 
-    public void notifyPlayers(String name) {
-        // notyfikuje wszystkich graczy jaką kartę wystawił gracz kończący swoją turę
-        // czyli informuje o aktualnych zmianach na stole
-    }
-
     @Override
     public String toString() {
         return deck.getTopCard().toString();
@@ -102,6 +97,7 @@ public class Board {
     public int getGameDirection() {
         return gameDirection;
     }
+
     public void setNextPlayerStatus(String status) {
         nextPlayerStatus = status;
     }
