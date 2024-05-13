@@ -22,6 +22,6 @@ public class BlockCard implements Playable{
 
     @Override
     public void onPlay(Board board) {
-        board.setNextPlayerStatus("block ");
+        board.setNextPlayerStatus("block");
     }
 }
