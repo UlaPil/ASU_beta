@@ -166,7 +166,7 @@ public class Play {
                     System.out.println(play.currentPlayer.getName() + " has finished his move. Now the top card is: ");
                     System.out.println(play.board.getTopCard());
                 }
-                if (play.board.getTopCard().getSymbol().equals("block") && dumpFlag) {
+                if (dumpFlag) {
                     play.currentIndex += play.board.getGameDirection();
                     dumpFlag = false;
                 }
