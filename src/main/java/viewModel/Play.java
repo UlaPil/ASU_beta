@@ -16,7 +16,42 @@ public class Play {
     private int currentIndex;
     private boolean draw;
     static {
-        // inicjalizacja 64 kart
+        for(Integer i=0 ; i<10 ; i++) {
+            Playable card = new Card (i.toString(),"red");
+            cards.add(card);
+            cards.add(card);
+        }
+        for(Integer i=0 ; i<10 ; i++) {
+            Playable card = new Card (i.toString(),"blue");
+            cards.add(card);
+            cards.add(card);
+        }
+        for(Integer i=0 ; i<10 ; i++) {
+            Playable card = new Card (i.toString(),"yellow");
+            cards.add(card);
+            cards.add(card);
+        }
+        for(Integer i=0 ; i<10 ; i++) {
+            Playable card = new Card (i.toString(),"green");
+            cards.add(card);
+            cards.add(card);
+        }
+        for(int i=0 ; i<2 ; i++) {
+            Playable reversecard = new ReverseCard("red");
+            cards.add(reversecard);
+        }
+        for(int i=0 ; i<2 ; i++) {
+            Playable reversecard = new ReverseCard("blue");
+            cards.add(reversecard);
+        }
+        for(int i=0 ; i<2 ; i++) {
+            Playable reversecard = new ReverseCard("yellow");
+            cards.add(reversecard);
+        }
+        for(int i=0 ; i<2 ; i++) {
+            Playable reversecard = new ReverseCard("green");
+            cards.add(reversecard);
+        }
     }
 
     public Play(String ... players) {
@@ -96,7 +131,7 @@ public class Play {
         else {
             for (Player player : play.playerList) {
                 if (player.didIWin()) {
-                    if(player==play.playerList.get(0)) System.out.println("Congratulations! You're the winner!");
+                    if(player == play.playerList.get(0)) System.out.println("Congratulations! You're the winner!");
                     else System.out.println("Not this time :(  The winner is " + player.getName() + ".");
                     break;
                 }
