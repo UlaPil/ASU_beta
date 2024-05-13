@@ -29,8 +29,8 @@ public class AutomaticPlayer implements Player {
                     return true;
                 }
                 i++;
-            } catch(RuntimeException e) {
-                try{draw(1); player.playCard(i);} catch (Exception x) {return false;}
+            } catch(IncorrectInput e) {
+                try{draw(1); player.playCard(i);return true;} catch (Exception x) {return false;}
             }
         }
     }
