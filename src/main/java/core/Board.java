@@ -2,7 +2,6 @@ package core;
 
 import java.util.*;
 public class Board {
-    protected ArrayList<Player> playerList;
     private int gameDirection;
     private Deck deck;
     private String nextPlayerStatus;
@@ -72,10 +71,6 @@ public class Board {
 
     public void setTopColor(String color) {
         deck.topColor = color;
-    }
-
-    public void removePlayer(Player player) {
-        playerList.remove(player);
     }
 
     @Override
