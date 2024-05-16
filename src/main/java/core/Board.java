@@ -19,12 +19,14 @@ public class Board {
 
             for (Playable card: cards)
                 drawPile.push(card);
+
             shuffle();
+            
             // wyłożenie pierwszej karty na play pile
             try {
                 do {
                     play(draw());
-                } while (Objects.equals(getTopCard().getSymbol(), "block") || Objects.equals(getTopCard().getSymbol(), "changeColor") || Objects.equals(getTopCard().getSymbol(), "reverse"));
+                } while (List.of("block", "changeColor", "reverse").contains(getTopCard().getSymbol()));
             } catch (NoMoreCardsInDeck e) {
                 throw new RuntimeException(e);
             }
