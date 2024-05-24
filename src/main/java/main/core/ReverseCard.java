@@ -1,4 +1,4 @@
-package core;
+package main.core;
 
 public class ReverseCard implements Playable {
     Card card;

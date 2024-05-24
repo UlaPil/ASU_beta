@@ -1,4 +1,4 @@
-package core;
+package main.core;
 
 import java.util.*;
 public class Board {

@@ -1,4 +1,4 @@
-package viewModel;
+package main.viewModel;
 
 public class PlayerTurn {
 

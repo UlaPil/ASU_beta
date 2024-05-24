@@ -1,4 +1,4 @@
-package core;
+package main.core;
 
 public class AutomaticPlayer implements Player {
     RealPlayer player;

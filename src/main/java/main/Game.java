@@ -1,14 +1,18 @@
-package viewModel;
+package main;
+
 import java.util.Random;
 import java.util.Scanner;
 
 import core.*;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import main.core.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class Play {
+public class Game extends Application {
     private ArrayList<Player> playerList;
     public Board board;
     private static List<Playable> cards = new ArrayList<>();
@@ -17,6 +21,55 @@ public class Play {
     private int currentIndex;
     private boolean draw;
     static {
+        for(Integer i=0 ; i<10 ; i++) {
+            Playable card = new Card(i.toString(),"red");
+            cards.add(card);
+            cards.add(card);
+        }
+        for(Integer i=0 ; i<10 ; i++) {
+            Playable card = new Card (i.toString(),"blue");
+            cards.add(card);
+            cards.add(card);
+        }
+        for(Integer i=0 ; i<10 ; i++) {
+            Playable card = new Card (i.toString(),"yellow");
+            cards.add(card);
+            cards.add(card);
+        }
+        for(Integer i=0 ; i<10 ; i++) {
+            Playable card = new Card (i.toString(),"green");
+            cards.add(card);
+            cards.add(card);
+        }
+        for(int i=0 ; i<2 ; i++) {
+            Playable reversecard = new ReverseCard("red");
+            cards.add(reversecard);
+            Playable blockcard = new BlockCard("red");
+            cards.add(blockcard);
+        }
+        for(int i=0 ; i<2 ; i++) {
+            Playable reversecard = new ReverseCard("blue");
+            cards.add(reversecard);
+            Playable blockcard = new BlockCard("blue");
+            cards.add(blockcard);
+        }
+        for(int i=0 ; i<2 ; i++) {
+            Playable reversecard = new ReverseCard("yellow");
+            cards.add(reversecard);
+            Playable blockcard = new BlockCard("yellow");
+            cards.add(blockcard);
+        }
+        for(int i=0 ; i<2 ; i++) {
+            Playable reversecard = new ReverseCard("green");
+            cards.add(reversecard);
+            Playable blockcard = new BlockCard("green");
+            cards.add(blockcard);
+        }
+        for(int i=0 ; i<4 ; i++) {
+            Playable changecolorcard = new ChangeColorCard();
+            cards.add(changecolorcard);
+        }
+    }{
         for(Integer i=0 ; i<10 ; i++) {
             Playable card = new Card (i.toString(),"red");
             cards.add(card);
@@ -67,8 +120,8 @@ public class Play {
         }
     }
 
-    public Play(String ... players) {
-            // docelowo: modulo=players.length();
+    public Game(String ... players) {
+        // docelowo: modulo=players.length();
         modulo = 4;     //na aktualne potrzeby
         currentIndex = 0;
         draw = false;
@@ -96,12 +149,18 @@ public class Play {
     }
 
     public static void main(String[] args) {
+        launch(args);
+    }
+
+
+    @Override
+    public void start(Stage primaryStage) {
         boolean dumpFlag = false;
         System.out.print("Welcome to ASU game! Enter your name: ");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
         System.out.println("Hello " + name + "! Let's play!");
-        Play play = new Play(name);
+        Game play = new Game(name);
         System.out.println("The first top card is: ");
         System.out.println(play.board.getTopCard());
         try {
@@ -208,5 +267,3 @@ public class Play {
         scanner.close();
     }
 }
-
-
