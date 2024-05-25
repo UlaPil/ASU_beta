@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class test extends Application {
+public class Play extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -20,7 +20,6 @@ public class test extends Application {
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
-
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Hello World!");

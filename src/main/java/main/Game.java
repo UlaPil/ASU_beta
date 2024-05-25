@@ -3,16 +3,13 @@ package main;
 import java.util.Random;
 import java.util.Scanner;
 
-import core.*;
-import javafx.application.Application;
-import javafx.stage.Stage;
 import main.core.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class Game extends Application {
+public class Game {
     private ArrayList<Player> playerList;
     public Board board;
     private static List<Playable> cards = new ArrayList<>();
@@ -149,12 +146,6 @@ public class Game extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
-    }
-
-
-    @Override
-    public void start(Stage primaryStage) {
         boolean dumpFlag = false;
         System.out.print("Welcome to ASU game! Enter your name: ");
         Scanner scanner = new Scanner(System.in);
