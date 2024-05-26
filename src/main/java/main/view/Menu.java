@@ -1,4 +1,4 @@
-package main;
+package main.view;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.Stage;
 import main.viewModel.MenuTitle;
 
+
 public class Menu extends Application {
 
     public static void main(String[] args) {
@@ -25,14 +26,14 @@ public class Menu extends Application {
     @Override
     public void start(Stage primaryStage) {
         StackPane root  = new StackPane();
+        root.setId("bg");
         Pane title = new MenuTitle("ASU");
         root.getChildren().add(title);
-        Image image = new Image("file:./main/java/main/bg.jpg");
-        ImageView imageview = new ImageView(image);
-        root.getChildren().add(imageview);
+
 
 
         Scene scene = new Scene(root, 1680, 1680);
+        scene.getStylesheets().addAll(this.getClass().getResource("/style.css").toExternalForm());
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
