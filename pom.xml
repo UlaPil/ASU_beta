@@ -26,6 +26,12 @@
     </pluginManagement>
   </build>
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>23-ea+18</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
     <dependency>
       <groupId>org.openjfx</groupId>
