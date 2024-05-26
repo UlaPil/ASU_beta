@@ -17,7 +17,7 @@ public class MenuTitle extends Pane {
         text.setFont(Font.font("Verdana", 40));
         text.setStyle("-fx-font-weight : bold");
         text.setFill(Color.MAROON);
-        text.setX(50);
+        text.setX(800);
         text.setY(50);
         text.setEffect(new DropShadow(50, Color.BLACK));
         getChildren().addAll(text);

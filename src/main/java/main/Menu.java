@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -23,14 +25,15 @@ public class Menu extends Application {
     @Override
     public void start(Stage primaryStage) {
         StackPane root  = new StackPane();
-        root.setId("bg");
         Pane title = new MenuTitle("ASU");
         root.getChildren().add(title);
-
+        Image image = new Image("file:./main/java/main/bg.jpg");
+        ImageView imageview = new ImageView(image);
+        root.getChildren().add(imageview);
 
 
         Scene scene = new Scene(root, 1680, 1680);
-        scene.getStylesheets().addAll(this.getClass().getClassLoader().getResource("style.css").toExternalForm());
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
