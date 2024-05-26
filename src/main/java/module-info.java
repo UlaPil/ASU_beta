@@ -4,8 +4,6 @@ module ASU.beta {
     requires javafx.controls;
     requires javafx.fxml;
 
-
-//    opens viewModel;
-
+    opens main to javafx.fxml;
     exports main;
 }
