@@ -1,0 +1,6 @@
+#bg{
+    -fx-background-image: "bg.jpg";
+    -fx-background-repeat: "stretch";
+    -fx-background-size: 1680 1680;
+    -fx-background-position: center center;
+}
