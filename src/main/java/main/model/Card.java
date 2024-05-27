@@ -1,27 +1,23 @@
 package main.model;
 
 public class Card implements Playable{
-    private String symbol;
-    private String color;
-    public Card(String symbol, String color) {
+    private Symbol symbol;
+    private Color color;
+    public Card(Symbol symbol, Color color) {
         this.symbol = symbol;
         this.color = color;
     }
 
-    public String getSymbol() {
+    public Symbol getSymbol() {
         return symbol;
     }
 
-    @Override
-    public void onPlay(Board board) {
-    }
-
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 
     @Override
-    public boolean isPlayable(String color, String symbol) {
+    public boolean isPlayable(Symbol symbol, Color color) {
         if(this.color.equals(color) || this.symbol.equals(symbol)) {
             return true;
         }
@@ -30,6 +26,6 @@ public class Card implements Playable{
 
     @Override
     public String toString() {
-        return "(" + color + ", " + symbol + ")";
+        return "(" + color.toString() + ", " + symbol.toString() + ")";
     }
 }

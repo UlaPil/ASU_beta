@@ -2,9 +2,8 @@ package main.model;
 //symbole : 0-9 cyfry
 
 public interface Playable {
-    public boolean isPlayable(String color, String symbol);
+    public boolean isPlayable(Symbol symbol, Color color);
 
-    public String getColor();
-    public String getSymbol();
-    public void onPlay(Board  board);
+    public Color getColor();
+    public Symbol getSymbol();
 }

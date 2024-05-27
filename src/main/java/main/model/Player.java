@@ -3,9 +3,9 @@ package main.model;
 public interface Player {
     String getName();
     boolean didIWin();
-    void draw(int count) throws NoMoreCardsInDeck;
-    boolean playCard(int index) throws IncorrectInput;
+    void draw(Playable card) throws NoMoreCardsInDeck;
+    void playCard(Playable card);
     String toString();
-    boolean ifBlocked();
-    void setBlocked(int amount);
+    Playable getCard(int i);
+    int getHandSize();
 }
