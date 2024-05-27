@@ -170,6 +170,12 @@ public class Game {
         return false;
     }
 
+    public void setTopCard(Color color) {
+        board.setTopColor(color);
+    }
+
+
+
     public boolean drawCard(Player player) throws NoMoreCardsInDeck {
         try {
             player.draw(board.drawFromPile());

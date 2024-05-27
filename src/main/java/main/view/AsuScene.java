@@ -3,7 +3,7 @@ package main.view;
 import javafx.scene.Scene;
 
 public interface AsuScene {
-    double WIDTH = 800;
-    double HEIGHT = 600;
+    double WIDTH = 1280;
+    double HEIGHT = 720;
     Scene getScene();
 }
