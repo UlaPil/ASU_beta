@@ -6,10 +6,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import main.viewModel.DrawEvent;
 
-import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameView implements AsuScene {
     private static final double CARD_WIDTH = 80;
@@ -19,10 +19,7 @@ public class GameView implements AsuScene {
 
     public GameView() {
         scene = new Scene(root, WIDTH, HEIGHT);
-        Rectangle rectangle = new Rectangle(WIDTH, HEIGHT);
-        rectangle.setArcHeight(60.0);
-        rectangle.setArcWidth(60.0);
-        root.setClip(rectangle);
+        scene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("/style.css")).toExternalForm());
     }
 
     @Override
@@ -35,7 +32,12 @@ public class GameView implements AsuScene {
     }
 
     private void setBackground() {
-
+        Rectangle rectangle = new Rectangle(WIDTH, HEIGHT);
+        rectangle.setArcHeight(60.0);
+        rectangle.setArcWidth(60.0);
+        root.setClip(rectangle);
+        root.setId("gameBg");
+        scene.setFill(Color.TRANSPARENT);
     }
 
     private void addDrawPileButton() {
@@ -43,8 +45,8 @@ public class GameView implements AsuScene {
         ImageView button = new ImageView();
         root.getChildren().addAll(button);
         button.setImage(card);
-        button.setTranslateX(WIDTH/4);
-        button.setTranslateY(- HEIGHT/6);
+        button.setTranslateX(35*WIDTH/100);
+        button.setTranslateY(- HEIGHT/5);
         button.setFitWidth(CARD_WIDTH);
         button.setPreserveRatio(true);
         button.setOnMouseClicked(new DrawEvent());
@@ -74,17 +76,26 @@ public class GameView implements AsuScene {
         adjustCardSpacing();
     }
 
+    public void removeCardFromPlayerHans(CardDisplay card) {
+        cardContainer.getChildren().remove(card);
+    }
+
     private void adjustCardSpacing() {
         double containerWidth = cardContainer.getWidth();
         int numberOfCards = cardContainer.getChildren().size();
         if (numberOfCards == 0) return;
-        double totalCardWidth = numberOfCards * CARD_WIDTH;
-        double spacing = 0;
+
+        double spacing = 20;
+        double totalCardWidth = numberOfCards * CARD_WIDTH + (numberOfCards - 1) * spacing;
         if (totalCardWidth > containerWidth) {
             spacing = (containerWidth - CARD_WIDTH) / (numberOfCards - 1);
-        } else {
-            spacing = (containerWidth - totalCardWidth) / (numberOfCards - 1);
         }
         cardContainer.setSpacing(spacing);
+        double startX = (containerWidth - totalCardWidth + spacing) / 2;
+
+        for (int i = 0; i < numberOfCards; i++) {
+            ImageView card = (ImageView) cardContainer.getChildren().get(i);
+            card.setLayoutX(startX + i * (CARD_WIDTH + spacing));
+        }
     }
 }

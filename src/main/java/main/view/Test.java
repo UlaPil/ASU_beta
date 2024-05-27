@@ -7,7 +7,9 @@
 //import javafx.stage.Stage;
 //import javafx.stage.StageStyle;
 //import main.model.Board;
+//import main.model.Color;
 //import main.model.Playable;
+//import main.model.Symbol;
 //
 //public class Test extends Application {
 //    public static void main(String[] args) {
@@ -47,12 +49,12 @@
 //        });
 //        CardDisplay card2 =  new CardDisplay("/b_8.png", new Playable() {
 //            @Override
-//            public boolean isPlayable(String color, String symbol) {
+//            public boolean isPlayable(Color color, Symbol symbol) {
 //                return true;
 //            }
 //
 //            @Override
-//            public String getColor() {
+//            public Color getColor() {
 //                return "2";
 //            }
 //
