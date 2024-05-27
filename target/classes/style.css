@@ -1,8 +1,15 @@
-#bg{
+#bg {
     -fx-background-image: url("bg.jpg");
     -fx-background-size: 1280 720;
     -fx-background-radius: 30;
 }
+
 #button {
     -fx-background-color: transparent;
+}
+
+#gameBg {
+     -fx-background-image: url("boardBackground.jpg");
+     -fx-background-size: 1280 720;
+     -fx-background-radius: 30;
 }

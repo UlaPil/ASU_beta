@@ -82,6 +82,7 @@ public class Menu implements AsuScene {
         Buttons.put(But.EXIT, cross);
         root.getChildren().addAll(cross);
     }
+
     public Scene getScene() {
         return scene;
     }
