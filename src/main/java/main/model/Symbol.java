@@ -15,7 +15,7 @@ public enum Symbol {
     six(false),
     seven(false),
     eight(false),
-    nein(false);
+    nine(false);
 
     boolean special;
 
@@ -37,7 +37,7 @@ public enum Symbol {
         if(i == 6) return six;
         if(i == 7) return seven;
         if(i == 8) return eight;
-        else return nein;
+        else return nine;
     }
 
     public String toString() {
