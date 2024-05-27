@@ -116,14 +116,14 @@ public class Game {
             cards.add(changecolorcard);
         }
     }
-    public Game(String ... players) {
+    public Game(String player) {
         // docelowo: modulo=players.length();
         modulo = 4;     //na aktualne potrzeby
         currentIndex = 0;
         draw = false;
         board = new Board(cards);
         playerList = new ArrayList<>();
-        playerList.add(new RealPlayer(players[0]));
+        playerList.add(new RealPlayer(player));
         playerList.add(new RealPlayer("Bot1"));
         playerList.add(new RealPlayer("Bot2"));
         playerList.add(new RealPlayer("Bot3"));
@@ -170,14 +170,14 @@ public class Game {
         return false;
     }
 
-    public boolean drawCard(Player player) {
+    public boolean drawCard(Player player) throws NoMoreCardsInDeck {
         try {
             player.draw(board.drawFromPile());
             currentIndex += gameDirection;
             currentIndex = (currentIndex + 4) % 4;
             return true;
         } catch (NoMoreCardsInDeck e) {
-            return false;
+            throw e;
         }
     }
 

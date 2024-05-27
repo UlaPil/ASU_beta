@@ -54,32 +54,25 @@ public class GameRunner {
                             try {
                                 int number = Integer.parseInt(choice);
                                 if (number == 0) {
-                                    if(play.game.drawCard(game.getCurrentPlayer());
+                                    if(play.game.playCard(game.getPlayerList().get(game.currentIndex), game.);
                                     break;
                                 }
                                 try {
-                                    if (play.game.playCard(game.getPlayerList().get(game.currentIndex), game.)) {
+                                    if (play.game.currentPlayer.playCard(number)) {
                                         if (play.game.getBoard().getTopCard().getSymbol().equals(changeColor)) {
                                             System.out.print("Chose a color: ");
-                                            while(true) {
-                                                String newColor = scanner.next();
-                                                if (newColor == yellow.toString()) {
-                                                    play.game.getBoard().setTopColor(yellow);
-                                                    break;
-                                                }
-                                                if (newColor == blue.toString()) {
-                                                    play.game.getBoard().setTopColor(blue);
-                                                    break;
-                                                }
-                                                if (newColor == red.toString()) {
-                                                    play.game.getBoard().setTopColor(red);
-                                                    break;
-                                                }
-                                                if (newColor == green.toString()) {
-                                                    play.game.getBoard().setTopColor(blue);
-                                                    break;
-                                                } else System.out.print("It's wrong colour! Chose color once again: ");
+                                            String newColor = scanner.next();
+                                            if(newColor == yellow.toString()) {
+                                                play.game.getBoard().setTopColor(yellow);
                                             }
+                                            if(newColor == blue.toString()) {
+                                                play.game.getBoard().setTopColor(blue);
+                                            }
+                                            if(newColor == red.toString()) {
+                                                play.game.getBoard().setTopColor(red);
+                                            }
+                                            if()
+                                            play.game.getBoard().setTopColor(blue);
                                         }
                                         break;
                                     }
