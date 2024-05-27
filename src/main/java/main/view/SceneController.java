@@ -1,26 +1,47 @@
 package main.view;
 
-import javafx.scene.Scene;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class SceneController {
-    enum Scenes {
-        MENU(new Menu().getScene());
-        //GAME,
-        //HISTORY;
-
-        final Scene scene;
-        private Scenes(Scene scene) {
-            this.scene = scene;
-        }
+    public enum SceneName {
+        MENU,
+        PLAY,
+        HISTORY
     }
+    private final Map<SceneName, AsuScene> Scenes = new HashMap<>();
     Stage stage;
     public SceneController(Stage stage) {
         this.stage = stage;
+        Scenes.put(SceneName.MENU, new Menu());
+        initializeScenes();
     }
-    public Runnable getChangeScene(Scenes x) {
-        return ()->stage.setScene(x.scene);
+    private void initializeScenes() {
+        //Menu
+        Menu scene = (Menu)Scenes.get(SceneName.MENU);
+        scene.setEvent(Menu.But.EXIT, getCloser());
+        //scene.setEvent(Menu.But.PLAY, getSceneChanger(SceneName.PLAY));
+        //scene.setEvent(Menu.But.PLAY, getSceneChanger(SceneName.PLAY);
     }
+
+    public void init() {
+        stage.setScene(Scenes.get(SceneName.MENU).getScene());
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
+
+    }
+    public EventHandler<MouseEvent> getSceneChanger(SceneName name ) {
+        return e -> stage.setScene(Scenes.get(name).getScene());
+    }
+    public EventHandler<MouseEvent> getCloser() {
+        return e -> stage.close();
+    }
+
 }

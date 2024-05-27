@@ -19,5 +19,6 @@ public class Play extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         SceneController sceneController = new SceneController(stage);
+        sceneController.init();
     }
 }

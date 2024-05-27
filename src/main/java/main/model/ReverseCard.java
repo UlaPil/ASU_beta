@@ -23,7 +23,7 @@ public class ReverseCard implements Playable {
 
     @Override
     public void onPlay(Board board) {
-        board.reverseGameDirection();
+        //board.reverseGameDirection();
     }
 
     @Override

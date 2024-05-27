@@ -1,27 +1,40 @@
 package main.view;
-import javafx.application.Application;
+
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
-import javafx.stage.Stage;
-import javafx.util.Pair;
 
 import java.util.*;
 
 
 public class Menu implements AsuScene {
-
+    public enum But {
+        EXIT,
+        PLAY,
+        HISTORY
+    }
+    private final Map<But, Node> Buttons = new HashMap<>();
     private final StackPane root = new StackPane();
+
     private final StackPane menuPanel = new StackPane();
     private final Scene scene = new Scene(root,WIDTH,HEIGHT);
+    public Menu() {
+        addTitle();
+        addBg();
+        addMenuPanel();
+        addExit();
+        scene.setFill(Color.TRANSPARENT);
+        scene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("/style.css")).toExternalForm());
+    }
     private void addTitle() {
         MenuTitle title = new MenuTitle("ASU");
-        title.setTranslateX((double)WIDTH/18);
-        title.setTranslateY((double)HEIGHT/5);
+        title.setTranslateX(WIDTH/18);
+        title.setTranslateY(HEIGHT/5);
         root.getChildren().addAll(title);
     }
     private void addBg() {
@@ -33,15 +46,17 @@ public class Menu implements AsuScene {
     }
     private void addMenuPanel() {
         MenuElement play = new MenuElement("PLAY", 50);
-        play.setTranslateX((double)WIDTH/3 + 20);
-        play.setTranslateY((double)HEIGHT/3 - 10);
+        play.setTranslateX(WIDTH/3 + 20);
+        play.setTranslateY(HEIGHT/3 - 10);
         play.setBgColor(Color.GREEN);
         menuPanel.getChildren().addAll(play);
+        Buttons.put(But.PLAY, play);
 
         MenuElement history = new MenuElement("HISTORY", 50);
         history.setTranslateX((double)3*WIDTH/4);
         history.setTranslateY((double)4*HEIGHT/5);
         history.setBgColor(Color.valueOf("#1891AA"));
+        Buttons.put(But.HISTORY, history);
         menuPanel.getChildren().addAll(history);
         root.getChildren().addAll(menuPanel);
     }
@@ -60,23 +75,17 @@ public class Menu implements AsuScene {
         r1.getTransforms().add(new Rotate(45, (double)W/2, (double)H/2));
         r2.getTransforms().add(new Rotate(135, (double)W/2, (double)H/2));
         cross.getChildren().addAll(r1, r2);
-        cross.setTranslateX((double)0.98*WIDTH);
-        cross.setTranslateY((double)HEIGHT * 0.02);
-
+        cross.setTranslateX(0.98*WIDTH);
+        cross.setTranslateY(HEIGHT * 0.02);
+        Buttons.put(But.EXIT, cross);
 
         //cross.setOnMouseClicked(( ));
         root.getChildren().addAll(cross);
     }
     public Scene getScene() {
-        addTitle();
-        addBg();
-        addMenuPanel();
-        addExit();
-        scene.setFill(Color.TRANSPARENT);
-
-        scene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("/style.css")).toExternalForm());
         return scene;
-
     }
-
+    public void setEvent(But type, EventHandler<MouseEvent> eventHandler) {
+        Buttons.get(type).setOnMouseClicked(eventHandler);
+    }
 }

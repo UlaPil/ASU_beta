@@ -8,7 +8,7 @@ import javafx.scene.text.Text;
 
 
 public class MenuTitle extends Pane {
-    private Text text;
+    private final Text text;
     public MenuTitle(String name) {
         StringBuilder s = new StringBuilder();
         for(char c : name.toCharArray()) {
