@@ -65,21 +65,21 @@ public class Menu implements AsuScene {
         int W = 3;
         Pane cross = new Pane();
         Rectangle r1 = new Rectangle(0,0,W, H);
-        Rectangle r2 = new Rectangle(0,0,W, H);
         r1.setArcHeight(5);
         r1.setArcWidth(5);
+        r1.setFill(Color.WHITE);
+        r1.getTransforms().add(new Rotate(45, (double)W/2, (double)H/2));
+
+        Rectangle r2 = new Rectangle(0,0,W, H);
         r2.setArcHeight(5);
         r2.setArcWidth(5);
         r2.setFill(Color.WHITE);
-        r1.setFill(Color.WHITE);
-        r1.getTransforms().add(new Rotate(45, (double)W/2, (double)H/2));
         r2.getTransforms().add(new Rotate(135, (double)W/2, (double)H/2));
+
         cross.getChildren().addAll(r1, r2);
         cross.setTranslateX(0.98*WIDTH);
         cross.setTranslateY(HEIGHT * 0.02);
         Buttons.put(But.EXIT, cross);
-
-        //cross.setOnMouseClicked(( ));
         root.getChildren().addAll(cross);
     }
     public Scene getScene() {
