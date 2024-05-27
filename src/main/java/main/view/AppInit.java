@@ -32,6 +32,7 @@ public class AppInit {
         scene.setEvent(Menu.But.EXIT, getCloser());
         scene.setEvent(Menu.But.PLAY, getSceneChanger(SceneName.PLAY));
         //scene.setEvent(Menu.But.HISTORY, getSceneChanger(SceneName.HISTORY));
+        GameView scene2 = (GameView)Scenes.get(SceneName.PLAY);
     }
 
     public void init() {
