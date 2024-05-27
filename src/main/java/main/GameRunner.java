@@ -1,4 +1,4 @@
-package main;
+/*package main;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -141,3 +141,4 @@ public class GameRunner {
         scanner.close();
     }
 }
+*/
