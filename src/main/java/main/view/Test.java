@@ -1,6 +1,9 @@
 package main.view;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.model.Board;
@@ -13,10 +16,12 @@ public class Test extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         GameView menu = new GameView();
-            primaryStage.setTitle("ASU");
-        primaryStage.setScene(menu.getScene());
-        primaryStage.setResizable(false);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.setTitle("ASU");
+        Pane root = new Pane();
+        primaryStage.setScene(new Scene(root));
+
+        ImageView imageView = new ImageView("/cards/b_0.png" );
+        root.getChildren().addAll(imageView);
         primaryStage.show();
 
         CardDisplay card1 = new CardDisplay("/b_8.png", new Playable() {

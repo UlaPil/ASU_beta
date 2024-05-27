@@ -1,17 +1,14 @@
 package main.model;
 
-public class RealPlayer implements Player {
-    public RealPlayer(String name, Board board) {
+public class RealPlayer implements Player{
+    public RealPlayer(String name) {
         this.name = name;
         myHand = new Hand();
-        myBoard = board;
-        blocked=0;
     }
     private final String name;
     private Hand myHand;
-    private Board myBoard;
-    private int blocked;
 
+    @Override
     public String getName() {
         return name;
     }
@@ -22,23 +19,14 @@ public class RealPlayer implements Player {
     }
 
     @Override
-    public void draw(int count) throws NoMoreCardsInDeck {
-        for(int i = 0 ; i < count ; i++) myHand.putInHand(myBoard.drawFromPile());
+    public void draw(Playable card) throws NoMoreCardsInDeck {
+        myHand.putInHand(card);
     }
 
     @Override
-    public boolean playCard(int index) throws IncorrectInput {
-        if(index <= 0 || index > myHand.getSize()) {throw new IncorrectInput();}
-        Playable topCard = myBoard.getTopCard();
-        if(myHand.getFromHand(index - 1).isPlayable(topCard.getColor(), topCard.getSymbol())) {
-            myBoard.playOnBoard(myHand.getFromHand(index - 1));
-            myHand.getFromHand(index - 1).onPlay(myBoard);
-            myHand.removeFromHand(index - 1);
-            return true;
-        }
-        return false;
+    public void playCard(Playable card) {
+        myHand.removeFromHand(card);
     }
-
     // Asu i po  asu
     @Override
     public String toString() {
@@ -46,17 +34,12 @@ public class RealPlayer implements Player {
     }
 
     @Override
-    public boolean ifBlocked() {
-        if(blocked > 0) {
-            blocked--;
-            return true;
-        }
-        return false;
+    public Playable getCard(int index) {
+        return myHand.getFromHand(index);
     }
 
     @Override
-    public void setBlocked(int amount) {
-        blocked = amount;
+    public int getHandSize() {
+        return myHand.getSize();
     }
-
 }

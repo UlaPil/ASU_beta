@@ -1,10 +1,13 @@
 package main.model;
 
 import java.util.*;
+
+import static main.model.Symbol.*;
+
 public class Board {
     Stack<Playable> drawPile;
     Stack<Playable> playPile;
-    String topColor;
+    Color topColor;
 
     public Board(Collection<Playable> cards) {
         drawPile = new Stack<>();
@@ -19,7 +22,7 @@ public class Board {
         try {
             do {
                 playOnBoard(drawFromPile());
-            } while (List.of("block", "changeColor", "reverse").contains(getTopCard().getSymbol()));
+            } while (List.of(block, changeColor, reverse).contains(getTopCard().getSymbol()));
         } catch (NoMoreCardsInDeck e) {
             throw new RuntimeException(e);
         }
@@ -33,7 +36,7 @@ public class Board {
         return new Card(playPile.lastElement().getSymbol(), topColor);
     }
 
-    public void setTopColor(String color) {
+    public void setTopColor(Color color) {
         topColor = color;
     }
 

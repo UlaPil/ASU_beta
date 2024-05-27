@@ -3,6 +3,9 @@ package main.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import static main.model.Color.*;
+import static main.model.Symbol.*;
+
 public class Game {
     private int gameDirection;
     private String nextPlayerStatus;
@@ -15,47 +18,47 @@ public class Game {
     public boolean draw;
     static {
         for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card(i.toString(),"red");
+            Playable card = new Card(one.getSymbolOfNumber(i), red);
             cards.add(card);
             cards.add(card);
         }
         for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (i.toString(),"blue");
+            Playable card = new Card (one.getSymbolOfNumber(i), blue);
             cards.add(card);
             cards.add(card);
         }
         for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (i.toString(),"yellow");
+            Playable card = new Card (one.getSymbolOfNumber(i), yellow);
             cards.add(card);
             cards.add(card);
         }
         for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (i.toString(),"green");
+            Playable card = new Card (one.getSymbolOfNumber(i), green);
             cards.add(card);
             cards.add(card);
         }
         for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard("red");
+            Playable reversecard = new ReverseCard(red);
             cards.add(reversecard);
-            Playable blockcard = new BlockCard("red");
+            Playable blockcard = new BlockCard(red);
             cards.add(blockcard);
         }
         for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard("blue");
+            Playable reversecard = new ReverseCard(blue);
             cards.add(reversecard);
-            Playable blockcard = new BlockCard("blue");
+            Playable blockcard = new BlockCard(blue);
             cards.add(blockcard);
         }
         for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard("yellow");
+            Playable reversecard = new ReverseCard(yellow);
             cards.add(reversecard);
-            Playable blockcard = new BlockCard("yellow");
+            Playable blockcard = new BlockCard(yellow);
             cards.add(blockcard);
         }
         for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard("green");
+            Playable reversecard = new ReverseCard(green);
             cards.add(reversecard);
-            Playable blockcard = new BlockCard("green");
+            Playable blockcard = new BlockCard(green);
             cards.add(blockcard);
         }
         for(int i=0 ; i<4 ; i++) {
@@ -65,47 +68,47 @@ public class Game {
     }
     static {
         for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (i.toString(),"red");
+            Playable card = new Card (one.getSymbolOfNumber(i),red);
             cards.add(card);
             cards.add(card);
         }
         for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (i.toString(),"blue");
+            Playable card = new Card (one.getSymbolOfNumber(i), blue);
             cards.add(card);
             cards.add(card);
         }
         for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (i.toString(),"yellow");
+            Playable card = new Card (one.getSymbolOfNumber(i), yellow);
             cards.add(card);
             cards.add(card);
         }
         for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (i.toString(),"green");
+            Playable card = new Card (one.getSymbolOfNumber(i), green);
             cards.add(card);
             cards.add(card);
         }
         for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard("red");
+            Playable reversecard = new ReverseCard(red);
             cards.add(reversecard);
-            Playable blockcard = new BlockCard("red");
+            Playable blockcard = new BlockCard(red);
             cards.add(blockcard);
         }
         for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard("blue");
+            Playable reversecard = new ReverseCard(blue);
             cards.add(reversecard);
-            Playable blockcard = new BlockCard("blue");
+            Playable blockcard = new BlockCard(blue);
             cards.add(blockcard);
         }
         for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard("yellow");
+            Playable reversecard = new ReverseCard(yellow);
             cards.add(reversecard);
-            Playable blockcard = new BlockCard("yellow");
+            Playable blockcard = new BlockCard(yellow);
             cards.add(blockcard);
         }
         for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard("green");
+            Playable reversecard = new ReverseCard(green);
             cards.add(reversecard);
-            Playable blockcard = new BlockCard("green");
+            Playable blockcard = new BlockCard(green);
             cards.add(blockcard);
         }
         for(int i=0 ; i<4 ; i++) {
@@ -120,16 +123,16 @@ public class Game {
         draw = false;
         board = new Board(cards);
         playerList = new ArrayList<>();
-        playerList.add(new RealPlayer(players[0], board));
-        playerList.add(new AutomaticPlayer("Bot1", board));
-        playerList.add(new AutomaticPlayer("Bot2", board));
-        playerList.add(new AutomaticPlayer("Bot3", board));
+        playerList.add(new RealPlayer(players[0]));
+        playerList.add(new RealPlayer("Bot1"));
+        playerList.add(new RealPlayer("Bot2"));
+        playerList.add(new RealPlayer("Bot3"));
         gameDirection = 1;
         nextPlayerStatus = "";
     }
     public void startGame() throws NoMoreCardsInDeck {
         for (Player player: playerList) {
-            player.draw(7);
+            for(int i=0 ; i<7 ; i++) player.draw(board.drawFromPile());
         }
         currentPlayer = playerList.get(0);
     }
@@ -140,6 +143,59 @@ public class Game {
         }
         return false;
     }
+
+    public Playable brain(Player player) throws NoMoreCardsInDeck {
+        int i = 1;
+        while (true) {
+            if (player.getCard(i).isPlayable(board.getTopCard().getSymbol(),board.getTopCard().getColor())) {
+                //board.playOnBoard(player.getCard(i));
+                return player.getCard(i);
+            }
+            if(i >= player.getHandSize()) break;
+            i++;
+        }
+        player.draw(board.drawFromPile());
+        return null;
+    }
+
+    public boolean playCard(Player player, Playable card) {
+        if(card.isPlayable(board.getTopCard().getSymbol(),board.getTopCard().getColor())) {
+            player.playCard(card);
+            board.playOnBoard(card);
+            ifSpecial(card);
+            currentIndex += gameDirection;
+            currentIndex = (currentIndex + 4) % 4;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean drawCard(Player player) {
+        try {
+            player.draw(board.drawFromPile());
+            currentIndex += gameDirection;
+            currentIndex = (currentIndex + 4) % 4;
+            return true;
+        } catch (NoMoreCardsInDeck e) {
+            return false;
+        }
+    }
+
+    public void ifSpecial(Playable card) {
+        if(card.getSymbol().isSpecial()) {
+            if(card.getSymbol() == block) {
+                currentIndex += gameDirection;
+            }
+        }
+        if(card.getSymbol() == reverse) {
+            reverseGameDirection();
+        }
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     public void reverseGameDirection() {
         gameDirection = -1 * gameDirection;
     }
@@ -159,6 +215,7 @@ public class Game {
     public static List<Playable> getCards() {
         return cards;
     }
+
     public ArrayList<Player> getPlayerList() {
         return playerList;
     }

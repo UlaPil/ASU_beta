@@ -9,147 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static main.model.Color.*;
+import static main.model.Symbol.*;
+
 public class GameRunner {
     private Game game;
-//    private ArrayList<Player> playerList;
-//    public Board board;
-//    private static List<Playable> cards = new ArrayList<>();
-//    public Player currentPlayer;
-//    private int modulo;
-//    private int currentIndex;
-//    private boolean draw;
-//    static {
-//        for(Integer i=0 ; i<10 ; i++) {
-//            Playable card = new Card(i.toString(),"red");
-//            cards.add(card);
-//            cards.add(card);
-//        }
-//        for(Integer i=0 ; i<10 ; i++) {
-//            Playable card = new Card (i.toString(),"blue");
-//            cards.add(card);
-//            cards.add(card);
-//        }
-//        for(Integer i=0 ; i<10 ; i++) {
-//            Playable card = new Card (i.toString(),"yellow");
-//            cards.add(card);
-//            cards.add(card);
-//        }
-//        for(Integer i=0 ; i<10 ; i++) {
-//            Playable card = new Card (i.toString(),"green");
-//            cards.add(card);
-//            cards.add(card);
-//        }
-//        for(int i=0 ; i<2 ; i++) {
-//            Playable reversecard = new ReverseCard("red");
-//            cards.add(reversecard);
-//            Playable blockcard = new BlockCard("red");
-//            cards.add(blockcard);
-//        }
-//        for(int i=0 ; i<2 ; i++) {
-//            Playable reversecard = new ReverseCard("blue");
-//            cards.add(reversecard);
-//            Playable blockcard = new BlockCard("blue");
-//            cards.add(blockcard);
-//        }
-//        for(int i=0 ; i<2 ; i++) {
-//            Playable reversecard = new ReverseCard("yellow");
-//            cards.add(reversecard);
-//            Playable blockcard = new BlockCard("yellow");
-//            cards.add(blockcard);
-//        }
-//        for(int i=0 ; i<2 ; i++) {
-//            Playable reversecard = new ReverseCard("green");
-//            cards.add(reversecard);
-//            Playable blockcard = new BlockCard("green");
-//            cards.add(blockcard);
-//        }
-//        for(int i=0 ; i<4 ; i++) {
-//            Playable changecolorcard = new ChangeColorCard();
-//            cards.add(changecolorcard);
-//        }
-//    }{
-//        for(Integer i=0 ; i<10 ; i++) {
-//            Playable card = new Card (i.toString(),"red");
-//            cards.add(card);
-//            cards.add(card);
-//        }
-//        for(Integer i=0 ; i<10 ; i++) {
-//            Playable card = new Card (i.toString(),"blue");
-//            cards.add(card);
-//            cards.add(card);
-//        }
-//        for(Integer i=0 ; i<10 ; i++) {
-//            Playable card = new Card (i.toString(),"yellow");
-//            cards.add(card);
-//            cards.add(card);
-//        }
-//        for(Integer i=0 ; i<10 ; i++) {
-//            Playable card = new Card (i.toString(),"green");
-//            cards.add(card);
-//            cards.add(card);
-//        }
-//        for(int i=0 ; i<2 ; i++) {
-//            Playable reversecard = new ReverseCard("red");
-//            cards.add(reversecard);
-//            Playable blockcard = new BlockCard("red");
-//            cards.add(blockcard);
-//        }
-//        for(int i=0 ; i<2 ; i++) {
-//            Playable reversecard = new ReverseCard("blue");
-//            cards.add(reversecard);
-//            Playable blockcard = new BlockCard("blue");
-//            cards.add(blockcard);
-//        }
-//        for(int i=0 ; i<2 ; i++) {
-//            Playable reversecard = new ReverseCard("yellow");
-//            cards.add(reversecard);
-//            Playable blockcard = new BlockCard("yellow");
-//            cards.add(blockcard);
-//        }
-//        for(int i=0 ; i<2 ; i++) {
-//            Playable reversecard = new ReverseCard("green");
-//            cards.add(reversecard);
-//            Playable blockcard = new BlockCard("green");
-//            cards.add(blockcard);
-//        }
-//        for(int i=0 ; i<4 ; i++) {
-//            Playable changecolorcard = new ChangeColorCard();
-//            cards.add(changecolorcard);
-//        }
-//    }
 
     public GameRunner(String ... players) {
-        // docelowo: modulo=players.length();
-//        modulo = 4;     //na aktualne potrzeby
-//        currentIndex = 0;
-//        draw = false;
-//        board = new Board(cards);
-//        playerList = new ArrayList<>();
-//        playerList.add(new RealPlayer(players[0], board));
-//        playerList.add(new AutomaticPlayer("Bot1", board));
-//        playerList.add(new AutomaticPlayer("Bot2", board));
-//        playerList.add(new AutomaticPlayer("Bot3", board));
         game = new Game();
 
 
     }
-
-//    private void startGame() throws NoMoreCardsInDeck {
-//        for (Player player: game.getPlayerList()) {
-//            player.draw(7);
-//        }
-//        game.currentPlayer = game.getPlayerList().get(0);
-//    }
-//
-//    public boolean gameOver() {
-//        for (Player player: game.getPlayerList()) {
-//            if (player.didIWin()) return true;
-//        }
-//        return false;
-//    }
-
     public static void main(String[] args) {
-        boolean dumpFlag = false;
         System.out.print("Welcome to ASU game! Enter your name: ");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
@@ -183,18 +54,32 @@ public class GameRunner {
                             try {
                                 int number = Integer.parseInt(choice);
                                 if (number == 0) {
-                                    play.game.currentPlayer.draw(1);
+                                    if(play.game.drawCard(game.getCurrentPlayer());
                                     break;
                                 }
                                 try {
-                                    if (play.game.currentPlayer.playCard(number)) {
-                                        if (play.game.getBoard().getTopCard().getSymbol().equals("block")) {
-                                            dumpFlag = true;
-                                        }
-                                        if (play.game.getBoard().getTopCard().getSymbol().equals("changeColor")) {
+                                    if (play.game.playCard(game.getPlayerList().get(game.currentIndex), game.)) {
+                                        if (play.game.getBoard().getTopCard().getSymbol().equals(changeColor)) {
                                             System.out.print("Chose a color: ");
-                                            String newColor = scanner.next();
-                                            play.game.getBoard().setTopColor(newColor);
+                                            while(true) {
+                                                String newColor = scanner.next();
+                                                if (newColor == yellow.toString()) {
+                                                    play.game.getBoard().setTopColor(yellow);
+                                                    break;
+                                                }
+                                                if (newColor == blue.toString()) {
+                                                    play.game.getBoard().setTopColor(blue);
+                                                    break;
+                                                }
+                                                if (newColor == red.toString()) {
+                                                    play.game.getBoard().setTopColor(red);
+                                                    break;
+                                                }
+                                                if (newColor == green.toString()) {
+                                                    play.game.getBoard().setTopColor(blue);
+                                                    break;
+                                                } else System.out.print("It's wrong colour! Chose color once again: ");
+                                            }
                                         }
                                         break;
                                     }
@@ -220,9 +105,8 @@ public class GameRunner {
                     }
                     try {
                         if (play.game.currentPlayer.playCard(0)) {
-                            if (play.game.getBoard().getTopCard().getSymbol().equals("block")) dumpFlag = true;
-                            if (play.game.getBoard().getTopCard().getSymbol().equals("changeColor")) {
-                                String[] colors = {"red", "green", "blue", "yellow"};
+                            if (play.game.getBoard().getTopCard().getSymbol().equals(changeColor)) {
+                                Color[] colors = {red, green, blue, yellow};
                                 Random random = new Random();
                                 int randomIndex = random.nextInt(colors.length);
                                 String newColor = colors[randomIndex];
@@ -234,10 +118,6 @@ public class GameRunner {
                     }
                     System.out.println(play.game.currentPlayer.getName() + " has finished his move. Now the top card is: ");
                     System.out.println(play.game.getBoard().getTopCard());
-                }
-                if (dumpFlag) {
-                    play.game.currentIndex += play.game.getGameDirection();
-                    dumpFlag = false;
                 }
                 play.game.currentIndex += play.game.getGameDirection();
                 if (play.game.currentIndex < 0) play.game.currentIndex += play.game.getModulo();
