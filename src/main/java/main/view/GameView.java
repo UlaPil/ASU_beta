@@ -16,17 +16,18 @@ public class GameView implements AsuScene {
     Scene scene;
     private final StackPane root = new StackPane();
     private HBox cardContainer;
+    private ImageView topCard;
 
-    public GameView() {
+    public GameView(CardDisplay card) {
         scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("/style.css")).toExternalForm());
+        topCard = card.getImageView();
     }
 
     @Override
     public Scene getScene() {
         setBackground();
         addDrawPileButton();
-        setTopCard();
         addPlayerHand();
         return scene;
     }
@@ -54,8 +55,8 @@ public class GameView implements AsuScene {
         button.setOnMouseExited(mouseDragEvent -> button.setCursor(Cursor.DEFAULT));
     }
 
-    private void setTopCard() {
-
+    public void setTopCard(CardDisplay card) {
+        topCard = card.getImageView();
     }
 
     private void addPlayerHand() {
@@ -71,11 +72,15 @@ public class GameView implements AsuScene {
     }
 
     public void addCardToPlayerHand(CardDisplay card) {
-        cardContainer.getChildren().add(card.getImageView());
+        ImageView cardView = card.getImageView();
+        cardContainer.getChildren().add(cardView);
+        cardView.setOnMouseClicked(new PlayEvent());
+        cardView.setOnMouseEntered(mouseDragEvent -> cardView.setCursor(Cursor.HAND));
+        cardView.setOnMouseExited(mouseDragEvent -> cardView.setCursor(Cursor.DEFAULT));
         adjustCardSpacing();
     }
 
-    public void removeCardFromPlayerHans(CardDisplay card) {
+    public void removeCardFromPlayerHand(CardDisplay card) {
         cardContainer.getChildren().remove(card);
     }
 
