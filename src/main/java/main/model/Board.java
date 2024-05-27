@@ -2,9 +2,6 @@ package main.model;
 
 import java.util.*;
 public class Board {
-    private int gameDirection;
-    private String nextPlayerStatus;
-    private int howManySpecialCards;
     Stack<Playable> drawPile;
     Stack<Playable> playPile;
     String topColor;
