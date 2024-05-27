@@ -15,10 +15,10 @@ public class MenuTitle extends Pane {
             s.append(c).append(" ");
         }
         text = new Text(s.toString());
-        text.setFont(Font.font("roboto", 80));
+        text.setFont(Font.font("roboto", 120));
         text.setStyle("-fx-font-weight : bold");
         text.setFill(Color.ANTIQUEWHITE);
-        text.setEffect(new DropShadow(50, Color.CRIMSON));
+        text.setEffect(new DropShadow(50, Color.WHITE));
         getChildren().addAll(text);
     }
     public double getTitleWidth() {
