@@ -62,7 +62,8 @@ public class Game {
             Playable changecolorcard = new ChangeColorCard();
             cards.add(changecolorcard);
         }
-    }{
+    }
+    static {
         for(Integer i=0 ; i<10 ; i++) {
             Playable card = new Card (i.toString(),"red");
             cards.add(card);
