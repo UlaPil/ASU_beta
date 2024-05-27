@@ -29,6 +29,14 @@ public class Hand {
 
     public void putInHand(Playable card) {
         cards.add(card);
+        cards.sort(new Comparator<Playable>() {
+            @Override
+            public int compare(Playable card1, Playable card2) {
+                int colorsCompare = card1.getColor().compareTo(card2.getColor());
+                if (colorsCompare != 0) return colorsCompare;
+                return card1.getSymbol().compareTo(card2.getSymbol());
+            }
+        });
     }
 
     public Playable getFromHand(int index) {
