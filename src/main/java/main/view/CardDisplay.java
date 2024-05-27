@@ -10,7 +10,7 @@ import java.io.InputStream;
 public class CardDisplay {
     ImageView imageView;
     Playable card;
-    CardDisplay(Playable card) {
+    public CardDisplay(Playable card) {
        StringBuilder builder = new StringBuilder("/");
        builder.append(card.getColor().toString().charAt(0)).append("_");
        String x;

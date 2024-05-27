@@ -5,6 +5,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.model.Game;
+import main.model.NoMoreCardsInDeck;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +25,11 @@ public class AppInit {
         game = new Game(" ");
         Scenes.put(SceneName.MENU, new Menu());
         Scenes.put(SceneName.PLAY, new GameView(new CardDisplay(game.getTopCard())));
+        try {
+            game.startGame();
+        } catch(NoMoreCardsInDeck e) {
+            throw new RuntimeException(e);
+        }
         initializeScenes();
     }
     private void initializeScenes() {

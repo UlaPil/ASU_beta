@@ -2,16 +2,17 @@ package main.viewModel;
 
 import main.model.Game;
 import main.model.Playable;
+import main.view.GameView;
 
 public class HandObserver {
-    HandManager menager;
-    HandObserver(Game game) {
-        menager = new HandManager(game);
+    HandManager manager;
+    HandObserver(GameView view) {
+        this.manager = new HandManager(view);
     }
     public void updateAdd(Playable card) {
-        menager.updateAdd(card);
+        manager.updateAdd(card);
     }
     public void updateDelete(Playable card) {
-        menager.updateDelete(card);
+        manager.updateDelete(card);
     }
 }
