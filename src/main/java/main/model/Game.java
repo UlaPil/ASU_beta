@@ -1,5 +1,8 @@
 package main.model;
 
+import main.viewModel.HandObserver;
+import main.viewModel.TopCardObserver;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +10,8 @@ import static main.model.Color.*;
 import static main.model.Symbol.*;
 
 public class Game {
+    private ArrayList<TopCardObserver> cardObservers;
+    private ArrayList<HandObserver> handObservers;
     private int gameDirection;
     private String nextPlayerStatus;
     private ArrayList<Player> playerList;
@@ -118,6 +123,8 @@ public class Game {
     }
     public Game(String player) {
         // docelowo: modulo=players.length();
+        cardObservers = new ArrayList<>();
+        handObservers = new ArrayList<>();
         modulo = 4;     //na aktualne potrzeby
         currentIndex = 0;
         draw = false;
@@ -143,6 +150,21 @@ public class Game {
         }
         return false;
     }
+    public void addObserver(TopCardObserver observer) {
+        cardObservers.add(observer);
+    }
+
+    public void deleteObserver(TopCardObserver observer) {
+        cardObservers.remove(observer);
+    }
+
+    public void oddObserver(HandObserver observer) {
+        handObservers.add(observer);
+    }
+
+    public void deleteObserver(HandObserver observer) {
+        handObservers.remove(observer);
+    }
 
     public Playable brain(Player player) throws NoMoreCardsInDeck {
         int i = 1;
@@ -165,6 +187,14 @@ public class Game {
             ifSpecial(card);
             currentIndex += gameDirection;
             currentIndex = (currentIndex + 4) % 4;
+            if(player.equals(playerList.get(0))) {
+                for(HandObserver observer : handObservers) {
+                    observer.updateDelete(card);
+                }
+            }
+            for(TopCardObserver obserwer : cardObservers) {
+                obserwer.update(card);
+            }
             return true;
         }
         return false;
@@ -178,7 +208,13 @@ public class Game {
 
     public boolean drawCard(Player player) throws NoMoreCardsInDeck {
         try {
-            player.draw(board.drawFromPile());
+            Playable card = board.drawFromPile();
+            player.draw(card);
+            if(player.equals(playerList.get(0))) {
+                for(HandObserver observer : handObservers) {
+                    observer.updateAdd(card);
+                }
+            }
             currentIndex += gameDirection;
             currentIndex = (currentIndex + 4) % 4;
             return true;
