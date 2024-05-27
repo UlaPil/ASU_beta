@@ -6,4 +6,6 @@ module ASU.beta {
 
     opens main to javafx.fxml;
     exports main;
+    exports main.view;
+    opens main.view to javafx.fxml;
 }

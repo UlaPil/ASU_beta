@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.GameController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.view.GameController">
    <Button layoutX="14.0" layoutY="325.0" mnemonicParsing="false" onAction="#ASU" prefHeight="33.0" prefWidth="82.0" text="ASU">
       <font>
          <Font name="Georgia Pro Black" size="22.0" />

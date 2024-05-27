@@ -1,4 +1,4 @@
-package main.core;
+package main.model;
 
 public interface Player {
     String getName();

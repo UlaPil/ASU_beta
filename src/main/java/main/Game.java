@@ -3,7 +3,7 @@ package main;
 import java.util.Random;
 import java.util.Scanner;
 
-import main.core.*;
+import main.model.*;
 
 import java.util.ArrayList;
 import java.util.List;

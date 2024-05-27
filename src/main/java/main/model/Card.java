@@ -1,4 +1,4 @@
-package main.core;
+package main.model;
 
 public class Card implements Playable{
     private String symbol;

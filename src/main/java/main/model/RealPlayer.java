@@ -1,4 +1,4 @@
-package main.core;
+package main.model;
 
 public class RealPlayer implements Player {
     public RealPlayer(String name, Board board) {

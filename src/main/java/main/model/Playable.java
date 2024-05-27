@@ -1,4 +1,4 @@
-package main.core;
+package main.model;
 //symbole : 0-9 cyfry
 
 public interface Playable {
