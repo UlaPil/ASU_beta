@@ -126,7 +126,7 @@ public class Game {
         gameDirection = 1;
         nextPlayerStatus = "";
     }
-    private void startGame() throws NoMoreCardsInDeck {
+    public void startGame() throws NoMoreCardsInDeck {
         for (Player player: playerList) {
             player.draw(7);
         }

@@ -134,19 +134,19 @@ public class GameRunner {
 
     }
 
-    private void startGame() throws NoMoreCardsInDeck {
-        for (Player player: game.getPlayerList()) {
-            player.draw(7);
-        }
-        game.currentPlayer = game.getPlayerList().get(0);
-    }
-
-    public boolean gameOver() {
-        for (Player player: game.getPlayerList()) {
-            if (player.didIWin()) return true;
-        }
-        return false;
-    }
+//    private void startGame() throws NoMoreCardsInDeck {
+//        for (Player player: game.getPlayerList()) {
+//            player.draw(7);
+//        }
+//        game.currentPlayer = game.getPlayerList().get(0);
+//    }
+//
+//    public boolean gameOver() {
+//        for (Player player: game.getPlayerList()) {
+//            if (player.didIWin()) return true;
+//        }
+//        return false;
+//    }
 
     public static void main(String[] args) {
         boolean dumpFlag = false;
@@ -158,12 +158,12 @@ public class GameRunner {
         System.out.println("The first top card is: ");
         System.out.println(play.game.getBoard().getTopCard());
         try {
-            play.startGame();
+            play.game.startGame();
         } catch (NoMoreCardsInDeck e) {
             System.out.println("Sorry... something went wrong :(");
             throw new RuntimeException(e);
         }
-        while(!play.gameOver()) {
+        while(!play.game.gameOver()) {
             try {
                 if (play.game.currentPlayer.equals(play.game.getPlayerList().get(0))) {
                     System.out.println("Now it's your turn. ");
@@ -236,10 +236,10 @@ public class GameRunner {
                     System.out.println(play.game.getBoard().getTopCard());
                 }
                 if (dumpFlag) {
-                    play.game.currentIndex += play.game.getBoard().getGameDirection();
+                    play.game.currentIndex += play.game.getGameDirection();
                     dumpFlag = false;
                 }
-                play.game.currentIndex += play.game.getBoard().getGameDirection();
+                play.game.currentIndex += play.game.getGameDirection();
                 if (play.game.currentIndex < 0) play.game.currentIndex += play.game.getModulo();
                 play.game.currentIndex = play.game.currentIndex % play.game.getModulo();
                 play.game.currentPlayer = play.game.getPlayerList().get(play.game.currentIndex);
