@@ -64,10 +64,9 @@ public class GameView implements AsuScene {
         cardContainer.setAlignment(Pos.CENTER);
         StackPane.setAlignment(cardContainer, Pos.CENTER);
         cardContainer.setMaxWidth(9*WIDTH/10);
-        cardContainer.setMaxHeight(HEIGHT/4);
-        cardContainer.setMinHeight(HEIGHT/4);
+        cardContainer.setMaxHeight(125);
+        cardContainer.setMinHeight(125);
         cardContainer.setTranslateY(3*HEIGHT/10);
-        cardContainer.setStyle("-fx-background-color: green;");
         cardContainer.widthProperty().addListener((obs, oldVal, newVal) -> adjustCardSpacing());
     }
 
