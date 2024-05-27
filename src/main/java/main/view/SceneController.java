@@ -20,14 +20,15 @@ public class SceneController {
     public SceneController(Stage stage) {
         this.stage = stage;
         Scenes.put(SceneName.MENU, new Menu());
+        Scenes.put(SceneName.PLAY, new GameView());
         initializeScenes();
     }
     private void initializeScenes() {
         //Menu
         Menu scene = (Menu)Scenes.get(SceneName.MENU);
         scene.setEvent(Menu.But.EXIT, getCloser());
-        //scene.setEvent(Menu.But.PLAY, getSceneChanger(SceneName.PLAY));
-        //scene.setEvent(Menu.But.PLAY, getSceneChanger(SceneName.PLAY);
+        scene.setEvent(Menu.But.PLAY, getSceneChanger(SceneName.PLAY));
+        //scene.setEvent(Menu.But.HISTORY, getSceneChanger(SceneName.HISTORY));
     }
 
     public void init() {

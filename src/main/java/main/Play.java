@@ -1,14 +1,8 @@
 package main;
 
 import javafx.application.Application;
-import javafx.scene.*;
 import javafx.stage.*;
-import javafx.fxml.*;
 import main.view.SceneController;
-
-import java.io.IOException;
-import java.util.Objects;
-
 
 public class Play extends Application {
 
@@ -17,7 +11,7 @@ public class Play extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
         SceneController sceneController = new SceneController(stage);
         sceneController.init();
     }
