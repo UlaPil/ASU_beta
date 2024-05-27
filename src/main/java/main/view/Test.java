@@ -16,5 +16,6 @@ public class Test extends Application {
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.show();
+
     }
 }

@@ -15,7 +15,7 @@ public class MenuTitle extends Pane {
             s.append(c).append(" ");
         }
         text = new Text(s.toString());
-        text.setFont(Font.font("roboto", 120));
+        text.setFont(Font.font( 120));
         text.setStyle("-fx-font-weight : bold");
         text.setFill(Color.ANTIQUEWHITE);
         text.setEffect(new DropShadow(50, Color.WHITE));

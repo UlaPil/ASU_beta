@@ -3,3 +3,6 @@
     -fx-background-size: 1280 720;
     -fx-background-radius: 30;
 }
+#button {
+    -fx-background-color: transparent;
+}
