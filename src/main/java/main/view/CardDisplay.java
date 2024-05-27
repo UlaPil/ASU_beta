@@ -7,9 +7,8 @@ import main.model.Playable;
 public class CardDisplay {
     ImageView imageView;
     Playable card;
-    CardDisplay(String url, Playable card) {
-        imageView = new ImageView(url);
-        this.card = card;
+    CardDisplay(Playable card) {
+       card.getColor();
     }
     public ImageView getImageView() {
         return imageView;
