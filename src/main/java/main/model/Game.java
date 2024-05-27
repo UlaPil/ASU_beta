@@ -203,7 +203,9 @@ public class Game {
     public void setTopCard(Color color) {
         board.setTopColor(color);
     }
-
+    public Playable getTopCard() {
+        return board.getTopCard();
+    }
 
 
     public boolean drawCard(Player player) throws NoMoreCardsInDeck {

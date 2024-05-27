@@ -2,7 +2,8 @@ package main;
 
 import javafx.application.Application;
 import javafx.stage.*;
-import main.view.SceneController;
+import main.view.AppInit;
+import main.view.AppInit;
 
 public class Play extends Application {
 
@@ -12,7 +13,7 @@ public class Play extends Application {
 
     @Override
     public void start(Stage stage) {
-        SceneController sceneController = new SceneController(stage);
-        sceneController.init();
+        AppInit appInit = new AppInit(stage);
+        appInit.init();
     }
 }

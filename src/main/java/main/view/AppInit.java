@@ -4,23 +4,26 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import main.model.Game;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class SceneController {
+public class AppInit {
     public enum SceneName {
         MENU,
         PLAY,
         HISTORY
     }
     private final Map<SceneName, AsuScene> Scenes = new HashMap<>();
+    private final Game game;
     Stage stage;
-    public SceneController(Stage stage) {
+    public AppInit(Stage stage) {
         this.stage = stage;
+        game = new Game(" ");
         Scenes.put(SceneName.MENU, new Menu());
-        Scenes.put(SceneName.PLAY, new GameView());
+        Scenes.put(SceneName.PLAY, new GameView(new CardDisplay(game.getTopCard())));
         initializeScenes();
     }
     private void initializeScenes() {
