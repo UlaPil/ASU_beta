@@ -8,7 +8,7 @@ public class CardDisplay {
     ImageView imageView;
     Playable card;
     CardDisplay(Playable card) {
-       card.getColor();
+
     }
     public ImageView getImageView() {
         return imageView;
