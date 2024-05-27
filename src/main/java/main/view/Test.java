@@ -10,11 +10,12 @@ public class Test extends Application {
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Menu menu = new Menu();
+        GameView menu = new GameView();
             primaryStage.setTitle("ASU");
         primaryStage.setScene(menu.getScene());
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.show();
+
     }
 }

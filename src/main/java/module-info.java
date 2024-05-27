@@ -3,6 +3,7 @@ module ASU.beta {
     requires javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
     opens main to javafx.fxml;
     exports main;
