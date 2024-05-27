@@ -1,10 +1,12 @@
 package main.view;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -18,19 +20,22 @@ public class GameView implements AsuScene {
     private final StackPane root = new StackPane();
     private HBox cardContainer;
     private ImageView topCard;
+    private Pane cross;
 
     public GameView(CardDisplay card) {
         scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("/style.css")).toExternalForm());
         topCard = card.getImageView();
-    }
-
-    @Override
-    public Scene getScene() {
+        root.getChildren().addAll(topCard);
         setBackground();
         addExit();
         addDrawPileButton();
         addPlayerHand();
+
+    }
+
+    @Override
+    public Scene getScene() {
         return scene;
     }
 
@@ -71,6 +76,7 @@ public class GameView implements AsuScene {
         cardContainer.setMinHeight(125);
         cardContainer.setTranslateY(3*HEIGHT/10);
         cardContainer.widthProperty().addListener((obs, oldVal, newVal) -> adjustCardSpacing());
+
     }
 
     public void addCardToPlayerHand(CardDisplay card) {
@@ -124,6 +130,11 @@ public class GameView implements AsuScene {
         cross.getChildren().addAll(r1, r2);
         cross.setTranslateX(0.98*WIDTH);
         cross.setTranslateY(HEIGHT * 0.02);
+        this.cross = cross;
+
         root.getChildren().addAll(cross);
+    }
+   public void defineExit(EventHandler<MouseEvent> event) {
+        cross.setOnMouseClicked(event);
     }
 }
