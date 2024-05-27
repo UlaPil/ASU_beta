@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
 
 import java.util.Objects;
 
@@ -27,6 +28,7 @@ public class GameView implements AsuScene {
     @Override
     public Scene getScene() {
         setBackground();
+        addExit();
         addDrawPileButton();
         addPlayerHand();
         return scene;
@@ -101,5 +103,27 @@ public class GameView implements AsuScene {
             ImageView card = (ImageView) cardContainer.getChildren().get(i);
             card.setLayoutX(startX + i * (CARD_WIDTH + spacing));
         }
+    }
+
+    private void addExit() {
+        int H = 20;
+        int W = 3;
+        Pane cross = new Pane();
+        Rectangle r1 = new Rectangle(0,0,W, H);
+        r1.setArcHeight(5);
+        r1.setArcWidth(5);
+        r1.setFill(Color.WHITE);
+        r1.getTransforms().add(new Rotate(45, (double)W/2, (double)H/2));
+
+        Rectangle r2 = new Rectangle(0,0,W, H);
+        r2.setArcHeight(5);
+        r2.setArcWidth(5);
+        r2.setFill(Color.WHITE);
+        r2.getTransforms().add(new Rotate(135, (double)W/2, (double)H/2));
+
+        cross.getChildren().addAll(r1, r2);
+        cross.setTranslateX(0.98*WIDTH);
+        cross.setTranslateY(HEIGHT * 0.02);
+        root.getChildren().addAll(cross);
     }
 }
