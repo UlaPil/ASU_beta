@@ -46,11 +46,11 @@ public class Test extends Application {
         menu.addCardToPlayerHand(card6);
         menu.addCardToPlayerHand(card7);
         menu.addCardToPlayerHand(card8);
-        menu.addCardToPlayerHand(card9);
-        menu.addCardToPlayerHand(card10);
-        menu.addCardToPlayerHand(card11);
-        menu.addCardToPlayerHand(card12);
-        menu.addCardToPlayerHand(card13);
-        menu.addCardToPlayerHand(card14);
+//        menu.addCardToPlayerHand(card9);
+//        menu.addCardToPlayerHand(card10);
+//        menu.addCardToPlayerHand(card11);
+//        menu.addCardToPlayerHand(card12);
+//        menu.addCardToPlayerHand(card13);
+//        menu.addCardToPlayerHand(card14);
     }
 }

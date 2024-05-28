@@ -1,11 +1,11 @@
 package main.view;
 
-import javafx.collections.ObservableList;
+import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -13,6 +13,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
+
 import java.util.Objects;
 
 public class GameView implements AsuScene {
@@ -27,8 +29,7 @@ public class GameView implements AsuScene {
         scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("/style.css")).toExternalForm());
         topCard = card.getImageView();
-        topCard.setTranslateY(- HEIGHT/8);
-        topCard.setStyle("-fx-radius: 25;");
+//        topCard.setTranslateY(- HEIGHT/8);
         root.getChildren().addAll(topCard);
         setBackground();
         addExit();
@@ -56,13 +57,32 @@ public class GameView implements AsuScene {
         ImageView button = new ImageView();
         root.getChildren().addAll(button);
         button.setImage(card);
-        button.setTranslateX(35*WIDTH/100);
-        button.setTranslateY(- HEIGHT/8);
+        button.setTranslateX(WIDTH/6);
+//        button.setTranslateY(- HEIGHT/8);
         button.setFitWidth(CARD_WIDTH);
         button.setPreserveRatio(true);
         button.setOnMouseClicked(new DrawEvent());
-        button.setOnMouseEntered(mouseDragEvent -> button.setCursor(Cursor.HAND));
-        button.setOnMouseExited(mouseDragEvent -> button.setCursor(Cursor.DEFAULT));
+        button.setOnMouseEntered(mouseDragEvent -> {
+            button.setCursor(Cursor.HAND);
+            addHighlightEffect(button, true);
+        });
+        button.setOnMouseExited(mouseDragEvent -> {
+            button.setCursor(Cursor.DEFAULT);
+            addHighlightEffect(button, false);
+        });
+    }
+
+    private void addHighlightEffect(ImageView cardView, boolean highlight) {
+        if (highlight) {
+            DropShadow dropShadow = new DropShadow();
+            dropShadow.setRadius(20);
+            dropShadow.setOffsetX(0);
+            dropShadow.setOffsetY(0);
+            dropShadow.setColor(Color.WHITE);
+            cardView.setEffect(dropShadow);
+        } else {
+            cardView.setEffect(null);
+        }
     }
 
     public void setTopCard(CardDisplay card) {
@@ -75,7 +95,7 @@ public class GameView implements AsuScene {
         cardContainer.setAlignment(Pos.CENTER);
         StackPane.setAlignment(cardContainer, Pos.CENTER);
         cardContainer.setId("hand");
-        cardContainer.setMaxWidth(8*WIDTH/10);
+        cardContainer.setMaxWidth(2*WIDTH/10);
         cardContainer.setMaxHeight(135);
         cardContainer.setMinHeight(135);
         cardContainer.setTranslateY(4*HEIGHT/10);
@@ -86,15 +106,30 @@ public class GameView implements AsuScene {
     public void addCardToPlayerHand(CardDisplay card) {
         ImageView cardView = card.getImageView();
         cardContainer.getChildren().add(cardView);
-        cardView.setOnMouseClicked(new PlayEvent());
-        cardView.setOnMouseEntered(mouseDragEvent -> cardView.setCursor(Cursor.HAND));
-        cardView.setOnMouseExited(mouseDragEvent -> cardView.setCursor(Cursor.DEFAULT));
+//        cardView.setOnMouseClicked(new PlayEvent());
+        // to tak nie będzie ale tylko na razie na potrzeby testu
+        // docelowo będzie tak jak wyżej
+        cardView.setOnMouseClicked(mouseEvent -> removeCardFromPlayerHand(card));
+        cardView.setOnMouseEntered(mouseEvent -> {
+            cardView.setCursor(Cursor.HAND);
+            playBounceAnimation(cardView, -20);
+        });
+        cardView.setOnMouseExited(mouseEvent -> {
+            cardView.setCursor(Cursor.DEFAULT);
+            playBounceAnimation(cardView, 0);
+        });
         adjustCardSpacing();
         sortCards();
     }
 
+    private void playBounceAnimation(ImageView cardView, double toY) {
+        TranslateTransition transition = new TranslateTransition(Duration.millis(200), cardView);
+        transition.setToY(toY);
+        transition.play();
+    }
+
     public void removeCardFromPlayerHand(CardDisplay card) {
-        cardContainer.getChildren().remove(card);
+        cardContainer.getChildren().remove(card.getImageView());
     }
 
     private void adjustCardSpacing() {
@@ -143,7 +178,8 @@ public class GameView implements AsuScene {
 
         root.getChildren().addAll(cross);
     }
-   public void defineExit(EventHandler<MouseEvent> event) {
+
+    public void defineExit(EventHandler<MouseEvent> event) {
         cross.setOnMouseClicked(event);
         cross.setOnMouseEntered(mouseDragEvent -> cross.setCursor(Cursor.HAND));
         cross.setOnMouseExited(mouseDragEvent -> cross.setCursor(Cursor.DEFAULT));
