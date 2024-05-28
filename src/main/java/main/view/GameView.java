@@ -1,8 +1,10 @@
 package main.view;
 
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,7 +13,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
-
 import java.util.Objects;
 
 public class GameView implements AsuScene {
@@ -74,10 +75,9 @@ public class GameView implements AsuScene {
         cardContainer.setAlignment(Pos.CENTER);
         StackPane.setAlignment(cardContainer, Pos.CENTER);
         cardContainer.setId("hand");
-        cardContainer.setMaxWidth(9*WIDTH/10);
-        cardContainer.setMaxHeight(125);
-        cardContainer.setMinHeight(125);
-//        cardContainer.setOpacity(0.5);
+        cardContainer.setMaxWidth(8*WIDTH/10);
+        cardContainer.setMaxHeight(135);
+        cardContainer.setMinHeight(135);
         cardContainer.setTranslateY(4*HEIGHT/10);
         cardContainer.widthProperty().addListener((obs, oldVal, newVal) -> adjustCardSpacing());
 
@@ -90,6 +90,7 @@ public class GameView implements AsuScene {
         cardView.setOnMouseEntered(mouseDragEvent -> cardView.setCursor(Cursor.HAND));
         cardView.setOnMouseExited(mouseDragEvent -> cardView.setCursor(Cursor.DEFAULT));
         adjustCardSpacing();
+        sortCards();
     }
 
     public void removeCardFromPlayerHand(CardDisplay card) {
@@ -97,14 +98,14 @@ public class GameView implements AsuScene {
     }
 
     private void adjustCardSpacing() {
-        double containerWidth = cardContainer.getWidth();
+        double containerWidth = cardContainer.getWidth() * 0.95;
         int numberOfCards = cardContainer.getChildren().size();
         if (numberOfCards == 0) return;
 
         double spacing = 20;
         double totalCardWidth = numberOfCards * CARD_WIDTH + (numberOfCards - 1) * spacing;
         if (totalCardWidth > containerWidth) {
-            spacing = (containerWidth - CARD_WIDTH) / (numberOfCards - 1);
+            spacing = (containerWidth - numberOfCards * CARD_WIDTH) / (numberOfCards - 1);
         }
         cardContainer.setSpacing(spacing);
         double startX = (containerWidth - totalCardWidth + spacing) / 2;
@@ -113,6 +114,10 @@ public class GameView implements AsuScene {
             ImageView card = (ImageView) cardContainer.getChildren().get(i);
             card.setLayoutX(startX + i * (CARD_WIDTH + spacing));
         }
+    }
+
+    public void sortCards() {
+        // TODO
     }
 
     private void addExit() {
