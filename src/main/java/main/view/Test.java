@@ -23,10 +23,10 @@ public class Test extends Application {
 //        root.getChildren().addAll(imageView);
         primaryStage.show();
 
-        CardDisplay card1 = new CardDisplay(new Card(Symbol.five, Color.red));
+        CardDisplay card1 = new CardDisplay(new Card(Symbol.reverse, Color.red));
         CardDisplay card3 = new CardDisplay(new Card(Symbol.three, Color.blue));
         CardDisplay card4 = new CardDisplay(new Card(Symbol.two, Color.yellow));
-        CardDisplay card5 = new CardDisplay(new Card(Symbol.eight, Color.red));
+        CardDisplay card5 = new CardDisplay(new Card(Symbol.changeColor, Color.wild));
         CardDisplay card6 = new CardDisplay(new Card(Symbol.five, Color.blue));
         CardDisplay card7 = new CardDisplay(new Card(Symbol.nine, Color.red));
 

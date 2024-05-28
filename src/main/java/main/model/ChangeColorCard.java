@@ -1,11 +1,11 @@
 package main.model;
 
-import static main.model.Color.black;
+import static main.model.Color.wild;
 import static main.model.Symbol.changeColor;
 
 public class ChangeColorCard implements Playable{
     Card card;
-    public ChangeColorCard() { card = new Card(changeColor, black) ; }
+    public ChangeColorCard() { card = new Card(changeColor, wild) ; }
 
     @Override
     public boolean isPlayable(Symbol symbol, Color color) { return true; }
