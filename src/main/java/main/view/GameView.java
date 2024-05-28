@@ -26,6 +26,8 @@ public class GameView implements AsuScene {
         scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("/style.css")).toExternalForm());
         topCard = card.getImageView();
+        topCard.setTranslateY(- HEIGHT/8);
+        topCard.setStyle("-fx-radius: 25;");
         root.getChildren().addAll(topCard);
         setBackground();
         addExit();
@@ -54,7 +56,7 @@ public class GameView implements AsuScene {
         root.getChildren().addAll(button);
         button.setImage(card);
         button.setTranslateX(35*WIDTH/100);
-        button.setTranslateY(- HEIGHT/5);
+        button.setTranslateY(- HEIGHT/8);
         button.setFitWidth(CARD_WIDTH);
         button.setPreserveRatio(true);
         button.setOnMouseClicked(new DrawEvent());
@@ -71,10 +73,12 @@ public class GameView implements AsuScene {
         root.getChildren().addAll(cardContainer);
         cardContainer.setAlignment(Pos.CENTER);
         StackPane.setAlignment(cardContainer, Pos.CENTER);
+        cardContainer.setId("hand");
         cardContainer.setMaxWidth(9*WIDTH/10);
         cardContainer.setMaxHeight(125);
         cardContainer.setMinHeight(125);
-        cardContainer.setTranslateY(3*HEIGHT/10);
+        cardContainer.setOpacity(0.5);
+        cardContainer.setTranslateY(4*HEIGHT/10);
         cardContainer.widthProperty().addListener((obs, oldVal, newVal) -> adjustCardSpacing());
 
     }
@@ -136,5 +140,7 @@ public class GameView implements AsuScene {
     }
    public void defineExit(EventHandler<MouseEvent> event) {
         cross.setOnMouseClicked(event);
+        cross.setOnMouseEntered(mouseDragEvent -> cross.setCursor(Cursor.HAND));
+        cross.setOnMouseExited(mouseDragEvent -> cross.setCursor(Cursor.DEFAULT));
     }
 }

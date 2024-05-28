@@ -13,3 +13,8 @@
      -fx-background-size: 1280 720;
      -fx-background-radius: 30;
 }
+
+#hand {
+    -fx-background-color: white;
+    -fx-background-radius: 25;
+}

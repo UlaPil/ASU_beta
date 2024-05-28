@@ -1,6 +1,7 @@
 package main.view;
 
 import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
@@ -49,6 +50,8 @@ public class Menu implements AsuScene {
         play.setTranslateX(WIDTH/3 + 20);
         play.setTranslateY(HEIGHT/3 - 10);
         play.setBgColor(Color.GREEN);
+        play.setOnMouseEntered(mouseDragEvent -> play.setCursor(Cursor.HAND));
+        play.setOnMouseExited(mouseDragEvent -> play.setCursor(Cursor.DEFAULT));
         menuPanel.getChildren().addAll(play);
         Buttons.put(But.PLAY, play);
 
@@ -56,6 +59,8 @@ public class Menu implements AsuScene {
         history.setTranslateX((double)3*WIDTH/4);
         history.setTranslateY((double)4*HEIGHT/5);
         history.setBgColor(Color.valueOf("#1891AA"));
+        history.setOnMouseEntered(mouseDragEvent -> history.setCursor(Cursor.HAND));
+        history.setOnMouseExited(mouseDragEvent -> history.setCursor(Cursor.DEFAULT));
         Buttons.put(But.HISTORY, history);
         menuPanel.getChildren().addAll(history);
         root.getChildren().addAll(menuPanel);
@@ -79,6 +84,8 @@ public class Menu implements AsuScene {
         cross.getChildren().addAll(r1, r2);
         cross.setTranslateX(0.98*WIDTH);
         cross.setTranslateY(HEIGHT * 0.02);
+        cross.setOnMouseEntered(mouseDragEvent -> cross.setCursor(Cursor.HAND));
+        cross.setOnMouseExited(mouseDragEvent -> cross.setCursor(Cursor.DEFAULT));
         Buttons.put(But.EXIT, cross);
         root.getChildren().addAll(cross);
     }
