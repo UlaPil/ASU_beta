@@ -52,6 +52,7 @@ public class AppInit {
     public EventHandler<MouseEvent> getSceneChanger(SceneName name ) {
         return e -> stage.setScene(Scenes.get(name).getScene());
     }
+
     public EventHandler<MouseEvent> getCloser() {
         return e -> stage.close();
     }
