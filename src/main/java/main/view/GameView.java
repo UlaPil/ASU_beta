@@ -95,7 +95,7 @@ public class GameView implements AsuScene {
         cardContainer.setAlignment(Pos.CENTER);
         StackPane.setAlignment(cardContainer, Pos.CENTER);
         cardContainer.setId("hand");
-        cardContainer.setMaxWidth(2*WIDTH/10);
+        cardContainer.setMaxWidth(6*WIDTH/10);
         cardContainer.setMaxHeight(135);
         cardContainer.setMinHeight(135);
         cardContainer.setTranslateY(4*HEIGHT/10);
