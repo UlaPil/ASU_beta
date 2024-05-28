@@ -77,7 +77,7 @@ public class GameView implements AsuScene {
         cardContainer.setMaxWidth(9*WIDTH/10);
         cardContainer.setMaxHeight(125);
         cardContainer.setMinHeight(125);
-        cardContainer.setOpacity(0.5);
+//        cardContainer.setOpacity(0.5);
         cardContainer.setTranslateY(4*HEIGHT/10);
         cardContainer.widthProperty().addListener((obs, oldVal, newVal) -> adjustCardSpacing());
 

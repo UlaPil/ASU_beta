@@ -1,74 +1,40 @@
-//package main.view;
-//
-//import javafx.application.Application;
-//import javafx.scene.Scene;
-//import javafx.scene.image.ImageView;
-//import javafx.scene.layout.Pane;
-//import javafx.stage.Stage;
-//import javafx.stage.StageStyle;
-//import main.model.Board;
-//import main.model.Color;
-//import main.model.Playable;
-//import main.model.Symbol;
-//
-//public class Test extends Application {
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
-//    @Override
-//    public void start(Stage primaryStage) throws Exception {
-//        GameView menu = new GameView();
-//        primaryStage.setTitle("ASU");
-//        Pane root = new Pane();
-//        primaryStage.setScene(new Scene(root));
-//
+package main.view;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import main.model.*;
+
+public class Test extends Application {
+    public static void main(String[] args) {
+        launch(args);
+    }
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        CardDisplay card2 = new CardDisplay(new Card(Symbol.five, Color.red));
+        GameView menu = new GameView(card2);
+        primaryStage.setTitle("ASU");
+        Pane root = new Pane();
+        primaryStage.setScene(menu.getScene());
+
 //        ImageView imageView = new ImageView("/cards/b_0.png" );
 //        root.getChildren().addAll(imageView);
-//        primaryStage.show();
-//
-//        CardDisplay card1 = new CardDisplay("/b_8.png", new Playable() {
-//            @Override
-//            public boolean isPlayable(String color, String symbol) {
-//                return true;
-//            }
-//
-//            @Override
-//            public String getColor() {
-//                return "2";
-//            }
-//
-//            @Override
-//            public String getSymbol() {
-//                return "3";
-//            }
-//
-//            @Override
-//            public void onPlay(Board board) {
-//
-//            }
-//        });
-//        CardDisplay card2 =  new CardDisplay("/b_8.png", new Playable() {
-//            @Override
-//            public boolean isPlayable(Color color, Symbol symbol) {
-//                return true;
-//            }
-//
-//            @Override
-//            public Color getColor() {
-//                return "2";
-//            }
-//
-//            @Override
-//            public String getSymbol() {
-//                return "3";
-//            }
-//
-//            @Override
-//            public void onPlay(Board board) {
-//
-//            }
-//        });
-//        menu.addCardToPlayerHand(card1);
-//        menu.addCardToPlayerHand(card2);
-//    }
-//}
+        primaryStage.show();
+
+        CardDisplay card1 = new CardDisplay(new Card(Symbol.five, Color.red));
+        CardDisplay card3 = new CardDisplay(new Card(Symbol.three, Color.blue));
+        CardDisplay card4 = new CardDisplay(new Card(Symbol.two, Color.yellow));
+        CardDisplay card5 = new CardDisplay(new Card(Symbol.eight, Color.red));
+        CardDisplay card6 = new CardDisplay(new Card(Symbol.five, Color.blue));
+        CardDisplay card7 = new CardDisplay(new Card(Symbol.nine, Color.red));
+
+        menu.addCardToPlayerHand(card1);
+        menu.addCardToPlayerHand(card3);
+        menu.addCardToPlayerHand(card4);
+        menu.addCardToPlayerHand(card5);
+        menu.addCardToPlayerHand(card6);
+        menu.addCardToPlayerHand(card7);
+    }
+}

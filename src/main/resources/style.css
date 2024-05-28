@@ -15,6 +15,6 @@
 }
 
 #hand {
-    -fx-background-color: white;
+    -fx-background-color: rgb(0, 0, 0, 0.5);
     -fx-background-radius: 25;
 }
