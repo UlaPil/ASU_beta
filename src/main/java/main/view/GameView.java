@@ -181,8 +181,9 @@ public class GameView implements AsuScene {
         r2.getTransforms().add(new Rotate(135, (double)W/2, (double)H/2));
 
         cross.getChildren().addAll(r1, r2);
+        cross.setMaxHeight(H);
         cross.setTranslateX(0.98*WIDTH);
-        cross.setTranslateY(HEIGHT * 0.02);
+        cross.setTranslateY((-HEIGHT/2)*0.94);
         this.cross = cross;
 
         root.getChildren().addAll(cross);

@@ -24,6 +24,10 @@ public class MenuElement extends Pane{
 
         getChildren().addAll(bg, text);
     }
+
+    public double getBgWidth() { return bg.getWidth(); }
+    public double getBgHeight() { return bg.getHeight(); }
+
     public void setBgColor(Color color) {bg.setFill(color);}
 
 }

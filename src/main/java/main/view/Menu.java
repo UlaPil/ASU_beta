@@ -47,8 +47,10 @@ public class Menu implements AsuScene {
     }
     private void addMenuPanel() {
         MenuElement play = new MenuElement("PLAY", 50);
-        play.setTranslateX(WIDTH/3 + 20);
-        play.setTranslateY(HEIGHT/3 - 10);
+        play.setMaxWidth(play.getBgWidth());
+        play.setMaxHeight(play.getBgHeight());
+        play.setTranslateX(-WIDTH/12);
+        play.setTranslateY(-HEIGHT/8);
         play.setBgColor(Color.GREEN);
         play.setOnMouseEntered(mouseDragEvent -> play.setCursor(Cursor.HAND));
         play.setOnMouseExited(mouseDragEvent -> play.setCursor(Cursor.DEFAULT));
@@ -56,8 +58,10 @@ public class Menu implements AsuScene {
         Buttons.put(But.PLAY, play);
 
         MenuElement history = new MenuElement("HISTORY", 50);
-        history.setTranslateX((double)3*WIDTH/4);
-        history.setTranslateY((double)4*HEIGHT/5);
+        history.setMaxWidth(play.getBgWidth());
+        history.setMaxHeight(play.getBgHeight());
+        history.setTranslateX(WIDTH/3 + 10);
+        history.setTranslateY(5*HEIGHT/12 - 5);
         history.setBgColor(Color.valueOf("#1891AA"));
         history.setOnMouseEntered(mouseDragEvent -> history.setCursor(Cursor.HAND));
         history.setOnMouseExited(mouseDragEvent -> history.setCursor(Cursor.DEFAULT));
@@ -82,8 +86,9 @@ public class Menu implements AsuScene {
         r2.getTransforms().add(new Rotate(135, (double)W/2, (double)H/2));
 
         cross.getChildren().addAll(r1, r2);
+        cross.setMaxHeight(H);
         cross.setTranslateX(0.98*WIDTH);
-        cross.setTranslateY(HEIGHT * 0.02);
+        cross.setTranslateY((-HEIGHT/2)*0.94);
         cross.setOnMouseEntered(mouseDragEvent -> cross.setCursor(Cursor.HAND));
         cross.setOnMouseExited(mouseDragEvent -> cross.setCursor(Cursor.DEFAULT));
         Buttons.put(But.EXIT, cross);
