@@ -55,24 +55,33 @@ public class GameView implements AsuScene {
     private void addDrawPileButton() {
         Image card = new Image("/back-side.png");
         ImageView button = new ImageView();
-        root.getChildren().addAll(button);
         button.setImage(card);
-        button.setTranslateX(WIDTH/6);
-//        button.setTranslateY(- HEIGHT/8);
         button.setFitWidth(CARD_WIDTH);
         button.setPreserveRatio(true);
-        button.setOnMouseClicked(new DrawEvent());
-        button.setOnMouseEntered(mouseDragEvent -> {
-            button.setCursor(Cursor.HAND);
-            addHighlightEffect(button, true);
+        double width = button.getFitWidth();
+        double height = button.getFitWidth() * button.getImage().getHeight() / button.getImage().getWidth();
+        Rectangle rectangle = new Rectangle(width, height);
+        rectangle.setArcHeight(15.0);
+        rectangle.setArcWidth(15.0);
+        button.setClip(rectangle);
+        StackPane stackPane = new StackPane(button);
+        stackPane.setPrefSize(width, height);
+        root.getChildren().add(stackPane);
+        stackPane.setTranslateX(WIDTH / 6);
+        stackPane.setMaxWidth(CARD_WIDTH);
+        stackPane.setMaxHeight(height);
+        stackPane.setOnMouseClicked(new DrawEvent());
+        stackPane.setOnMouseEntered(mouseDragEvent -> {
+            stackPane.setCursor(Cursor.HAND);
+            addHighlightEffect(stackPane, true);
         });
-        button.setOnMouseExited(mouseDragEvent -> {
-            button.setCursor(Cursor.DEFAULT);
-            addHighlightEffect(button, false);
+        stackPane.setOnMouseExited(mouseDragEvent -> {
+            stackPane.setCursor(Cursor.DEFAULT);
+            addHighlightEffect(stackPane, false);
         });
     }
 
-    private void addHighlightEffect(ImageView cardView, boolean highlight) {
+    private void addHighlightEffect(StackPane cardView, boolean highlight) {
         if (highlight) {
             DropShadow dropShadow = new DropShadow();
             dropShadow.setRadius(20);
@@ -107,8 +116,8 @@ public class GameView implements AsuScene {
         ImageView cardView = card.getImageView();
         cardContainer.getChildren().add(cardView);
 //        cardView.setOnMouseClicked(new PlayEvent());
-        // to tak nie będzie ale tylko na razie na potrzeby testu
-        // docelowo będzie tak jak wyżej
+//         to tak nie będzie ale tylko na razie na potrzeby testu Test.java
+//         docelowo będzie tak jak wyżej
         cardView.setOnMouseClicked(mouseEvent -> removeCardFromPlayerHand(card));
         cardView.setOnMouseEntered(mouseEvent -> {
             cardView.setCursor(Cursor.HAND);

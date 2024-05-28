@@ -2,9 +2,11 @@ package main.view;
 
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 import main.model.Card;
 import main.model.Playable;
 
+import java.awt.*;
 import java.io.InputStream;
 
 public class CardDisplay {
@@ -15,6 +17,7 @@ public class CardDisplay {
        builder.append(card.getColor().toString().charAt(0)).append("_");
        String x;
        switch(card.getSymbol()) {
+           case zero -> x = "0";
            case one -> x = "1";
            case two -> x = "2";
            case three -> x = "3";
@@ -35,6 +38,13 @@ public class CardDisplay {
        }
        imageView.setFitWidth(80);
        imageView.setPreserveRatio(true);
+       double width = imageView.getFitWidth();
+       double height = imageView.getFitWidth() * imageView.getImage().getHeight() / imageView.getImage().getWidth();
+       Rectangle rectangle = new Rectangle(width, height);
+       rectangle.setArcHeight(15.0);
+       rectangle.setArcWidth(15.0);
+       imageView.setClip(rectangle);
+
     }
     public ImageView getImageView() {
         return imageView;
