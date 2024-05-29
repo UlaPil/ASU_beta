@@ -2,7 +2,6 @@ package main.view;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 
 public class BotHandView {
     private final HBox cardContainer;
@@ -10,7 +9,7 @@ public class BotHandView {
     public BotHandView() {
         cardContainer = new HBox();
         cardContainer.setMaxHeight(130);
-        cardContainer.setMaxWidth(250);
+        cardContainer.setMaxWidth(200);
     }
 
     public void addCard() {
@@ -29,11 +28,11 @@ public class BotHandView {
     }
 
     private void adjustCardSpacing() {
-        double containerWidth = cardContainer.getWidth() * 0.95;
+        double containerWidth = 200;
         int numberOfCards = cardContainer.getChildren().size();
         if (numberOfCards == 0) return;
         double cardWidth = 80;
-        double spacing = -60;
+        double spacing = -50;
         double totalCardWidth = numberOfCards * cardWidth + (numberOfCards - 1) * spacing;
         if (totalCardWidth > containerWidth) {
             spacing = (containerWidth - numberOfCards * cardWidth) / (numberOfCards - 1);

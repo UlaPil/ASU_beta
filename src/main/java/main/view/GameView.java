@@ -6,13 +6,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Rotate;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.util.Objects;
@@ -34,12 +33,14 @@ public class GameView implements AsuScene {
         scene.getStylesheets().addAll(Objects.requireNonNull(
                 this.getClass().getResource("/style.css")).toExternalForm());
         topCard = card.getImageView();
+        topCard.setTranslateY(HEIGHT/30);
         root.getChildren().addAll(topCard);
         setBackground();
         addExit();
         addDrawPileButton();
         addPlayerHand();
         addBotsHands();
+        addText();
     }
 
     @Override
@@ -63,7 +64,8 @@ public class GameView implements AsuScene {
         double height = button.getFitHeight();
         StackPane stackPane = new StackPane(button);
         root.getChildren().add(stackPane);
-        stackPane.setTranslateX(WIDTH / 6);
+        stackPane.setTranslateX(WIDTH / 7);
+        stackPane.setTranslateY(HEIGHT/30);
         stackPane.setMaxWidth(CARD_WIDTH);
         stackPane.setMaxHeight(height);
         stackPane.setOnMouseClicked(new DrawEvent());
@@ -186,6 +188,24 @@ public class GameView implements AsuScene {
         bot3Hand.setTranslateX(WIDTH/3);
         bot3Hand.setTranslateY(-HEIGHT/4);
         bot2Hand.setTranslateY(-HEIGHT/3);
+    }
+
+    private void addText() {
+        Text bot1 = new PlayerNameText("Bot 1").getText();
+        Text bot2 = new PlayerNameText("Bot 2").getText();
+        Text bot3 = new PlayerNameText("Bot 3").getText();
+        Text player = new PlayerNameText("Player").getText();
+        bot1.setRotate(-30);
+        bot3.setRotate(30);
+        bot1.setTranslateX(-2*WIDTH/5 + 40);
+        bot1.setTranslateY(-HEIGHT/3 - 10);
+        bot2.setTranslateY((-HEIGHT/2)*0.9);
+        bot3.setTranslateX(2*WIDTH/5 - 40);
+        bot3.setTranslateY(-HEIGHT/3 - 10);
+        player.setTranslateY(7*HEIGHT/24 - 15);
+        player.setTranslateX(-WIDTH/4);
+        root.getChildren().addAll(bot1, bot2, bot3, player);
+
     }
 
     private void addExit() {
