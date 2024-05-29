@@ -51,7 +51,7 @@ public class Menu implements AsuScene {
         play.setMaxHeight(play.getBgHeight());
         play.setTranslateX(-WIDTH/12);
         play.setTranslateY(-HEIGHT/8);
-        play.setBgColor(Color.GREEN);
+        play.setBgColor(Color.valueOf("#23AC38"));
         play.setOnMouseEntered(mouseDragEvent -> play.setCursor(Cursor.HAND));
         play.setOnMouseExited(mouseDragEvent -> play.setCursor(Cursor.DEFAULT));
         menuPanel.getChildren().addAll(play);
