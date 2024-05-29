@@ -24,18 +24,22 @@ public class GameView implements AsuScene {
     private HBox cardContainer;
     private ImageView topCard;
     private Pane cross;
+    public BotHandView bot1HandView;
+    public BotHandView bot2HandView;
+    public BotHandView bot3HandView;
+
 
     public GameView(CardDisplay card) {
         scene = new Scene(root, WIDTH, HEIGHT);
-        scene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("/style.css")).toExternalForm());
+        scene.getStylesheets().addAll(Objects.requireNonNull(
+                this.getClass().getResource("/style.css")).toExternalForm());
         topCard = card.getImageView();
-//        topCard.setTranslateY(- HEIGHT/8);
         root.getChildren().addAll(topCard);
         setBackground();
         addExit();
         addDrawPileButton();
         addPlayerHand();
-
+        addBotsHands();
     }
 
     @Override
@@ -53,19 +57,11 @@ public class GameView implements AsuScene {
     }
 
     private void addDrawPileButton() {
-        Image card = new Image("/back-side.png");
-        ImageView button = new ImageView();
-        button.setImage(card);
-        button.setFitWidth(CARD_WIDTH);
-        button.setPreserveRatio(true);
+        ReversView card = new ReversView();
+        ImageView button = card.getImageView();
         double width = button.getFitWidth();
-        double height = button.getFitWidth() * button.getImage().getHeight() / button.getImage().getWidth();
-        Rectangle rectangle = new Rectangle(width, height);
-        rectangle.setArcHeight(15.0);
-        rectangle.setArcWidth(15.0);
-        button.setClip(rectangle);
+        double height = button.getFitHeight();
         StackPane stackPane = new StackPane(button);
-        stackPane.setPrefSize(width, height);
         root.getChildren().add(stackPane);
         stackPane.setTranslateX(WIDTH / 6);
         stackPane.setMaxWidth(CARD_WIDTH);
@@ -142,6 +138,7 @@ public class GameView implements AsuScene {
 
     public void removeCardFromPlayerHand(CardDisplay card) {
         cardContainer.getChildren().remove(card.getImageView());
+        adjustCardSpacing();
     }
 
     private void adjustCardSpacing() {
@@ -167,29 +164,39 @@ public class GameView implements AsuScene {
         // TODO
     }
 
+    private void addBotsHands() {
+        bot1HandView = new BotHandView();
+        bot2HandView = new BotHandView();
+        bot3HandView = new BotHandView();
+        HBox bot1Hand = bot1HandView.getCardContainer();
+        HBox bot2Hand = bot2HandView.getCardContainer();
+        HBox bot3Hand = bot3HandView.getCardContainer();
+        bot1Hand.setMaxWidth(bot1Hand.getWidth());
+        bot1Hand.setMaxHeight(bot1Hand.getHeight());
+        bot2Hand.setMaxWidth(bot2Hand.getWidth());
+        bot2Hand.setMaxHeight(bot2Hand.getHeight());
+        bot3Hand.setMaxWidth(bot3Hand.getWidth());
+        bot3Hand.setMaxHeight(bot3Hand.getHeight());
+        root.getChildren().addAll(bot1Hand, bot2Hand, bot3Hand);
+        bot1Hand.setRotate(150);
+        bot2Hand.setRotate(180);
+        bot3Hand.setRotate(210);
+        bot1Hand.setTranslateX(-WIDTH/3);
+        bot1Hand.setTranslateY(-HEIGHT/4);
+        bot3Hand.setTranslateX(WIDTH/3);
+        bot3Hand.setTranslateY(-HEIGHT/4);
+        bot2Hand.setTranslateY(-HEIGHT/3);
+    }
+
     private void addExit() {
-        int H = 20;
-        int W = 3;
-        Pane cross = new Pane();
-        Rectangle r1 = new Rectangle(0,0,W, H);
-        r1.setArcHeight(5);
-        r1.setArcWidth(5);
-        r1.setFill(Color.WHITE);
-        r1.getTransforms().add(new Rotate(45, (double)W/2, (double)H/2));
-
-        Rectangle r2 = new Rectangle(0,0,W, H);
-        r2.setArcHeight(5);
-        r2.setArcWidth(5);
-        r2.setFill(Color.WHITE);
-        r2.getTransforms().add(new Rotate(135, (double)W/2, (double)H/2));
-
-        cross.getChildren().addAll(r1, r2);
-        cross.setMaxHeight(H);
-        cross.setTranslateX(0.98*WIDTH);
-        cross.setTranslateY((-HEIGHT/2)*0.94);
-        this.cross = cross;
-
-        root.getChildren().addAll(cross);
+        ExitButtonView cross = new ExitButtonView();
+        Pane crossButton = cross.getCross();
+        crossButton.setMaxWidth(crossButton.getWidth());
+        crossButton.setMaxHeight(crossButton.getHeight());
+        crossButton.setTranslateX((WIDTH/2)*0.96);
+        crossButton.setTranslateY((-HEIGHT/2)*0.96);
+        this.cross = crossButton;
+        root.getChildren().addAll(crossButton);
     }
 
     public void defineExit(EventHandler<MouseEvent> event) {

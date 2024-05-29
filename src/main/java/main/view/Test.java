@@ -51,5 +51,11 @@ public class Test extends Application {
         menu.addCardToPlayerHand(card12);
         menu.addCardToPlayerHand(card13);
         menu.addCardToPlayerHand(card14);
+
+        for (int i = 0; i < 7; i++) {
+            menu.bot1HandView.addCard();
+            menu.bot2HandView.addCard();
+            menu.bot3HandView.addCard();
+        }
     }
 }

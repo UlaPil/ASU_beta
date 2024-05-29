@@ -70,29 +70,16 @@ public class Menu implements AsuScene {
         root.getChildren().addAll(menuPanel);
     }
     private void addExit() {
-        int H = 20;
-        int W = 3;
-        Pane cross = new Pane();
-        Rectangle r1 = new Rectangle(0,0,W, H);
-        r1.setArcHeight(5);
-        r1.setArcWidth(5);
-        r1.setFill(Color.WHITE);
-        r1.getTransforms().add(new Rotate(45, (double)W/2, (double)H/2));
-
-        Rectangle r2 = new Rectangle(0,0,W, H);
-        r2.setArcHeight(5);
-        r2.setArcWidth(5);
-        r2.setFill(Color.WHITE);
-        r2.getTransforms().add(new Rotate(135, (double)W/2, (double)H/2));
-
-        cross.getChildren().addAll(r1, r2);
-        cross.setMaxHeight(H);
-        cross.setTranslateX(0.98*WIDTH);
-        cross.setTranslateY((-HEIGHT/2)*0.94);
-        cross.setOnMouseEntered(mouseDragEvent -> cross.setCursor(Cursor.HAND));
-        cross.setOnMouseExited(mouseDragEvent -> cross.setCursor(Cursor.DEFAULT));
-        Buttons.put(But.EXIT, cross);
-        root.getChildren().addAll(cross);
+        ExitButtonView cross = new ExitButtonView();
+        Pane crossButton = cross.getCross();
+        crossButton.setMaxWidth(crossButton.getWidth());
+        crossButton.setMaxHeight(crossButton.getHeight());
+        crossButton.setTranslateX((WIDTH/2)*0.96);
+        crossButton.setTranslateY((-HEIGHT/2)*0.96);
+        crossButton.setOnMouseEntered(mouseDragEvent -> crossButton.setCursor(Cursor.HAND));
+        crossButton.setOnMouseExited(mouseDragEvent -> crossButton.setCursor(Cursor.DEFAULT));
+        Buttons.put(But.EXIT, crossButton);
+        root.getChildren().addAll(crossButton);
     }
 
     public Scene getScene() {
