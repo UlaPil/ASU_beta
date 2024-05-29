@@ -115,10 +115,13 @@ public class GameView implements AsuScene {
     public void addCardToPlayerHand(CardDisplay card) {
         ImageView cardView = card.getImageView();
         cardContainer.getChildren().add(cardView);
-//        cardView.setOnMouseClicked(new PlayEvent());
-//         to tak nie będzie ale tylko na razie na potrzeby testu Test.java
-//         docelowo będzie tak jak wyżej
-        cardView.setOnMouseClicked(mouseEvent -> removeCardFromPlayerHand(card));
+//      cardView.setOnMouseClicked(new PlayEvent());
+//       |  to tak nie będzie, ale tylko na razie na potrzeby testu Test.java
+//       V  docelowo będzie tak jak wyżej
+        cardView.setOnMouseClicked(mouseEvent -> {
+            removeCardFromPlayerHand(card);
+            adjustCardSpacing();
+        });
         cardView.setOnMouseEntered(mouseEvent -> {
             cardView.setCursor(Cursor.HAND);
             playBounceAnimation(cardView, -20);
@@ -146,7 +149,7 @@ public class GameView implements AsuScene {
         int numberOfCards = cardContainer.getChildren().size();
         if (numberOfCards == 0) return;
 
-        double spacing = 20;
+        double spacing = 15;
         double totalCardWidth = numberOfCards * CARD_WIDTH + (numberOfCards - 1) * spacing;
         if (totalCardWidth > containerWidth) {
             spacing = (containerWidth - numberOfCards * CARD_WIDTH) / (numberOfCards - 1);
