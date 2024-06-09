@@ -77,10 +77,10 @@ public class Game {
     public Playable brain(Player player) {
         int i = 1;
         while (true) {
+            if(i >= player.getHandSize()) break;
             if (player.getCard(i).isPlayable(board.getTopCard().getSymbol(), board.getTopCard().getColor())) {
                 return player.getCard(i);
             }
-            if(i >= player.getHandSize()) break;
             i++;
         }
         return null;
