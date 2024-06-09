@@ -1,6 +1,6 @@
 package main.model;
 
-import main.viewModel.HandManager;
+import main.viewModel.PlayerHandManager;
 import main.viewModel.TopCardManager;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import static main.model.Symbol.*;
 
 public class Game {
     private ArrayList<TopCardManager> cardObservers;
-    private ArrayList<HandManager> handObservers;
+    private ArrayList<PlayerHandManager> handObservers;
     private int gameDirection;
     private String nextPlayerStatus;
     private ArrayList<Player> playerList;
@@ -41,16 +41,32 @@ public class Game {
         gameDirection = 1;
         nextPlayerStatus = "";
     }
+
     public Player getMainPlayer() {
         return playerList.get(0);
     }
+
     public void startGame() throws NoMoreCardsInDeck {
         for (Player player: playerList) {
             for(int i=0 ; i<7 ; i++) player.draw(board.drawFromPile());
         }
         currentPlayer = playerList.get(0);
-        while(!gameOver()) {
+    }
 
+    private void playBots() {
+        while(currentPlayer != getMainPlayer()) {
+            try {
+                Playable card = brain(currentPlayer);
+                if (card != null) {
+                    board.playOnBoard(card);
+                } else {
+                    card = board.drawFromPile();
+                    // dodac karte do reki bota 
+                }
+            } catch (NoMoreCardsInDeck e) {
+                System.out.println("Game over. No more cards :(");
+            }
+            // grają boty i notifikują view jesli cos się zmieni 
         }
     }
 
@@ -60,6 +76,7 @@ public class Game {
         }
         return false;
     }
+    
     public void addObserver(TopCardManager observer) {
         cardObservers.add(observer);
     }
@@ -68,18 +85,18 @@ public class Game {
         cardObservers.remove(observer);
     }
 
-    public void oddObserver(HandManager observer) {
+    public void oddObserver(PlayerHandManager observer) {
         handObservers.add(observer);
     }
 
-    public void deleteObserver(HandManager observer) {
+    public void deleteObserver(PlayerHandManager observer) {
         handObservers.remove(observer);
     }
 
     public Playable brain(Player player) throws NoMoreCardsInDeck {
         int i = 1;
         while (true) {
-            if (player.getCard(i).isPlayable(board.getTopCard().getSymbol(),board.getTopCard().getColor())) {
+            if (player.getCard(i).isPlayable(board.getTopCard().getSymbol(), board.getTopCard().getColor())) {
                 //board.playOnBoard(player.getCard(i));
                 return player.getCard(i);
             }
@@ -98,7 +115,7 @@ public class Game {
             currentIndex += gameDirection;
             currentIndex = (currentIndex + 4) % 4;
             if(player.equals(playerList.get(0))) {
-                for(HandManager observer : handObservers) {
+                for(PlayerHandManager observer : handObservers) {
                     observer.updateDelete(card);
                 }
             }
@@ -123,7 +140,7 @@ public class Game {
             Playable card = board.drawFromPile();
             player.draw(card);
             if(player.equals(playerList.get(0))) {
-                for(HandManager observer : handObservers) {
+                for(PlayerHandManager observer : handObservers) {
                     observer.updateAdd(card);
                 }
             }
