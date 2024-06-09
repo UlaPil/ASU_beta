@@ -121,12 +121,12 @@ public class GameView implements AsuScene {
     public void addCardToPlayerHand(CardDisplay card) {
         ImageView cardView = card.getImageView();
         cardContainer.getChildren().add(cardView);
-        cardView.setOnMouseClicked(eventFactory.getPlayEvent(card, mainPlayer));
-
-        cardView.setOnMouseClicked(mouseEvent -> {
-            removeCardFromPlayerHand(card);
+        cardView.setOnMouseClicked(e -> {
+            eventFactory.getPlayEvent(card, mainPlayer);
             adjustCardSpacing();
         });
+
+
         cardView.setOnMouseEntered(mouseEvent -> {
             cardView.setCursor(Cursor.HAND);
             playBounceAnimation(cardView, -20);
