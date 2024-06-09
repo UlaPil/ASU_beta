@@ -101,7 +101,9 @@ public class GameView implements AsuScene {
     }
 
     public void setTopCard(CardDisplay card) {
+        root.getChildren().remove(topCard);
         topCard = card.getImageView();
+        root.getChildren().addAll(topCard);
     }
 
     private void addPlayerHand() {
@@ -122,7 +124,6 @@ public class GameView implements AsuScene {
         ImageView cardView = card.getImageView();
         cardContainer.getChildren().add(cardView);
         cardView.setOnMouseClicked(eventFactory.getPlayEvent(card, mainPlayer));
-
 
         cardView.setOnMouseEntered(mouseEvent -> {
             cardView.setCursor(Cursor.HAND);
