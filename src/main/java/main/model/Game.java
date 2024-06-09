@@ -46,7 +46,16 @@ public class Game {
 
     public void startGame() throws NoMoreCardsInDeck {
         for (Player player: playerList) {
-            for(int i=0 ; i<7 ; i++) player.draw(board.drawFromPile());
+            for(int i=0 ; i<7 ; i++) {
+                Playable card = board.drawFromPile();
+                player.draw(card);
+                for(HandManager observer : handObservers) {
+                    observer.notify(card, player, true);
+                }
+            }
+            for(TopCardManager observer : cardObservers) {
+                observer.notify(board.getTopCard());
+            }
         }
         currentPlayer = playerList.get(0);
     }
@@ -76,6 +85,10 @@ public class Game {
 
     public void playCard(Player player, Playable card) {
         if(card.isPlayable(board.getTopCard().getSymbol(),board.getTopCard().getColor()) && player==currentPlayer) {
+            if (blockCount > 0 && card.getSymbol() != block) return;
+            if (plus2Count> 0 && card.getSymbol() != plusTwo) return;
+            if (card.getSymbol() == block) blockCount++;
+            if (card.getSymbol() == plusTwo) plus2Count++;
             player.playCard(card);
             board.playOnBoard(card);
             ifSpecial(card); // TODO: obsługa block, reverse i plus
@@ -116,7 +129,7 @@ public class Game {
             Playable card = board.drawFromPile();
             player.draw(card);
             currentIndex += gameDirection;
-            if (blockList.get(currentIndex) > 0) {
+            if (blockList.get(currentIndex%4) > 0) {
                 currentIndex += gameDirection;
                 blockList.set(currentIndex, blockList.get(currentIndex) - 1);
             }
