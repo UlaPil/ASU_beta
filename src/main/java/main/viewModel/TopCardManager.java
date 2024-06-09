@@ -17,7 +17,9 @@ public class TopCardManager{
     public void removeObserver(TopCardObserver observer) {observers.remove(observer);}
 
     public void update(Playable card){
-
+        for(TopCardObserver observer : observers){
+            observer.notify(card);
+        }
     }
 
 }

@@ -1,5 +1,14 @@
 package main.view;
 
-public class TopCardObserver {
 
+import main.model.Playable;
+
+public class TopCardObserver {
+    GameView gameView;
+    TopCardObserver(GameView gameView) {
+        this.gameView = gameView;
+    }
+    public void notify( Playable card) {
+        gameView.setTopCard(new CardDisplay(card));
+    }
 }
