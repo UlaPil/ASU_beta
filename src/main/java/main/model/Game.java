@@ -15,6 +15,7 @@ public class Game {
     private int gameDirection;
     private String nextPlayerStatus;
     private ArrayList<Player> playerList;
+    private ArrayList<Integer> blockList;
     private Board board;
     private static List<Playable> cards = GenerateCards.getCardsList();
     public Player currentPlayer;
@@ -31,10 +32,12 @@ public class Game {
         draw = false;
         board = new Board(cards);
         playerList = new ArrayList<>();
+        blockList = new ArrayList<>();
         playerList.add(new RealPlayer(player));
         playerList.add(new RealPlayer("Bot1"));
         playerList.add(new RealPlayer("Bot2"));
         playerList.add(new RealPlayer("Bot3"));
+        for (int i = 0; i < modulo; i++) blockList.add(0);
         gameDirection = 1;
         nextPlayerStatus = "";
     }
@@ -46,6 +49,9 @@ public class Game {
             for(int i=0 ; i<7 ; i++) player.draw(board.drawFromPile());
         }
         currentPlayer = playerList.get(0);
+        while(!gameOver()) {
+
+        }
     }
 
     public boolean gameOver() {
