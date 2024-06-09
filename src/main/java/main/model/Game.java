@@ -84,7 +84,7 @@ public class Game {
             currentIndex = currentIndex%4;
             currentPlayer = playerList.get(currentIndex);
             for(TopCardManager observer : cardObservers) {
-                observer.update(card);
+                observer.notify(card);
             }
             for(HandManager observer : handObservers) {
                 observer.notify(card, player, false);

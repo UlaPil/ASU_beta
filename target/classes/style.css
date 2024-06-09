@@ -9,7 +9,7 @@
 }
 
 #gameBg {
-     -fx-background-image: url("gameBG.png");
+     -fx-background-image: url("GameBG.png");
      -fx-background-size: cover; /* lub contain */
      -fx-background-repeat: no-repeat;
      -fx-background-position: center center;

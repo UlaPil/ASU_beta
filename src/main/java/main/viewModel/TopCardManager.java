@@ -10,13 +10,13 @@ import java.util.List;
 public class TopCardManager{
     List<TopCardObserver> observers;
     GameView gameView;
-    TopCardManager(GameView gameView) {
+    public TopCardManager(GameView gameView) {
         this.gameView = gameView;
     }
     public void addObserver(TopCardObserver observer) {observers.add(observer);}
     public void removeObserver(TopCardObserver observer) {observers.remove(observer);}
 
-    public void update(Playable card){
+    public void notify(Playable card){
         for(TopCardObserver observer : observers){
             observer.notify(card);
         }

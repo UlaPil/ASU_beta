@@ -10,7 +10,7 @@ import java.util.List;
 
 public class HandManager {
     List<HandObserver> handObservers;
-    HandManager() {
+    public HandManager() {
         handObservers = new ArrayList<>();
     }
     public void addObserver(HandObserver handObserver) {

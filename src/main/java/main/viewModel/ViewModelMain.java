@@ -8,11 +8,13 @@ public class ViewModelMain {
     private ModelManager modelManager;
     private TopCardManager topCardManager;
     private TopColorManager topColorManager;
-    public ViewModelMain(Game game, GameView gameView) {
+    public ViewModelMain(Game game) {
         handManager = new HandManager();
         modelManager = new ModelManager(game);
         topColorManager = new TopColorManager(game);
-        topCardManager = new TopCardManager(gameView);
+    }
+    public void setTopCardManager(TopCardManager topCardManager) {
+        this.topCardManager = topCardManager;
     }
     public HandManager getHandManager() {return handManager;}
     public ModelManager getModelManager() {return modelManager;}
