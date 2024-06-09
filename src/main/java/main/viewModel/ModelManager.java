@@ -8,7 +8,14 @@ public class ModelManager {
     Game game;
     public ModelManager(Game game) { this.game = game;}
 
-    public void updatePlayerHand(Player player, CardDisplay card) {
+    public void removeFromPlayerHand(Player player, CardDisplay card) {
         game.playCard(player, card.getCard());
     }
+
+    public void addToPlayerHand(Player player) {
+        try {
+            game.drawCard(player);
+        } catch (Exception e) {}
+    }
+
 }

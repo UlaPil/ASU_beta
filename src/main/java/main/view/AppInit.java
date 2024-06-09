@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.model.Game;
 import main.model.NoMoreCardsInDeck;
+import main.viewModel.ModelManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,12 +20,15 @@ public class AppInit {
     }
     private final Map<SceneName, AsuScene> Scenes = new HashMap<>();
     private final Game game;
+    private final ModelManager viewModel;
     Stage stage;
     public AppInit(Stage stage) {
         this.stage = stage;
-        game = new Game(" ");
+        game = new Game("");
+        viewModel = new ModelManager(game);
         Scenes.put(SceneName.MENU, new Menu());
-        Scenes.put(SceneName.PLAY, new GameView(new CardDisplay(game.getTopCard())));
+        GameView gameView = new GameView(new CardDisplay(game.getTopCard()),new EventFactory(viewModel), game.getMainPlayer());
+        Scenes.put(SceneName.PLAY, gameView );
         try {
             game.startGame();
         } catch(NoMoreCardsInDeck e) {

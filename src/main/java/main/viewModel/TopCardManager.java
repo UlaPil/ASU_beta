@@ -1,15 +1,21 @@
 package main.viewModel;
 
-import main.model.Board;
-import main.model.Game;
+
 import main.model.Playable;
+import main.view.GameView;
+import main.view.TopCardObserver;
+
+import java.util.List;
 
 public class TopCardManager{
-
-    Game game;
-    TopCardManager(Game game) {
-        this.game = game;
+    List<TopCardObserver> observers;
+    GameView gameView;
+    TopCardManager(GameView gameView) {
+        this.gameView = gameView;
     }
+    public void addObserver(TopCardObserver observer) {observers.add(observer);}
+    public void removeObserver(TopCardObserver observer) {observers.remove(observer);}
+
     public void update(Playable card){
 
     }

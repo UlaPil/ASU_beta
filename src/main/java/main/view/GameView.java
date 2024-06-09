@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import main.model.Player;
 
 import java.util.Objects;
 
@@ -26,10 +27,14 @@ public class GameView implements AsuScene {
     public BotHandView bot1HandView;
     public BotHandView bot2HandView;
     public BotHandView bot3HandView;
+    public EventFactory eventFactory;
+    public Player mainPlayer;
 
 
-    public GameView(CardDisplay card) {
+    public GameView(CardDisplay card, EventFactory eventFactory, Player player) {
         scene = new Scene(root, WIDTH, HEIGHT);
+        this.eventFactory = eventFactory;
+        this.mainPlayer = player;
         scene.getStylesheets().addAll(Objects.requireNonNull(
                 this.getClass().getResource("/style.css")).toExternalForm());
         topCard = card.getImageView();
@@ -68,7 +73,7 @@ public class GameView implements AsuScene {
         stackPane.setTranslateY(HEIGHT/30);
         stackPane.setMaxWidth(CARD_WIDTH);
         stackPane.setMaxHeight(height);
-        stackPane.setOnMouseClicked(new DrawEvent());
+        stackPane.setOnMouseClicked(eventFactory.getDrawEvent(mainPlayer));
         stackPane.setOnMouseEntered(mouseDragEvent -> {
             stackPane.setCursor(Cursor.HAND);
             addHighlightEffect(stackPane, true);
@@ -113,9 +118,8 @@ public class GameView implements AsuScene {
     public void addCardToPlayerHand(CardDisplay card) {
         ImageView cardView = card.getImageView();
         cardContainer.getChildren().add(cardView);
-//      cardView.setOnMouseClicked(new PlayEvent());
-//       |  to tak nie będzie, ale tylko na razie na potrzeby testu Test.java
-//       V  docelowo będzie tak jak wyżej
+        cardView.setOnMouseClicked(eventFactory.getPlayEvent(card, mainPlayer));
+
         cardView.setOnMouseClicked(mouseEvent -> {
             removeCardFromPlayerHand(card);
             adjustCardSpacing();

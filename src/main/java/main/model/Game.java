@@ -1,7 +1,7 @@
 package main.model;
 
-import main.viewModel.HandObserver;
-import main.viewModel.TopCardObserver;
+import main.viewModel.HandManager;
+import main.viewModel.TopCardManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import static main.model.Color.*;
 import static main.model.Symbol.*;
 
 public class Game {
-    private ArrayList<TopCardObserver> cardObservers;
-    private ArrayList<HandObserver> handObservers;
+    private ArrayList<TopCardManager> cardObservers;
+    private ArrayList<HandManager> handObservers;
     private int gameDirection;
     private String nextPlayerStatus;
     private ArrayList<Player> playerList;
@@ -137,6 +137,9 @@ public class Game {
         gameDirection = 1;
         nextPlayerStatus = "";
     }
+    public Player getMainPlayer() {
+        return playerList.get(0);
+    }
     public void startGame() throws NoMoreCardsInDeck {
         for (Player player: playerList) {
             for(int i=0 ; i<7 ; i++) player.draw(board.drawFromPile());
@@ -150,19 +153,19 @@ public class Game {
         }
         return false;
     }
-    public void addObserver(TopCardObserver observer) {
+    public void addObserver(TopCardManager observer) {
         cardObservers.add(observer);
     }
 
-    public void deleteObserver(TopCardObserver observer) {
+    public void deleteObserver(TopCardManager observer) {
         cardObservers.remove(observer);
     }
 
-    public void oddObserver(HandObserver observer) {
+    public void oddObserver(HandManager observer) {
         handObservers.add(observer);
     }
 
-    public void deleteObserver(HandObserver observer) {
+    public void deleteObserver(HandManager observer) {
         handObservers.remove(observer);
     }
 
@@ -188,11 +191,11 @@ public class Game {
             currentIndex += gameDirection;
             currentIndex = (currentIndex + 4) % 4;
             if(player.equals(playerList.get(0))) {
-                for(HandObserver observer : handObservers) {
+                for(HandManager observer : handObservers) {
                     observer.updateDelete(card);
                 }
             }
-            for(TopCardObserver obserwer : cardObservers) {
+            for(TopCardManager obserwer : cardObservers) {
                 obserwer.update(card);
             }
             return true;
@@ -213,7 +216,7 @@ public class Game {
             Playable card = board.drawFromPile();
             player.draw(card);
             if(player.equals(playerList.get(0))) {
-                for(HandObserver observer : handObservers) {
+                for(HandManager observer : handObservers) {
                     observer.updateAdd(card);
                 }
             }
