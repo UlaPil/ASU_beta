@@ -34,7 +34,7 @@ public class CardDisplay {
        try {
            imageView = new ImageView(builder.toString());
        } catch(IllegalArgumentException e) {
-           throw new RuntimeException(builder.toString() + "spowodowal wywalenie programu");
+           throw new RuntimeException(builder.toString() + " spowodowal wywalenie programu");
        }
        imageView.setFitWidth(80);
        imageView.setPreserveRatio(true);
