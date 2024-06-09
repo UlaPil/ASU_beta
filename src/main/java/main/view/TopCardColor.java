@@ -1,15 +1,15 @@
-package main.model;
+package main.view;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 
 import static main.model.Color.*;
 
-public class TopColor extends Rectangle{
+public class TopCardColor {
     private Rectangle rectangle;
 
-    public TopColor(double width, double height) {
+    public TopCardColor(double width, double height) {
         rectangle = new Rectangle(width, height);
-        rectangle.setArcWidth(20); // Zaokrąglone rogi
+        rectangle.setArcWidth(20);
         rectangle.setArcHeight(20);
     }
 

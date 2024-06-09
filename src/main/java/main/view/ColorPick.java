@@ -14,7 +14,6 @@ import javafx.stage.StageStyle;
 import java.util.Objects;
 
 public class ColorPick extends Application {
-    //StackPane root = new StackPane();
     private GridPane gridPane = new GridPane();
     Scene scene;
     @Override
@@ -24,7 +23,6 @@ public class ColorPick extends Application {
         Button greenButton = createColorButton("green", "-fx-background-color: green; -fx-font-weight: bold; -fx-text-fill: green;");
         Button yellowButton = createColorButton("yellow", "-fx-background-color: yellow; -fx-font-weight: bold; -fx-text-fill: yellow;");
 
-        //gridPane = new GridPane();
         int buttonSize = 150;
         redButton.setPrefSize(buttonSize, buttonSize);
         blueButton.setPrefSize(buttonSize, buttonSize);
@@ -43,7 +41,6 @@ public class ColorPick extends Application {
         roundedRect.setArcWidth(20);
         roundedRect.setArcHeight(20);
 
-        //root.getChildren().add(gridPane);
         scene = new Scene(gridPane, 300, 300);
         scene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("/style.css")).toExternalForm());
         primaryStage.setScene(scene);
@@ -66,7 +63,6 @@ public class ColorPick extends Application {
         Button button = new Button(colorName);
         button.setStyle(style + " -fx-cursor: hand;");
         button.setOnAction(event -> {
-            //setTopColor(colorName);
             ((Stage) button.getScene().getWindow()).close();
         });
         return button;
