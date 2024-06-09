@@ -16,6 +16,7 @@ import javafx.util.Duration;
 import main.model.Player;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 public class GameView implements AsuScene {
@@ -25,18 +26,18 @@ public class GameView implements AsuScene {
     private HBox cardContainer;
     private ImageView topCard;
     private Pane cross;
-    public HashMap<Player,BotHandView>
-    public BotHandView bot1HandView;
-    public BotHandView bot2HandView;
-    public BotHandView bot3HandView;
+    public HashMap<Player,BotHandView> botHands = new HashMap<>();
     public EventFactory eventFactory;
     public Player mainPlayer;
+    public List<Player> playerList;
 
 
-    public GameView(CardDisplay card, EventFactory eventFactory, Player player) {
+    public GameView(CardDisplay card, EventFactory eventFactory, List<Player> playerList) {
         scene = new Scene(root, WIDTH, HEIGHT);
         this.eventFactory = eventFactory;
-        this.mainPlayer = player;
+        this.mainPlayer = playerList.get(0);
+        this.playerList = playerList;
+
         scene.getStylesheets().addAll(Objects.requireNonNull(
                 this.getClass().getResource("/style.css")).toExternalForm());
         topCard = card.getImageView();
@@ -144,7 +145,10 @@ public class GameView implements AsuScene {
         transition.play();
     }
     public void removeCardFromRobotHand(Player player) {
-
+        botHands.get(player).removeCard();
+    }
+    public void addCardToRobotHand(Player player) {
+        botHands.get(player).addCard();
     }
     public void removeCardFromPlayerHand(CardDisplay card) {
         cardContainer.getChildren().remove(card.getImageView());
@@ -175,27 +179,22 @@ public class GameView implements AsuScene {
     }
 
     private void addBotsHands() {
-        bot1HandView = new BotHandView();
-        bot2HandView = new BotHandView();
-        bot3HandView = new BotHandView();
-        HBox bot1Hand = bot1HandView.getCardContainer();
-        HBox bot2Hand = bot2HandView.getCardContainer();
-        HBox bot3Hand = bot3HandView.getCardContainer();
-        bot1Hand.setMaxWidth(bot1Hand.getWidth());
-        bot1Hand.setMaxHeight(bot1Hand.getHeight());
-        bot2Hand.setMaxWidth(bot2Hand.getWidth());
-        bot2Hand.setMaxHeight(bot2Hand.getHeight());
-        bot3Hand.setMaxWidth(bot3Hand.getWidth());
-        bot3Hand.setMaxHeight(bot3Hand.getHeight());
-        root.getChildren().addAll(bot1Hand, bot2Hand, bot3Hand);
-        bot1Hand.setRotate(150);
-        bot2Hand.setRotate(180);
-        bot3Hand.setRotate(210);
-        bot1Hand.setTranslateX(-WIDTH/3);
-        bot1Hand.setTranslateY(-HEIGHT/4);
-        bot3Hand.setTranslateX(WIDTH/3);
-        bot3Hand.setTranslateY(-HEIGHT/4);
-        bot2Hand.setTranslateY(-HEIGHT/3);
+        for(int i = 1 ; i < playerList.size() ; i++) {
+            botHands.put(playerList.get(i), new BotHandView());
+        }
+        for(int i = 1 ; i < playerList.size() ; i++) {
+            HBox botHand = botHands.get(playerList.get(i)).getCardContainer();
+            botHand.setMaxWidth(botHand.getWidth());
+            botHand.setMaxHeight(botHand.getHeight());
+            botHand.setRotate(120 + 30*i);
+            root.getChildren().add(botHand);
+
+        }
+        botHands.get(playerList.get(1)).getCardContainer().setTranslateX(-WIDTH/4);
+        botHands.get(playerList.get(1)).getCardContainer().setTranslateY(-HEIGHT/4);
+        botHands.get(playerList.get(3)).getCardContainer().setTranslateX(WIDTH/3);
+        botHands.get(playerList.get(3)).getCardContainer().setTranslateY(-HEIGHT/4);
+        botHands.get(playerList.get(2)).getCardContainer().setTranslateX(-HEIGHT/2);
     }
 
     private void addText() {
