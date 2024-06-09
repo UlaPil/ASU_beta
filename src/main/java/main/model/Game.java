@@ -62,13 +62,23 @@ public class Game {
     }
 
     private void playBots() {
+
+        Object lock = new Object();
         while(currentPlayer != getMainPlayer()) {
-            Playable card = brain(currentPlayer);
-            if (card != null) {
-                playCard(currentPlayer, card);
-            } else {
-                drawCard(currentPlayer);
+            synchronized (lock) {
+                try {
+                    lock.wait(1000);
+                } catch (Exception i) {
+                    i.printStackTrace();
+                }
+                Playable card = brain(currentPlayer);
+                if (card != null) {
+                    playCard(currentPlayer, card);
+                } else {
+                    drawCard(currentPlayer);
+                }
             }
+
         }
     }
 
@@ -107,7 +117,7 @@ public class Game {
                 observer.notify(card, player, false);
             }
             if(player.equals(playerList.get(0))) {
-                playBots();
+                    playBots();
             }
         }
     }
