@@ -1,5 +1,6 @@
 package main.model;
 
+import main.viewModel.HandManager;
 import main.viewModel.PlayerHandManager;
 import main.viewModel.TopCardManager;
 
@@ -11,7 +12,7 @@ import static main.model.Symbol.*;
 
 public class Game {
     private ArrayList<TopCardManager> cardObservers;
-    private ArrayList<PlayerHandManager> handObservers;
+    private ArrayList<HandManager> handObservers;
     private int gameDirection;
     private String nextPlayerStatus;
     private ArrayList<Player> playerList;
@@ -55,18 +56,63 @@ public class Game {
 
     private void playBots() {
         while(currentPlayer != getMainPlayer()) {
-            try {
-                Playable card = brain(currentPlayer);
-                if (card != null) {
-                    board.playOnBoard(card);
-                } else {
-                    card = board.drawFromPile();
-                    // dodac karte do reki bota 
-                }
-            } catch (NoMoreCardsInDeck e) {
-                System.out.println("Game over. No more cards :(");
+            Playable card = brain(currentPlayer);
+            if (card != null) {
+                playCard(currentPlayer, card);
+            } else {
+                drawCard(currentPlayer);
             }
-            // grają boty i notifikują view jesli cos się zmieni 
+        }
+    }
+
+    public Playable brain(Player player) {
+        int i = 1;
+        while (true) {
+            if (player.getCard(i).isPlayable(board.getTopCard().getSymbol(), board.getTopCard().getColor())) {
+                return player.getCard(i);
+            }
+            if(i >= player.getHandSize()) break;
+            i++;
+        }
+        return null;
+    }
+
+    public void playCard(Player player, Playable card) {
+        if(card.isPlayable(board.getTopCard().getSymbol(),board.getTopCard().getColor()) && player==currentPlayer) {
+            player.playCard(card);
+            board.playOnBoard(card);
+            ifSpecial(card); // TODO: obsługa block, reverse i plus
+            currentIndex += gameDirection;
+            currentIndex = currentIndex%4;
+            currentPlayer = playerList.get(currentIndex);
+            for(TopCardManager observer : cardObservers) {
+                observer.update(card);
+            }
+            for(HandManager observer : handObservers) {
+                observer.notify(card, player, false);
+            }
+            if(player.equals(playerList.get(0))) {
+                playBots();
+            }
+        }
+    }
+
+    public void drawCard(Player player) {
+        if (player != currentPlayer) return;
+        try {
+            Playable card = board.drawFromPile();
+            player.draw(card);
+            currentIndex += gameDirection;
+            currentIndex = currentIndex%4;
+            currentPlayer = playerList.get(currentIndex);
+            for(HandManager observer : handObservers) {
+                observer.notify(card, player, true);
+            }
+            if(player.equals(playerList.get(0))) {
+                playBots();
+            }
+        } catch (NoMoreCardsInDeck e) {
+            System.out.println("Game over. No more cards :(");
         }
     }
 
@@ -85,46 +131,12 @@ public class Game {
         cardObservers.remove(observer);
     }
 
-    public void oddObserver(PlayerHandManager observer) {
+    public void oddObserver(HandManager observer) {
         handObservers.add(observer);
     }
 
-    public void deleteObserver(PlayerHandManager observer) {
+    public void deleteObserver(HandManager observer) {
         handObservers.remove(observer);
-    }
-
-    public Playable brain(Player player) throws NoMoreCardsInDeck {
-        int i = 1;
-        while (true) {
-            if (player.getCard(i).isPlayable(board.getTopCard().getSymbol(), board.getTopCard().getColor())) {
-                //board.playOnBoard(player.getCard(i));
-                return player.getCard(i);
-            }
-            if(i >= player.getHandSize()) break;
-            i++;
-        }
-        player.draw(board.drawFromPile());
-        return null;
-    }
-
-    public boolean playCard(Player player, Playable card) {
-        if(card.isPlayable(board.getTopCard().getSymbol(),board.getTopCard().getColor())) {
-            player.playCard(card);
-            board.playOnBoard(card);
-            ifSpecial(card);
-            currentIndex += gameDirection;
-            currentIndex = (currentIndex + 4) % 4;
-            if(player.equals(playerList.get(0))) {
-                for(PlayerHandManager observer : handObservers) {
-                    observer.updateDelete(card);
-                }
-            }
-            for(TopCardManager obserwer : cardObservers) {
-                obserwer.update(card);
-            }
-            return true;
-        }
-        return false;
     }
 
     public void setTopCard(Color color) {
@@ -132,24 +144,6 @@ public class Game {
     }
     public Playable getTopCard() {
         return board.getTopCard();
-    }
-
-
-    public boolean drawCard(Player player) throws NoMoreCardsInDeck {
-        try {
-            Playable card = board.drawFromPile();
-            player.draw(card);
-            if(player.equals(playerList.get(0))) {
-                for(PlayerHandManager observer : handObservers) {
-                    observer.updateAdd(card);
-                }
-            }
-            currentIndex += gameDirection;
-            currentIndex = (currentIndex + 4) % 4;
-            return true;
-        } catch (NoMoreCardsInDeck e) {
-            throw e;
-        }
     }
 
     public void ifSpecial(Playable card) {
@@ -171,18 +165,6 @@ public class Game {
         gameDirection = -1 * gameDirection;
     }
 
-    public int getGameDirection() {
-        return gameDirection;
-    }
-
-    public void setNextPlayerStatus(String status) {
-        nextPlayerStatus = status;
-    }
-
-    public String getNextPlayerStatus() {
-        return nextPlayerStatus;
-    }
-
     public static List<Playable> getCards() {
         return cards;
     }
@@ -193,10 +175,6 @@ public class Game {
 
     public Board getBoard() {
         return board;
-    }
-
-    public Object getCurrentIndex() {
-        return currentIndex;
     }
 
     public int getModulo() {
