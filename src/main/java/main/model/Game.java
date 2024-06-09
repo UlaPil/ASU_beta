@@ -94,11 +94,11 @@ public class Game {
             board.playOnBoard(card);
             ifSpecial(card); // TODO: obsługa block, reverse i plus
             currentIndex += gameDirection;
-            if (blockList.get(currentIndex%4) > 0) {
+            if (blockList.get((currentIndex+4)%4) > 0) {
                 currentIndex += gameDirection;
-                blockList.set(currentIndex%4, blockList.get(currentIndex%4) - 1);
+                blockList.set((currentIndex+4)%4, blockList.get((currentIndex+4)%4) - 1);
             }
-            currentIndex = currentIndex%4;
+            currentIndex = (currentIndex+4)%4;
             currentPlayer = playerList.get(currentIndex);
             for(TopCardManager observer : cardObservers) {
                 observer.notify(card);
@@ -130,11 +130,11 @@ public class Game {
             Playable card = board.drawFromPile();
             player.draw(card);
             currentIndex += gameDirection;
-            if (blockList.get(currentIndex%4) > 0) {
+            if (blockList.get((currentIndex+4)%4) > 0) {
                 currentIndex += gameDirection;
-                blockList.set(currentIndex%4, blockList.get(currentIndex%4) - 1);
+                blockList.set((currentIndex+4)%4, blockList.get((currentIndex+4)%4) - 1);
             }
-            currentIndex = currentIndex%4;
+            currentIndex = (currentIndex+4)%4;
             currentPlayer = playerList.get(currentIndex);
             for(HandManager observer : handObservers) {
                 observer.notify(card, player, true);
