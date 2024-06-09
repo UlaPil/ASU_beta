@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import main.model.Player;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class GameView implements AsuScene {
@@ -24,6 +25,7 @@ public class GameView implements AsuScene {
     private HBox cardContainer;
     private ImageView topCard;
     private Pane cross;
+    public HashMap<Player,BotHandView>
     public BotHandView bot1HandView;
     public BotHandView bot2HandView;
     public BotHandView bot3HandView;
@@ -141,7 +143,9 @@ public class GameView implements AsuScene {
         transition.setToY(toY);
         transition.play();
     }
+    public void removeCardFromRobotHand(Player player) {
 
+    }
     public void removeCardFromPlayerHand(CardDisplay card) {
         cardContainer.getChildren().remove(card.getImageView());
         adjustCardSpacing();

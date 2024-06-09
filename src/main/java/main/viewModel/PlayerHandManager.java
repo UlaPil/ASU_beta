@@ -7,10 +7,6 @@ import main.view.GameView;
 
 public class PlayerHandManager {
 
-    GameView view;
-    public PlayerHandManager(GameView view) {
-        this.view = view;
-    }
 
     public void updateAdd(Playable card) {
         view.addCardToPlayerHand(new CardDisplay(card));
