@@ -1,15 +1,14 @@
 package main.viewModel;
 
 
-import main.model.Game;
 import main.model.Playable;
 import main.view.CardDisplay;
 import main.view.GameView;
 
-public class HandManager {
+public class PlayerHandManager {
 
     GameView view;
-    public HandManager(GameView view) {
+    public PlayerHandManager(GameView view) {
         this.view = view;
     }
 
