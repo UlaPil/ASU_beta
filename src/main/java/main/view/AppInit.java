@@ -27,7 +27,7 @@ public class AppInit {
         game = new Game("");
         viewModel = new ModelManager(game);
         Scenes.put(SceneName.MENU, new Menu());
-        GameView gameView = new GameView(new CardDisplay(game.getTopCard()),new EventFactory(viewModel), game.getMainPlayer());
+        GameView gameView = new GameView(new CardDisplay(game.getTopCard()),new EventFactory(viewModel), game.getPlayerList());
         Scenes.put(SceneName.PLAY, gameView );
         try {
             game.startGame();

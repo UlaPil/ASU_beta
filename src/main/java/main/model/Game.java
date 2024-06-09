@@ -1,13 +1,11 @@
 package main.model;
 
 import main.viewModel.HandManager;
-import main.viewModel.PlayerHandManager;
 import main.viewModel.TopCardManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static main.model.Color.*;
 import static main.model.Symbol.*;
 
 public class Game {

@@ -1,17 +1,23 @@
 package main.view;
 
-import main.model.Hand;
 import main.model.Player;
 
-import java.util.Collection;
-
 public class RobotHandObserver {
-    Player player;
     GameView view;
-    public RobotHandObserver(GameView view) {
+    Player player;
+    RobotHandObserver(GameView view, Player player) {
         this.view = view;
+        this.player = player;
     }
-    public void notify(boolean add) {
-        if (add) {}
+    public void notify(Player player, CardDisplay card, boolean add) {
+        if(!this.player.equals(player)) {
+            return;
+        }
+        if (add) {
+            view.addCardToRobotHand(player);
+        }
+        else {
+            view.removeCardFromRobotHand(player);
+        }
     }
 }
