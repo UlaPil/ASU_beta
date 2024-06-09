@@ -50,7 +50,7 @@ public class Game {
                 Playable card = board.drawFromPile();
                 player.draw(card);
                 for(HandManager observer : handObservers) {
-                    observer.notify( i, card, player, true);
+                    observer.notify(card, player, true);
 
                 }
             }
@@ -62,30 +62,39 @@ public class Game {
     }
 
     private void playBots() {
+
+        Object lock = new Object();
         while(currentPlayer != getMainPlayer()) {
-            int index = brain(currentPlayer);
-            if (index != -1 ) {
-                playCard(currentPlayer, index);
-            } else {
-                drawCard(currentPlayer);
+            synchronized (lock) {
+                try {
+                    lock.wait(1000);
+                } catch (Exception i) {
+                    i.printStackTrace();
+                }
+                Playable card = brain(currentPlayer);
+                if (card != null) {
+                    playCard(currentPlayer, card);
+                } else {
+                    drawCard(currentPlayer);
+                }
             }
+
         }
     }
 
-    public int brain(Player player) {
+    public Playable brain(Player player) {
         int i = 1;
         while (true) {
             if(i >= player.getHandSize()) break;
             if (player.getCard(i).isPlayable(board.getTopCard().getSymbol(), board.getTopCard().getColor())) {
-                return i;
+                return player.getCard(i);
             }
             i++;
         }
-        return -1;
+        return null;
     }
 
-    public void playCard(Player player, int index) {
-        Playable card = player.getCard(index);
+    public void playCard(Player player, Playable card) {
         if(card.isPlayable(board.getTopCard().getSymbol(),board.getTopCard().getColor()) && player==currentPlayer) {
             if (blockCount > 0 && card.getSymbol() != block) return;
             if (plus2Count> 0 && card.getSymbol() != plusTwo) return;
@@ -105,10 +114,10 @@ public class Game {
                 observer.notify(card);
             }
             for(HandManager observer : handObservers) {
-                observer.notify(index,card, player, false);
+                observer.notify(card, player, false);
             }
             if(player.equals(playerList.get(0))) {
-                playBots();
+                    playBots();
             }
         }
     }
@@ -138,7 +147,7 @@ public class Game {
             currentIndex = (currentIndex+4)%4;
             currentPlayer = playerList.get(currentIndex);
             for(HandManager observer : handObservers) {
-                observer.notify(0, card, player, true);
+                observer.notify(card, player, true);
             }
             if(player.equals(playerList.get(0))) {
                 playBots();
