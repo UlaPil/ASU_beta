@@ -49,14 +49,12 @@ public class Game {
             for(int i=0 ; i<7 ; i++) {
                 Playable card = board.drawFromPile();
                 player.draw(card);
-                System.out.println("aaa");
                 for(HandManager observer : handObservers) {
                     observer.notify(card, player, true);
 
                 }
             }
             for(TopCardManager observer : cardObservers) {
-                System.out.println("kupa");
                 observer.notify(board.getTopCard());
             }
         }
@@ -96,9 +94,9 @@ public class Game {
             board.playOnBoard(card);
             ifSpecial(card); // TODO: obsługa block, reverse i plus
             currentIndex += gameDirection;
-            if (blockList.get(currentIndex) > 0) {
+            if (blockList.get(currentIndex%4) > 0) {
                 currentIndex += gameDirection;
-                blockList.set(currentIndex, blockList.get(currentIndex) - 1);
+                blockList.set(currentIndex%4, blockList.get(currentIndex%4) - 1);
             }
             currentIndex = currentIndex%4;
             currentPlayer = playerList.get(currentIndex);
@@ -134,7 +132,7 @@ public class Game {
             currentIndex += gameDirection;
             if (blockList.get(currentIndex%4) > 0) {
                 currentIndex += gameDirection;
-                blockList.set(currentIndex, blockList.get(currentIndex) - 1);
+                blockList.set(currentIndex%4, blockList.get(currentIndex%4) - 1);
             }
             currentIndex = currentIndex%4;
             currentPlayer = playerList.get(currentIndex);
