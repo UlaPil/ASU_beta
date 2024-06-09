@@ -5,12 +5,14 @@ import main.model.Playable;
 import main.view.GameView;
 import main.view.TopCardObserver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TopCardManager{
     List<TopCardObserver> observers;
     GameView gameView;
     public TopCardManager(GameView gameView) {
+        observers = new ArrayList<>();
         this.gameView = gameView;
     }
     public void addObserver(TopCardObserver observer) {observers.add(observer);}

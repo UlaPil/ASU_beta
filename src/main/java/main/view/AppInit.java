@@ -39,6 +39,7 @@ public class AppInit {
             throw new RuntimeException(e);
         }
         initializeScenes();
+        initializeObservers();
     }
     private void initializeScenes() {
         //Menu
@@ -52,6 +53,15 @@ public class AppInit {
     private void initializeObservers() {
         viewModel.getTopCardManager().addObserver(new TopCardObserver(gameView));
         game.addCardObserver(viewModel.getTopCardManager());
+        for(int i = 0 ; i < game.getPlayerList().size() ; i++) {
+            if(i == 0) {
+                viewModel.getHandManager().addObserver(new PlayerHandObserver(gameView));
+            }
+            else {
+                viewModel.getHandManager().addObserver(new RobotHandObserver(gameView, game.getPlayerList().get(i)));
+            }
+        }
+        game.addHandObserver(viewModel.getHandManager());
     }
     public void init() {
         stage.setScene(Scenes.get(SceneName.MENU).getScene());

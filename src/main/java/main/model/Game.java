@@ -155,19 +155,19 @@ public class Game {
         return false;
     }
     
-    public void addObserver(TopCardManager observer) {
+    public void addCardObserver(TopCardManager observer) {
         cardObservers.add(observer);
     }
 
-    public void deleteObserver(TopCardManager observer) {
+    public void deleteCardObserver(TopCardManager observer) {
         cardObservers.remove(observer);
     }
 
-    public void oddObserver(HandManager observer) {
+    public void addHandObserver(HandManager observer) {
         handObservers.add(observer);
     }
 
-    public void deleteObserver(HandManager observer) {
+    public void deleteHandObserver(HandManager observer) {
         handObservers.remove(observer);
     }
 

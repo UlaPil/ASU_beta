@@ -4,7 +4,7 @@ import main.model.Player;
 
 import java.util.Observer;
 
-public class PlayerHandObserver{
+public class PlayerHandObserver implements HandObserver{
     GameView view;
     Player player;
     PlayerHandObserver(GameView view) {
