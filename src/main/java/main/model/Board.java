@@ -22,7 +22,7 @@ public class Board {
         try {
             do {
                 playOnBoard(drawFromPile());
-            } while (List.of(block, changeColor, reverse).contains(getTopCard().getSymbol()));
+            } while (List.of(block, changeColor, reverse, plusFour, plusTwo).contains(getTopCard().getSymbol()));
         } catch (NoMoreCardsInDeck e) {
             throw new RuntimeException(e);
         }
