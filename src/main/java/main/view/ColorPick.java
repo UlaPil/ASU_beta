@@ -15,14 +15,14 @@ import java.util.Objects;
 
 public class ColorPick extends Application {
     //StackPane root = new StackPane();
-    GridPane gridPane = new GridPane();
+    private GridPane gridPane = new GridPane();
     Scene scene;
     @Override
     public void start(Stage primaryStage) {
-        Button redButton = createColorButton("Red", "-fx-background-color: red; -fx-font-weight: bold; -fx-text-fill: red;");
-        Button blueButton = createColorButton("Blue", "-fx-background-color: blue; -fx-font-weight: bold; -fx-text-fill: blue;");
-        Button greenButton = createColorButton("Green", "-fx-background-color: green; -fx-font-weight: bold; -fx-text-fill: green;");
-        Button yellowButton = createColorButton("Yellow", "-fx-background-color: yellow; -fx-font-weight: bold; -fx-text-fill: yellow;");
+        Button redButton = createColorButton("red", "-fx-background-color: red; -fx-font-weight: bold; -fx-text-fill: red;");
+        Button blueButton = createColorButton("blue", "-fx-background-color: blue; -fx-font-weight: bold; -fx-text-fill: blue;");
+        Button greenButton = createColorButton("green", "-fx-background-color: green; -fx-font-weight: bold; -fx-text-fill: green;");
+        Button yellowButton = createColorButton("yellow", "-fx-background-color: yellow; -fx-font-weight: bold; -fx-text-fill: yellow;");
 
         //gridPane = new GridPane();
         int buttonSize = 150;
@@ -66,7 +66,7 @@ public class ColorPick extends Application {
         Button button = new Button(colorName);
         button.setStyle(style + " -fx-cursor: hand;");
         button.setOnAction(event -> {
-            System.out.println(colorName);
+            //setTopColor(colorName);
             ((Stage) button.getScene().getWindow()).close();
         });
         return button;
