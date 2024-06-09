@@ -190,11 +190,11 @@ public class GameView implements AsuScene {
             root.getChildren().add(botHand);
 
         }
-        botHands.get(playerList.get(1)).getCardContainer().setTranslateX(-WIDTH/4);
+        botHands.get(playerList.get(1)).getCardContainer().setTranslateX(-WIDTH/3);
         botHands.get(playerList.get(1)).getCardContainer().setTranslateY(-HEIGHT/4);
         botHands.get(playerList.get(3)).getCardContainer().setTranslateX(WIDTH/3);
         botHands.get(playerList.get(3)).getCardContainer().setTranslateY(-HEIGHT/4);
-        botHands.get(playerList.get(2)).getCardContainer().setTranslateX(-HEIGHT/2);
+        botHands.get(playerList.get(2)).getCardContainer().setTranslateY(-HEIGHT/3);
     }
 
     private void addText() {
