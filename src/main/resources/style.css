@@ -16,6 +16,14 @@
      -fx-background-radius: 30;
 }
 
+#colorPicker {
+    -fx-background-size: cover; /* lub contain */
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+}
+
 #hand {
     -fx-background-color: rgb(0, 0, 0, 0.5);
     -fx-background-radius: 25;
