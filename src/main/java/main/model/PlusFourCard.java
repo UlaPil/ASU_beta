@@ -17,5 +17,15 @@ public class PlusFourCard implements Playable {
     public Symbol getSymbol() { return card.getSymbol(); }
 
     @Override
+    public int getHash() {
+        return card.getHash();
+    }
+
+    @Override
+    public void setHash(int hash) {
+        card.setHash(hash);
+    }
+
+    @Override
     public String toString() { return card.toString(); }
 }

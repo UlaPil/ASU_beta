@@ -8,8 +8,8 @@ public class ModelManager {
     public Game game;
     public ModelManager(Game game) { this.game = game;}
 
-    public void removeFromPlayerHand(Player player, CardDisplay card) {
-        game.playCard(player, card.getCard());
+    public void removeFromPlayerHand(Player player, int index) {
+        game.playCard(player, index);
     }
 
     public void addToPlayerHand(Player player) {

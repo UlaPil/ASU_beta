@@ -22,5 +22,15 @@ public class BlockCard implements Playable{
         return card.getSymbol();
     }
 
+    @Override
+    public int getHash() {
+        return card.getHash();
+    }
+
+    @Override
+    public void setHash(int hash) {
+        card.setHash(hash);
+    }
+
     public String toString() { return card.toString(); }
 }

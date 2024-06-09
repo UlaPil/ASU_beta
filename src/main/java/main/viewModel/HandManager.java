@@ -20,9 +20,9 @@ public class HandManager {
     public void removeObserver(HandObserver handObserver) {
         handObservers.remove(handObserver);
     }
-    public void notify(Playable card, Player player, boolean add) {
+    public void notify(int index, Playable card, Player player, boolean add) {
         for(HandObserver handObserver : handObservers) {
-            handObserver.notify(player,new CardDisplay(card),add);
+            handObserver.notify(index, new CardDisplay(card),player,add);
         }
         System.out.println("notifyHandObservers");
     }

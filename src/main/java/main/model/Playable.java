@@ -6,4 +6,6 @@ public interface Playable {
 
     public Color getColor();
     public Symbol getSymbol();
+    public int getHash();
+    public void setHash(int hash);
 }

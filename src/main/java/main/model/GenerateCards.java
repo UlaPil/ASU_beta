@@ -22,6 +22,7 @@ public class GenerateCards {
         for (int j = 0; j < 2;  j++) {
             for (int i = 1; i < 10; i++) {
                 Playable card = new Card(one.getSymbolOfNumber(i), red);
+                card.setHash();
                 cards.add(card);
             }
             for (int i = 1; i < 10; i++) {

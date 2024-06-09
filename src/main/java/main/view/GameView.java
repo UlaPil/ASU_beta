@@ -123,7 +123,7 @@ public class GameView implements AsuScene {
     public void addCardToPlayerHand(CardDisplay card) {
         ImageView cardView = card.getImageView();
         cardContainer.getChildren().add(cardView);
-        cardView.setOnMouseClicked(eventFactory.getPlayEvent(card, mainPlayer));
+        cardView.setOnMouseClicked(eventFactory.getPlayEvent(cardContainer.getChildren()., mainPlayer));
 
         cardView.setOnMouseEntered(mouseEvent -> {
             cardView.setCursor(Cursor.HAND);
@@ -148,8 +148,11 @@ public class GameView implements AsuScene {
     public void addCardToRobotHand(Player player) {
         botHands.get(player).addCard();
     }
-    public void removeCardFromPlayerHand(CardDisplay card) {
-        cardContainer.getChildren().remove(card.getImageView());
+    public void removeCardFromPlayerHand(int index) {
+        System.out.println("XD");
+        root.getChildren().remove(cardContainer);
+        cardContainer.getChildren().remove(index);
+        root.getChildren().add(cardContainer);
         adjustCardSpacing();
     }
 
