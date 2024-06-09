@@ -121,10 +121,7 @@ public class GameView implements AsuScene {
     public void addCardToPlayerHand(CardDisplay card) {
         ImageView cardView = card.getImageView();
         cardContainer.getChildren().add(cardView);
-        cardView.setOnMouseClicked(e -> {
-            eventFactory.getPlayEvent(card, mainPlayer);
-            adjustCardSpacing();
-        });
+        cardView.setOnMouseClicked(eventFactory.getPlayEvent(card, mainPlayer));
 
 
         cardView.setOnMouseEntered(mouseEvent -> {

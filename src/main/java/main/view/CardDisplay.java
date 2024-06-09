@@ -40,7 +40,7 @@ public class CardDisplay {
        rectangle.setArcHeight(15.0);
        rectangle.setArcWidth(15.0);
        imageView.setClip(rectangle);
-
+       this.card = card;
     }
     public ImageView getImageView() {
         return imageView;
