@@ -7,6 +7,7 @@ import javafx.stage.StageStyle;
 import main.model.Game;
 import main.model.NoMoreCardsInDeck;
 import main.viewModel.ModelManager;
+import main.viewModel.TopCardManager;
 import main.viewModel.ViewModelMain;
 
 import java.util.HashMap;
@@ -22,14 +23,15 @@ public class AppInit {
     private final Map<SceneName, AsuScene> Scenes = new HashMap<>();
     private final Game game;
     private final ViewModelMain viewModel;
-
+    private final GameView gameView;
     Stage stage;
     public AppInit(Stage stage) {
         this.stage = stage;
         game = new Game("");
-        viewModel = new ViewModelMain(ga);
+        viewModel = new ViewModelMain(game);
         Scenes.put(SceneName.MENU, new Menu());
-        GameView gameView = new GameView(new CardDisplay(game.getTopCard()),new EventFactory(viewModel), game.getPlayerList());
+        gameView = new GameView(new CardDisplay(game.getTopCard()),new EventFactory(viewModel.getModelManager()), game.getPlayerList());
+        viewModel.setTopCardManager(new TopCardManager(gameView));
         Scenes.put(SceneName.PLAY, gameView );
         try {
             game.startGame();
@@ -37,6 +39,7 @@ public class AppInit {
             throw new RuntimeException(e);
         }
         initializeScenes();
+        initializeObservers();
     }
     private void initializeScenes() {
         //Menu
@@ -47,7 +50,19 @@ public class AppInit {
         GameView scene2 = (GameView)Scenes.get(SceneName.PLAY);
         scene2.defineExit(getCloser());
     }
-
+    private void initializeObservers() {
+        viewModel.getTopCardManager().addObserver(new TopCardObserver(gameView));
+        game.addCardObserver(viewModel.getTopCardManager());
+        for(int i = 0 ; i < game.getPlayerList().size() ; i++) {
+            if(i == 0) {
+                viewModel.getHandManager().addObserver(new PlayerHandObserver(gameView));
+            }
+            else {
+                viewModel.getHandManager().addObserver(new RobotHandObserver(gameView, game.getPlayerList().get(i)));
+            }
+        }
+        game.addHandObserver(viewModel.getHandManager());
+    }
     public void init() {
         stage.setScene(Scenes.get(SceneName.MENU).getScene());
         stage.setResizable(false);

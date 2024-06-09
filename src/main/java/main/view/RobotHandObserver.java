@@ -2,7 +2,7 @@ package main.view;
 
 import main.model.Player;
 
-public class RobotHandObserver {
+public class RobotHandObserver implements HandObserver {
     GameView view;
     Player player;
     RobotHandObserver(GameView view, Player player) {

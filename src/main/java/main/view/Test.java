@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.model.*;
 
-public class Test extends Application {
+/*public class Test extends Application {
     public static void main(String[] args) {
         launch(args);
     }
@@ -56,4 +56,4 @@ public class Test extends Application {
             menu.bot3HandView.addCard();
         }
     }
-}
+}*/

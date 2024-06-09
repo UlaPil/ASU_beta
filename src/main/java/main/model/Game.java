@@ -12,7 +12,8 @@ public class Game {
     private ArrayList<TopCardManager> cardObservers;
     private ArrayList<HandManager> handObservers;
     private int gameDirection;
-    private String nextPlayerStatus;
+    private int blockCount;
+    private int plus2Count;
     private ArrayList<Player> playerList;
     private ArrayList<Integer> blockList;
     private Board board;
@@ -20,15 +21,14 @@ public class Game {
     public Player currentPlayer;
     private int modulo;
     public int currentIndex;
-    public boolean draw;
 
     public Game(String player) {
-        // docelowo: modulo=players.length();
         cardObservers = new ArrayList<>();
         handObservers = new ArrayList<>();
         modulo = 4;     //na aktualne potrzeby
         currentIndex = 0;
-        draw = false;
+        blockCount = 0;
+        plus2Count = 0;
         board = new Board(cards);
         playerList = new ArrayList<>();
         blockList = new ArrayList<>();
@@ -38,7 +38,6 @@ public class Game {
         playerList.add(new RealPlayer("Bot3"));
         for (int i = 0; i < modulo; i++) blockList.add(0);
         gameDirection = 1;
-        nextPlayerStatus = "";
     }
 
     public Player getMainPlayer() {
@@ -47,7 +46,16 @@ public class Game {
 
     public void startGame() throws NoMoreCardsInDeck {
         for (Player player: playerList) {
-            for(int i=0 ; i<7 ; i++) player.draw(board.drawFromPile());
+            for(int i=0 ; i<7 ; i++) {
+                Playable card = board.drawFromPile();
+                player.draw(card);
+                for(HandManager observer : handObservers) {
+                    observer.notify(card, player, true);
+                }
+            }
+            for(TopCardManager observer : cardObservers) {
+                observer.notify(board.getTopCard());
+            }
         }
         currentPlayer = playerList.get(0);
     }
@@ -77,14 +85,22 @@ public class Game {
 
     public void playCard(Player player, Playable card) {
         if(card.isPlayable(board.getTopCard().getSymbol(),board.getTopCard().getColor()) && player==currentPlayer) {
+            if (blockCount > 0 && card.getSymbol() != block) return;
+            if (plus2Count> 0 && card.getSymbol() != plusTwo) return;
+            if (card.getSymbol() == block) blockCount++;
+            if (card.getSymbol() == plusTwo) plus2Count++;
             player.playCard(card);
             board.playOnBoard(card);
             ifSpecial(card); // TODO: obsługa block, reverse i plus
             currentIndex += gameDirection;
+            if (blockList.get(currentIndex) > 0) {
+                currentIndex += gameDirection;
+                blockList.set(currentIndex, blockList.get(currentIndex) - 1);
+            }
             currentIndex = currentIndex%4;
             currentPlayer = playerList.get(currentIndex);
             for(TopCardManager observer : cardObservers) {
-                observer.update(card);
+                observer.notify(card);
             }
             for(HandManager observer : handObservers) {
                 observer.notify(card, player, false);
@@ -97,10 +113,26 @@ public class Game {
 
     public void drawCard(Player player) {
         if (player != currentPlayer) return;
+        if (blockCount > 0) {
+            blockList.set(currentIndex, blockList.get(currentIndex) + blockCount);
+            blockCount = 0;
+            return;
+        }
+        if (plus2Count > 0) {
+            int temp = plus2Count;
+            plus2Count = 0;
+            for (int i = 0; i < temp; i++) drawCard(player);
+            blockCount = 0;
+            return;
+        }
         try {
             Playable card = board.drawFromPile();
             player.draw(card);
             currentIndex += gameDirection;
+            if (blockList.get(currentIndex%4) > 0) {
+                currentIndex += gameDirection;
+                blockList.set(currentIndex, blockList.get(currentIndex) - 1);
+            }
             currentIndex = currentIndex%4;
             currentPlayer = playerList.get(currentIndex);
             for(HandManager observer : handObservers) {
@@ -114,6 +146,21 @@ public class Game {
         }
     }
 
+    public void ifSpecial(Playable card) {
+        if(card.getSymbol() == block) {
+            blockCount++;
+        }
+        if(card.getSymbol() == reverse) {
+            reverseGameDirection();
+        }
+        if(card.getSymbol() == plusTwo) {
+            plus2Count++;
+        }
+        if(card.getSymbol() == changeColor && currentPlayer != getMainPlayer()) {
+            // TODO: bot musi wybrac kolor i zmienić kolor top karty
+        }
+    }
+
     public boolean gameOver() {
         for (Player player: playerList) {
             if (player.didIWin()) return true;
@@ -121,19 +168,19 @@ public class Game {
         return false;
     }
     
-    public void addObserver(TopCardManager observer) {
+    public void addCardObserver(TopCardManager observer) {
         cardObservers.add(observer);
     }
 
-    public void deleteObserver(TopCardManager observer) {
+    public void deleteCardObserver(TopCardManager observer) {
         cardObservers.remove(observer);
     }
 
-    public void oddObserver(HandManager observer) {
+    public void addHandObserver(HandManager observer) {
         handObservers.add(observer);
     }
 
-    public void deleteObserver(HandManager observer) {
+    public void deleteHandObserver(HandManager observer) {
         handObservers.remove(observer);
     }
 
@@ -144,16 +191,6 @@ public class Game {
         return board.getTopCard();
     }
 
-    public void ifSpecial(Playable card) {
-        if(card.getSymbol().isSpecial()) {
-            if(card.getSymbol() == block) {
-                currentIndex += gameDirection;
-            }
-        }
-        if(card.getSymbol() == reverse) {
-            reverseGameDirection();
-        }
-    }
 
     public Player getCurrentPlayer() {
         return currentPlayer;
