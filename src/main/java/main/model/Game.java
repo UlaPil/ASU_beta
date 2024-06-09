@@ -49,11 +49,14 @@ public class Game {
             for(int i=0 ; i<7 ; i++) {
                 Playable card = board.drawFromPile();
                 player.draw(card);
+                System.out.println("aaa");
                 for(HandManager observer : handObservers) {
                     observer.notify(card, player, true);
+
                 }
             }
             for(TopCardManager observer : cardObservers) {
+                System.out.println("kupa");
                 observer.notify(board.getTopCard());
             }
         }
@@ -177,6 +180,7 @@ public class Game {
     }
 
     public void addHandObserver(HandManager observer) {
+        System.out.println("added");
         handObservers.add(observer);
     }
 

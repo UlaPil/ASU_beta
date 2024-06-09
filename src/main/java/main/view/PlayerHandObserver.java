@@ -7,8 +7,9 @@ import java.util.Observer;
 public class PlayerHandObserver implements HandObserver{
     GameView view;
     Player player;
-    PlayerHandObserver(GameView view) {
+    PlayerHandObserver(GameView view, Player player) {
         this.view = view;
+        this.player = player;
     }
     public void notify(Player player, CardDisplay card, boolean add) {
         if(!this.player.equals(player)) {

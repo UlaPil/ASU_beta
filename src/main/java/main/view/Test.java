@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 package main.view;
 
 import javafx.application.Application;
@@ -58,7 +58,6 @@ import main.model.*;
         }
     }
 }*/
-=======
 //package main.view;
 //
 //import javafx.application.Application;
@@ -118,4 +117,4 @@ import main.model.*;
 //        }
 //    }
 //}
->>>>>>> Stashed changes
+

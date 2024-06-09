@@ -1,13 +1,9 @@
 package main.view;
 
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
-import main.model.Card;
+import main.model.Color;
 import main.model.Playable;
-
-import java.awt.*;
-import java.io.InputStream;
 
 public class CardDisplay {
     ImageView imageView;

@@ -33,13 +33,13 @@ public class AppInit {
         gameView = new GameView(new CardDisplay(game.getTopCard()),new EventFactory(viewModel.getModelManager()), game.getPlayerList());
         viewModel.setTopCardManager(new TopCardManager(gameView));
         Scenes.put(SceneName.PLAY, gameView );
+        initializeScenes();
+        initializeObservers();
         try {
             game.startGame();
         } catch(NoMoreCardsInDeck e) {
             throw new RuntimeException(e);
         }
-        initializeScenes();
-        initializeObservers();
     }
     private void initializeScenes() {
         //Menu
@@ -55,11 +55,11 @@ public class AppInit {
         game.addCardObserver(viewModel.getTopCardManager());
         for(int i = 0 ; i < game.getPlayerList().size() ; i++) {
             if(i == 0) {
-                viewModel.getHandManager().addObserver(new PlayerHandObserver(gameView));
+                viewModel.getHandManager().addObserver(new PlayerHandObserver(gameView, game.getPlayerList().get(i)));
             }
-            else {
-                viewModel.getHandManager().addObserver(new RobotHandObserver(gameView, game.getPlayerList().get(i)));
-            }
+            else{
+                    viewModel.getHandManager().addObserver(new RobotHandObserver(gameView, game.getPlayerList().get(i)));
+                }
         }
         game.addHandObserver(viewModel.getHandManager());
     }

@@ -14,6 +14,7 @@ public class HandManager {
         handObservers = new ArrayList<>();
     }
     public void addObserver(HandObserver handObserver) {
+        System.out.println("addHandObserver");
         handObservers.add(handObserver);
     }
     public void removeObserver(HandObserver handObserver) {
@@ -23,5 +24,6 @@ public class HandManager {
         for(HandObserver handObserver : handObservers) {
             handObserver.notify(player,new CardDisplay(card),add);
         }
+        System.out.println("notifyHandObservers");
     }
 }
