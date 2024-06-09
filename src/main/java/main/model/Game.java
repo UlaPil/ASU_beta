@@ -16,111 +16,12 @@ public class Game {
     private String nextPlayerStatus;
     private ArrayList<Player> playerList;
     private Board board;
-    private static List<Playable> cards = new ArrayList<>();
+    private static List<Playable> cards = GenerateCards.getCardsList();
     public Player currentPlayer;
     private int modulo;
     public int currentIndex;
     public boolean draw;
-    static {
-        for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card(one.getSymbolOfNumber(i), red);
-            cards.add(card);
-            cards.add(card);
-        }
-        for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (one.getSymbolOfNumber(i), blue);
-            cards.add(card);
-            cards.add(card);
-        }
-        for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (one.getSymbolOfNumber(i), yellow);
-            cards.add(card);
-            cards.add(card);
-        }
-        for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (one.getSymbolOfNumber(i), green);
-            cards.add(card);
-            cards.add(card);
-        }
-        for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard(red);
-            cards.add(reversecard);
-            Playable blockcard = new BlockCard(red);
-            cards.add(blockcard);
-        }
-        for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard(blue);
-            cards.add(reversecard);
-            Playable blockcard = new BlockCard(blue);
-            cards.add(blockcard);
-        }
-        for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard(yellow);
-            cards.add(reversecard);
-            Playable blockcard = new BlockCard(yellow);
-            cards.add(blockcard);
-        }
-        for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard(green);
-            cards.add(reversecard);
-            Playable blockcard = new BlockCard(green);
-            cards.add(blockcard);
-        }
-        for(int i=0 ; i<4 ; i++) {
-            Playable changecolorcard = new ChangeColorCard();
-            cards.add(changecolorcard);
-        }
-    }
-    static {
-        for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (one.getSymbolOfNumber(i),red);
-            cards.add(card);
-            cards.add(card);
-        }
-        for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (one.getSymbolOfNumber(i), blue);
-            cards.add(card);
-            cards.add(card);
-        }
-        for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (one.getSymbolOfNumber(i), yellow);
-            cards.add(card);
-            cards.add(card);
-        }
-        for(Integer i=0 ; i<10 ; i++) {
-            Playable card = new Card (one.getSymbolOfNumber(i), green);
-            cards.add(card);
-            cards.add(card);
-        }
-        for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard(red);
-            cards.add(reversecard);
-            Playable blockcard = new BlockCard(red);
-            cards.add(blockcard);
-        }
-        for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard(blue);
-            cards.add(reversecard);
-            Playable blockcard = new BlockCard(blue);
-            cards.add(blockcard);
-        }
-        for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard(yellow);
-            cards.add(reversecard);
-            Playable blockcard = new BlockCard(yellow);
-            cards.add(blockcard);
-        }
-        for(int i=0 ; i<2 ; i++) {
-            Playable reversecard = new ReverseCard(green);
-            cards.add(reversecard);
-            Playable blockcard = new BlockCard(green);
-            cards.add(blockcard);
-        }
-        for(int i=0 ; i<4 ; i++) {
-            Playable changecolorcard = new ChangeColorCard();
-            cards.add(changecolorcard);
-        }
-    }
+
     public Game(String player) {
         // docelowo: modulo=players.length();
         cardObservers = new ArrayList<>();
