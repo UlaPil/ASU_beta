@@ -75,7 +75,6 @@ public class Game {
 //            e.printStackTrace();
 //        }
         //Object lock = new Object();
-            System.out.println("currentPlayer: " + currentPlayer);
                 Playable card = brain(currentPlayer);
                 if (card != null) {
                     playCard(currentPlayer, card);
@@ -100,8 +99,6 @@ public class Game {
     public void playCard(Player player, Playable card) {
         if(gameOver) return;
         if(card.isPlayable(board.getTopCard().getSymbol(),board.getTopCard().getColor()) && player==currentPlayer) {
-            System.out.println(blockCount);
-            System.out.println(plus2Count);
             //if (blockCount > 0 && card.getSymbol() != block) return;
             //if (plus2Count> 0 && card.getSymbol() != plusTwo) return;
 
@@ -109,7 +106,7 @@ public class Game {
             if (card.getSymbol() == plusTwo) plus2Count++;
             player.playCard(card);
             board.playOnBoard(card);
-            ifSpecial(card); // TODO: obsługa block, reverse i plus
+            ifSpecial(card);
             gameOver = currentPlayer.didIWin();
             if(gameOver) {
                 gameEndManager.notify(currentIndex);
@@ -211,7 +208,6 @@ public class Game {
     }
 
     public void addHandObserver(HandManager observer) {
-        System.out.println("added");
         handObservers.add(observer);
     }
 
