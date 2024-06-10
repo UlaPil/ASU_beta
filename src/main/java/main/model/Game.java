@@ -1,5 +1,6 @@
 package main.model;
 
+import main.viewModel.GameEndManager;
 import main.viewModel.HandManager;
 import main.viewModel.TopCardManager;
 
@@ -11,20 +12,24 @@ import static main.model.Symbol.*;
 public class Game {
     private ArrayList<TopCardManager> cardObservers;
     private ArrayList<HandManager> handObservers;
+    private ArrayList<GameEndManager> endObservers;
     private int gameDirection;
     private int blockCount;
     private int plus2Count;
     private ArrayList<Player> playerList;
     private ArrayList<Integer> blockList;
+
     private Board board;
     private static List<Playable> cards = GenerateCards.getCardsList();
     public Player currentPlayer;
     private int modulo;
     public int currentIndex;
+    public boolean gameOver = false;
 
     public Game(String player) {
         cardObservers = new ArrayList<>();
         handObservers = new ArrayList<>();
+        endObservers = new ArrayList<>();
         modulo = 4;     //na aktualne potrzeby
         currentIndex = 0;
         blockCount = 0;
@@ -61,16 +66,13 @@ public class Game {
         currentPlayer = playerList.get(0);
     }
 
-    private void playBots() {
-
+    private void playBot() {
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //Object lock = new Object();
-        while(currentPlayer != getMainPlayer()) {
-            /*synchronized (lock) {
-                try {
-                    lock.wait(1000);
-                } catch (Exception i) {
-                    i.printStackTrace();
-                }*/
             System.out.println("currentPlayer: " + currentPlayer);
                 Playable card = brain(currentPlayer);
                 if (card != null) {
@@ -80,11 +82,10 @@ public class Game {
                 }
             //}
 
-        }
     }
 
     public Playable brain(Player player) {
-        int i = 1;
+        int i = 0;
         while (true) {
             if(i >= player.getHandSize()) break;
             if (player.getCard(i).isPlayable(board.getTopCard().getSymbol(), board.getTopCard().getColor())) {
@@ -96,6 +97,7 @@ public class Game {
     }
 
     public void playCard(Player player, Playable card) {
+        if(gameOver) return;
         if(card.isPlayable(board.getTopCard().getSymbol(),board.getTopCard().getColor()) && player==currentPlayer) {
             System.out.println(blockCount);
             System.out.println(plus2Count);
@@ -107,6 +109,10 @@ public class Game {
             player.playCard(card);
             board.playOnBoard(card);
             ifSpecial(card); // TODO: obsługa block, reverse i plus
+            gameOver = currentPlayer.didIWin();
+            if(gameOver) {
+
+            }
             currentIndex += gameDirection;
             if (blockList.get((currentIndex+4)%4) > 0) {
                 currentIndex += gameDirection;
@@ -121,8 +127,12 @@ public class Game {
                 observer.notify(card, player, false);
             }
             if(player.equals(playerList.get(0))) {
-                    playBots();
+                while(currentPlayer != getMainPlayer()) {
+                    if (gameOver) break;
+                    playBot();
+                }
             }
+
         }
     }
 
@@ -154,7 +164,10 @@ public class Game {
                 observer.notify(card, player, true);
             }
             if(player.equals(playerList.get(0))) {
-                playBots();
+                while(currentPlayer != getMainPlayer()) {
+                    if (gameOver) break;
+                    playBot();
+                }
             }
         } catch (NoMoreCardsInDeck e) {
             System.out.println("Game over. No more cards :(");
@@ -177,10 +190,7 @@ public class Game {
     }
 
     public boolean gameOver() {
-        for (Player player: playerList) {
-            if (player.didIWin()) return true;
-        }
-        return false;
+        return gameOver;
     }
     
     public void addCardObserver(TopCardManager observer) {
@@ -189,6 +199,12 @@ public class Game {
 
     public void deleteCardObserver(TopCardManager observer) {
         cardObservers.remove(observer);
+    }
+    public void addEndObserver(GameEndManager observer) {
+        endObservers.add(observer);
+    }
+    public void deleteEndObserver(GameEndManager observer) {
+        endObservers.remove(observer);
     }
 
     public void addHandObserver(HandManager observer) {
