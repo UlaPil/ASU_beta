@@ -69,11 +69,11 @@ public class Game {
     }
 
     private void playBot() {
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(1000);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         //Object lock = new Object();
             System.out.println("currentPlayer: " + currentPlayer);
                 Playable card = brain(currentPlayer);
