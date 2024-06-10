@@ -5,6 +5,9 @@ import main.viewModel.TopCardManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static main.model.Symbol.*;
 
@@ -21,6 +24,7 @@ public class Game {
     public Player currentPlayer;
     private int modulo;
     public int currentIndex;
+    private ScheduledExecutorService scheduler;
 
     public Game(String player) {
         cardObservers = new ArrayList<>();
@@ -38,6 +42,7 @@ public class Game {
         playerList.add(new RealPlayer("Bot3"));
         for (int i = 0; i < modulo; i++) blockList.add(0);
         gameDirection = 1;
+        scheduler = Executors.newScheduledThreadPool(1); // Inicjalizacja harmonogramu
     }
 
     public Player getMainPlayer() {
@@ -62,23 +67,25 @@ public class Game {
     }
 
     private void playBots() {
+        playBotsTurn();
+    }
 
-        Object lock = new Object();
-        while(currentPlayer != getMainPlayer()) {
-            synchronized (lock) {
-                try {
-                    lock.wait(1000);
-                } catch (Exception i) {
-                    i.printStackTrace();
-                }
+    private void playBotsTurn() {
+        if (currentPlayer != getMainPlayer()) {
+            scheduler.schedule(() -> {
+                System.out.println("Bot " + currentPlayer.getName() + " is playing");
                 Playable card = brain(currentPlayer);
                 if (card != null) {
                     playCard(currentPlayer, card);
                 } else {
                     drawCard(currentPlayer);
                 }
-            }
-
+                System.out.printf(currentPlayer);
+                // Kontynuacja ruchów botów z opóźnieniem
+                if (currentPlayer != getMainPlayer()) {
+                    playBotsTurn();
+                }
+            }, 1, TimeUnit.SECONDS);
         }
     }
 
@@ -106,7 +113,7 @@ public class Game {
             currentIndex += gameDirection;
             if (blockList.get((currentIndex+4)%4) > 0) {
                 currentIndex += gameDirection;
-                blockList.set((currentIndex+4)%4, blockList.get((currentIndex+4)%4) - 1);
+                blockList.set((currentIndex+4)%4, blockList.get((currentIndex+3)%4));
             }
             currentIndex = (currentIndex+4)%4;
             currentPlayer = playerList.get(currentIndex);
@@ -142,7 +149,7 @@ public class Game {
             currentIndex += gameDirection;
             if (blockList.get((currentIndex+4)%4) > 0) {
                 currentIndex += gameDirection;
-                blockList.set((currentIndex+4)%4, blockList.get((currentIndex+4)%4) - 1);
+                blockList.set((currentIndex+4)%4, blockList.get((currentIndex+3)%4));
             }
             currentIndex = (currentIndex+4)%4;
             currentPlayer = playerList.get(currentIndex);
