@@ -138,6 +138,7 @@ public class Game {
     }
 
     public void drawCard(Player player) {
+        if(gameOver) return;
         if (player != currentPlayer) return;
         if (blockCount > 0) {
             blockList.set(currentIndex, blockList.get(currentIndex) + blockCount);
