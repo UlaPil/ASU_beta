@@ -19,7 +19,7 @@ public class BotHandView {
     }
 
     public void removeCard() {
-        cardContainer.getChildren().remove(1);
+        cardContainer.getChildren().remove(0);
         adjustCardSpacing();
     }
 
