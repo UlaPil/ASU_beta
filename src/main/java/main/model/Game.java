@@ -16,6 +16,7 @@ public class Game {
     private int gameDirection;
     private int blockCount;
     private int plus2Count;
+    private GameEndManager gameEndManager;
     private ArrayList<Player> playerList;
     private ArrayList<Integer> blockList;
 
@@ -37,6 +38,7 @@ public class Game {
         board = new Board(cards);
         playerList = new ArrayList<>();
         blockList = new ArrayList<>();
+        gameEndManager = new GameEndManager();
         playerList.add(new RealPlayer(player));
         playerList.add(new RealPlayer("Bot1"));
         playerList.add(new RealPlayer("Bot2"));
@@ -86,8 +88,7 @@ public class Game {
 
     public Playable brain(Player player) {
         int i = 0;
-        while (true) {
-            if(i >= player.getHandSize()) break;
+        while (i < player.getHandSize()) {
             if (player.getCard(i).isPlayable(board.getTopCard().getSymbol(), board.getTopCard().getColor())) {
                 return player.getCard(i);
             }
@@ -111,7 +112,7 @@ public class Game {
             ifSpecial(card); // TODO: obsługa block, reverse i plus
             gameOver = currentPlayer.didIWin();
             if(gameOver) {
-
+                gameEndManager.notify(currentIndex);
             }
             currentIndex += gameDirection;
             if (blockList.get((currentIndex+4)%4) > 0) {
