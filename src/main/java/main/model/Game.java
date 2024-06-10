@@ -63,21 +63,22 @@ public class Game {
 
     private void playBots() {
 
-        Object lock = new Object();
+        //Object lock = new Object();
         while(currentPlayer != getMainPlayer()) {
-            synchronized (lock) {
+            /*synchronized (lock) {
                 try {
                     lock.wait(1000);
                 } catch (Exception i) {
                     i.printStackTrace();
-                }
+                }*/
+            System.out.println("currentPlayer: " + currentPlayer);
                 Playable card = brain(currentPlayer);
                 if (card != null) {
                     playCard(currentPlayer, card);
                 } else {
                     drawCard(currentPlayer);
                 }
-            }
+            //}
 
         }
     }
