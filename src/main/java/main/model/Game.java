@@ -145,6 +145,7 @@ public class Game {
             blockCount = 0;
             return;
         }
+        
         if (plus2Count > 0) {
             int temp = plus2Count;
             plus2Count = 0;
