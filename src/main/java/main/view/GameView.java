@@ -148,6 +148,7 @@ public class GameView implements AsuScene {
     }
     public void addCardToRobotHand(Player player) {
         botHands.get(player).addCard();
+        ;
     }
     public void removeCardFromPlayerHand(CardDisplay card) {
         for(int i = 0 ; i < cardContainer.getChildren().size() ; i++) {

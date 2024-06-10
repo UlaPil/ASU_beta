@@ -20,5 +20,6 @@ public class RobotHandObserver implements HandObserver {
         else {
             view.removeCardFromRobotHand(player);
         }
+
     }
 }

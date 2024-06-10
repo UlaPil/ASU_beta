@@ -9,7 +9,7 @@ import static main.model.Symbol.one;
 
 public class GenerateCards {
     private static List<Playable> cards = new ArrayList<>();
-    public GenerateCards() {}
+    private GenerateCards() {}
     public static List<Playable> getCardsList() {
         Playable cardR = new Card(one.getSymbolOfNumber(0), red);
         cards.add(cardR);

@@ -35,11 +35,6 @@ public class AppInit {
         Scenes.put(SceneName.PLAY, gameView );
         initializeScenes();
         initializeObservers();
-        try {
-            game.startGame();
-        } catch(NoMoreCardsInDeck e) {
-            throw new RuntimeException(e);
-        }
     }
     private void initializeScenes() {
         //Menu
@@ -67,6 +62,11 @@ public class AppInit {
         stage.setScene(Scenes.get(SceneName.MENU).getScene());
         stage.setResizable(false);
         stage.initStyle(StageStyle.TRANSPARENT);
+        try {
+            game.startGame();
+        } catch(NoMoreCardsInDeck e) {
+            throw new RuntimeException(e);
+        }
         stage.show();
 
     }
