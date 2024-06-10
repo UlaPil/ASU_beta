@@ -7,6 +7,7 @@ public class Winner {
     public static void show(int i) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Game Result");
+        alert.getDialogPane().setStyle("-fx-font-family: 'Arial';");
         alert.setHeaderText(null);
 
         if (i == 0) {
