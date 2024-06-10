@@ -41,7 +41,8 @@ public class GenerateCards {
                 card.setHash(j);
                 cards.add(card);
             }
-            for (int i = 0; i < 2; i++) {
+        }
+            /*for (int i = 0; i < 2; i++) {
                 Playable reverseCard = new ReverseCard(red);
                 reverseCard.setHash(j);
                 cards.add(reverseCard);
@@ -93,7 +94,7 @@ public class GenerateCards {
                 plusFourCard.setHash(j);
                 cards.add(plusFourCard);
             }
-        }
+        }*/
         return cards;
     }
 }

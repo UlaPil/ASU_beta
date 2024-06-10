@@ -97,8 +97,11 @@ public class Game {
 
     public void playCard(Player player, Playable card) {
         if(card.isPlayable(board.getTopCard().getSymbol(),board.getTopCard().getColor()) && player==currentPlayer) {
-            if (blockCount > 0 && card.getSymbol() != block) return;
-            if (plus2Count> 0 && card.getSymbol() != plusTwo) return;
+            System.out.println(blockCount);
+            System.out.println(plus2Count);
+            //if (blockCount > 0 && card.getSymbol() != block) return;
+            //if (plus2Count> 0 && card.getSymbol() != plusTwo) return;
+
             if (card.getSymbol() == block) blockCount++;
             if (card.getSymbol() == plusTwo) plus2Count++;
             player.playCard(card);
