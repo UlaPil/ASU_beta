@@ -24,7 +24,9 @@ public class PlusTwoCard implements Playable {
     public void setHash(int hash) {
         card.setHash(hash);
     }
-
+    public boolean equals(Object obj) {
+        return card.equals(obj);
+    }
     @Override
     public String toString() { return card.toString(); }
 }

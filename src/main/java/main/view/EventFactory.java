@@ -11,8 +11,8 @@ public class EventFactory {
     EventFactory(ModelManager modelManager) {
         this.modelManager = modelManager;
     }
-    public EventHandler<MouseEvent> getPlayEvent(Player player) {
-        return e -> {modelManager.removeFromPlayerHand(player, index);};
+    public EventHandler<MouseEvent> getPlayEvent(Player player, CardDisplay card) {
+        return e -> {modelManager.removeFromPlayerHand(player, card.getCard());};
     }
     public EventHandler<MouseEvent> getDrawEvent( Player player) {
         return e-> modelManager.addToPlayerHand(player);

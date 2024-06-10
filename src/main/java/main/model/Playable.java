@@ -8,4 +8,6 @@ public interface Playable {
     public Symbol getSymbol();
     public int getHash();
     public void setHash(int hash);
+    public boolean equals(Object obj);
+
 }

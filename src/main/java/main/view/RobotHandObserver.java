@@ -9,7 +9,7 @@ public class RobotHandObserver implements HandObserver {
         this.view = view;
         this.player = player;
     }
-    public void notify( int index, CardDisplay card, Player player,boolean add) {
+    public void notify(CardDisplay card, Player player,boolean add) {
         if(!this.player.equals(player)) {
             return;
         }

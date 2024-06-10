@@ -22,6 +22,11 @@ public class PlusFourCard implements Playable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        return card.equals(obj);
+    }
+
+    @Override
     public void setHash(int hash) {
         card.setHash(hash);
     }

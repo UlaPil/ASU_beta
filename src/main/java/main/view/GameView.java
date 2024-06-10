@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import main.model.Playable;
 import main.model.Player;
 
 import java.util.HashMap;
@@ -30,7 +31,7 @@ public class GameView implements AsuScene {
     public EventFactory eventFactory;
     public Player mainPlayer;
     public List<Player> playerList;
-
+    public HashMap<ImageView, Playable> cardMap = new HashMap<>();
 
     public GameView(CardDisplay card, EventFactory eventFactory, List<Player> playerList) {
         scene = new Scene(root, WIDTH, HEIGHT);
@@ -123,8 +124,8 @@ public class GameView implements AsuScene {
     public void addCardToPlayerHand(CardDisplay card) {
         ImageView cardView = card.getImageView();
         cardContainer.getChildren().add(cardView);
-        cardView.setOnMouseClicked(eventFactory.getPlayEvent(cardContainer.getChildren()., mainPlayer));
-
+        cardView.setOnMouseClicked(eventFactory.getPlayEvent(mainPlayer,card));
+        cardMap.put(cardView, card.getCard());
         cardView.setOnMouseEntered(mouseEvent -> {
             cardView.setCursor(Cursor.HAND);
             playBounceAnimation(cardView, -20);
@@ -148,11 +149,15 @@ public class GameView implements AsuScene {
     public void addCardToRobotHand(Player player) {
         botHands.get(player).addCard();
     }
-    public void removeCardFromPlayerHand(int index) {
-        System.out.println("XD");
-        root.getChildren().remove(cardContainer);
-        cardContainer.getChildren().remove(index);
-        root.getChildren().add(cardContainer);
+    public void removeCardFromPlayerHand(CardDisplay card) {
+        for(int i = 0 ; i < cardContainer.getChildren().size() ; i++) {
+            if(cardContainer.getChildren().get(i) instanceof ImageView v) {
+                if(cardMap.get(v).equals(card.getCard())) {
+                    cardContainer.getChildren().remove(i);
+                    break;
+                }
+            }
+        }
         adjustCardSpacing();
     }
 

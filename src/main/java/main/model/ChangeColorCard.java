@@ -20,7 +20,9 @@ public class ChangeColorCard implements Playable{
     public int getHash() {
         return card.getHash();
     }
-
+    public boolean equals(Object obj) {
+        return card.equals(obj);
+    }
     @Override
     public void setHash(int hash) {
         card.setHash(hash);
