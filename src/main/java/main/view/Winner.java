@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 public class Winner {
 
-    public static void show(Integer i) {
+    public void show(Integer i) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Game Result");
         alert.getDialogPane().setStyle("-fx-font-family: 'Arial';");
