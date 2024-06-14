@@ -73,24 +73,35 @@ public class Game {
     }
 
     private void playBot() {
-//        try {
-//            Thread.sleep(1000);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        //Object lock = new Object();
-                Playable card = brain(currentPlayer);
-                if (card != null) {
-                    playCard(currentPlayer, card);
-                } else {
-                    drawCard(currentPlayer);
-                }
-            //}
+        Playable card = brain(currentPlayer);
+        if (card != null) {
+            playCard(currentPlayer, card);
+        } else {
+            drawCard(currentPlayer);
+        }
 
     }
 
     public Playable brain(Player player) {
         int i = 0;
+        if (plus2Count > 0) {
+            while (i < player.getHandSize()) {
+                if (player.getCard(i).getSymbol().equals(plusTwo)) {
+                    return player.getCard(i);
+                }
+                i++;
+            }
+            return null;
+        }
+        if (blockCount > 0) {
+            while (i < player.getHandSize()) {
+                if (player.getCard(i).getSymbol().equals(block)) {
+                    return player.getCard(i);
+                }
+                i++;
+            }
+            return null;
+        }
         while (i < player.getHandSize()) {
             if (player.getCard(i).isPlayable(board.getTopCard().getSymbol(), board.getTopCard().getColor())) {
                 return player.getCard(i);
@@ -103,9 +114,18 @@ public class Game {
     public void playCard(Player player, Playable card) {
         if(gameOver) return;
         if(card.isPlayable(board.getTopCard().getSymbol(),board.getTopCard().getColor()) && player==currentPlayer) {
-            if (blockCount > 0 && card.getSymbol() != block) return;
-            if (plus2Count> 0 && card.getSymbol() != plusTwo) return;
-
+            if (blockCount > 0 && card.getSymbol() != block) {
+                if(player.equals(playerList.get(0))) {
+                    handleBotsTurn();
+                }
+                return;
+            }
+            if (plus2Count> 0 && card.getSymbol() != plusTwo) {
+                if(player.equals(playerList.get(0))) {
+                    handleBotsTurn();
+                }
+                return;
+            }
             if (card.getSymbol() == block) blockCount++;
             if (card.getSymbol() == plusTwo) plus2Count++;
             player.playCard(card);
@@ -117,8 +137,8 @@ public class Game {
             }
             currentIndex += gameDirection;
             if (blockList.get((currentIndex+4)%4) > 0) {
-                currentIndex += gameDirection;
                 blockList.set((currentIndex+4)%4, blockList.get((currentIndex+4)%4) - 1);
+                currentIndex += gameDirection;
             }
             currentIndex = (currentIndex+4)%4;
             currentPlayer = playerList.get(currentIndex);
@@ -129,20 +149,7 @@ public class Game {
                 observer.notify(card, player, false);
             }
             if(player.equals(playerList.get(0))) {
-
-                if(currentPlayer != getMainPlayer()) {
-                    if (gameOver) return;
-                    czekaj(new Runnable() {
-                        @Override
-                        public void run() {
-                            playBot();
-                            if(currentPlayer != getMainPlayer())
-                            {
-                                if (gameOver) return;
-                                czekaj(this, 1500);
-                            }
-                        }}, 1500);
-                }
+                handleBotsTurn();
             }
 
         }
@@ -158,25 +165,47 @@ public class Game {
         }, delay);
     }
 
+    private void handleBotsTurn() {
+        if(currentPlayer != getMainPlayer()) {
+            if (gameOver) return;
+            czekaj(new Runnable() {
+                @Override
+                public void run() {
+                    playBot();
+                    if(currentPlayer != getMainPlayer())
+                    {
+                        if (gameOver) return;
+                        czekaj(this, 1500);
+                    }
+                }}, 1500);
+        }
+    }
+
     public void drawCard(Player player) {
         if(gameOver) return;
         if (player != currentPlayer) return;
-        if (blockCount > 0) {
-            blockList.set(currentIndex, blockList.get(currentIndex) + blockCount);
-            blockCount = 0;
-            return;
-        }
-        
-        if (plus2Count > 0) {
-            int temp = plus2Count;
-            plus2Count = 0;
-            for (int i = 0; i < temp; i++) drawCard(player);
-            blockCount = 0;
-            return;
-        }
         try {
-            Playable card = board.drawFromPile();
-            player.draw(card);
+            if (blockCount > 0) {
+                blockList.set(currentIndex, blockList.get(currentIndex) + blockCount - 1);
+                blockCount = 0;
+            } else if (plus2Count > 0) {
+                int temp = plus2Count;
+                plus2Count = 0;
+                for (int i = 0; i < temp; i++) {
+                    Playable card = board.drawFromPile();
+                    player.draw(card);
+                    for(HandManager observer : handObservers) {
+                        observer.notify(card, player, true);
+                    }
+                }
+//                blockCount = 0;
+            } else {
+                Playable card = board.drawFromPile();
+                player.draw(card);
+                for(HandManager observer : handObservers) {
+                    observer.notify(card, player, true);
+                }
+            }
             currentIndex += gameDirection;
             if (blockList.get((currentIndex+4)%4) > 0) {
                 currentIndex += gameDirection;
@@ -184,23 +213,8 @@ public class Game {
             }
             currentIndex = (currentIndex+4)%4;
             currentPlayer = playerList.get(currentIndex);
-            for(HandManager observer : handObservers) {
-                observer.notify(card, player, true);
-            }
             if(player.equals(playerList.get(0))) {
-                if(currentPlayer != getMainPlayer()) {
-                    if (gameOver) return;
-                    czekaj(new Runnable() {
-                        @Override
-                        public void run() {
-                            playBot();
-                            if(currentPlayer != getMainPlayer())
-                            {
-                                if (gameOver) return;
-                                czekaj(this, 1500);
-                            }
-                        }}, 1500);
-                }
+                handleBotsTurn();
             }
         } catch (NoMoreCardsInDeck e) {
             System.out.println("Game over. No more cards :(");
@@ -209,7 +223,7 @@ public class Game {
 
     public void ifSpecial(Playable card) {
         if(card.getSymbol() == block) {
-            blockCount++;
+//            blockCount++;
         }
         if(card.getSymbol() == reverse) {
             reverseGameDirection();
