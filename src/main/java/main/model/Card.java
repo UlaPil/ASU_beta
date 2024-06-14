@@ -7,7 +7,6 @@ public class Card implements Playable{
     public Card(Symbol symbol, Color color) {
         this.symbol = symbol;
         this.color = color;
-        this.hash = 17 * symbol.getHash()+ color.getHash();
     }
 
     public Symbol getSymbol() {

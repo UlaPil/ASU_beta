@@ -23,10 +23,6 @@ public class ReverseCard implements Playable {
         return card.getSymbol();
     }
 
-    public boolean equals(Object obj) {
-        return card.equals(obj);
-    }
-
     @Override
     public String toString () { return card.toString(); }
 }
