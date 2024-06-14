@@ -5,16 +5,15 @@ import java.util.*;
 import static main.model.Symbol.*;
 
 public class Board {
-    Stack<Playable> drawPile;
-    Stack<Playable> playPile;
+    ArrayList<Playable> drawPile;
+    ArrayList<Playable> playPile;
     Color topColor;
 
     public Board(Collection<Playable> cards) {
-        drawPile = new Stack<>();
-        playPile = new Stack<>();
+        drawPile = new ArrayList<>();
+        playPile = new ArrayList<>();
 
-        for (Playable card: cards)
-            drawPile.push(card);
+        drawPile.addAll(cards);
 
         shuffle();
 
@@ -33,7 +32,7 @@ public class Board {
     }
 
     public Playable getTopCard() {
-        return new Card(playPile.lastElement().getSymbol(), topColor);
+        return new Card(playPile.get(playPile.size() - 1).getSymbol(), topColor);
     }
 
     public void setTopColor(Color color) {
@@ -46,29 +45,46 @@ public class Board {
     }
 
     public void playOnBoard(Playable card) {
-        playPile.push(card);
+        playPile.add(card);
         topColor = card.getColor();
     }
 
     public Playable drawFromPile() throws NoMoreCardsInDeck {
         if (drawPile.isEmpty()) {
             if (refillDrawPile()) {
-                return drawPile.pop();
+                return drawPile.remove(drawPile.size() - 1);
             }
         } else {
-            return drawPile.pop();
+            return drawPile.remove(drawPile.size() - 1);
         }
         throw new NoMoreCardsInDeck();
     }
-
-    private boolean refillDrawPile() {
-        if (playPile.isEmpty() || playPile.size() == 1) return false;
-        Playable lastCard = playPile.pop();
-        while (!playPile.isEmpty()) {
-            drawPile.push(playPile.pop());
+    public void reset() {
+        while(!playPile.isEmpty()) {
+            drawPile.add(playPile.get(playPile.size() - 1));
+            playPile.remove(playPile.size() - 1);
         }
         shuffle();
-        playPile.push(lastCard);
+        try {
+            do {
+                playOnBoard(drawFromPile());
+            } while (List.of(block, changeColor, reverse, plusFour, plusTwo).contains(getTopCard().getSymbol()));
+        } catch (NoMoreCardsInDeck e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void addToPile(Collection<? extends Playable> cards) {
+        playPile.addAll(cards);
+    }
+    private boolean refillDrawPile() {
+        if (playPile.isEmpty() || playPile.size() == 1) return false;
+        Playable lastCard = playPile.remove(playPile.size() - 1);
+        while (!playPile.isEmpty()) {
+            drawPile.add(playPile.get(playPile.size() - 1));
+            playPile.remove(playPile.size() - 1);
+        }
+        shuffle();
+        playPile.add(lastCard);
         return true;
     }
 }
