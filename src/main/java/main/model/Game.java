@@ -1,15 +1,19 @@
 package main.model;
 
+import javafx.application.Platform;
 import main.viewModel.GameEndManager;
 import main.viewModel.HandManager;
 import main.viewModel.TopCardManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static main.model.Symbol.*;
 
 public class Game {
+    private Timer timer = new Timer();
     private ArrayList<TopCardManager> cardObservers;
     private ArrayList<HandManager> handObservers;
     private ArrayList<GameEndManager> endObservers;
@@ -125,13 +129,30 @@ public class Game {
                 observer.notify(card, player, false);
             }
             if(player.equals(playerList.get(0))) {
-                while(currentPlayer != getMainPlayer()) {
-                    if (gameOver) break;
-                    playBot();
+
+                if(currentPlayer != getMainPlayer()) {
+                    if (gameOver) return;
+                    czekaj(new Runnable() {
+                        @Override
+                        public void run() {
+                            playBot();
+                            if(currentPlayer != getMainPlayer())
+                                czekaj(this, 1500);
+                        }}, 1500);
                 }
             }
 
         }
+    }
+
+    private void czekaj(Runnable function, int delay) {
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                //TimerTask task = this;
+                Platform.runLater(function);
+            }
+        }, delay);
     }
 
     public void drawCard(Player player) {
@@ -164,9 +185,15 @@ public class Game {
                 observer.notify(card, player, true);
             }
             if(player.equals(playerList.get(0))) {
-                while(currentPlayer != getMainPlayer()) {
-                    if (gameOver) break;
-                    playBot();
+                if(currentPlayer != getMainPlayer()) {
+                    if (gameOver) return;
+                    czekaj(new Runnable() {
+                        @Override
+                        public void run() {
+                            playBot();
+                            if(currentPlayer != getMainPlayer())
+                                czekaj(this, 1500);
+                        }}, 1500);
                 }
             }
         } catch (NoMoreCardsInDeck e) {
