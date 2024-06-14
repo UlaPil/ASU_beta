@@ -24,18 +24,5 @@ public class ReverseCard implements Playable {
     }
 
     @Override
-    public int getHash() {
-        return card.getHash();
-    }
-
-    @Override
-    public void setHash(int hash) {
-        card.setHash(hash);
-    }
-    public boolean equals(Object obj) {
-        return card.equals(obj);
-    }
-
-    @Override
     public String toString () { return card.toString(); }
 }

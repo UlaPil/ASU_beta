@@ -16,17 +16,7 @@ public class ChangeColorCard implements Playable{
     @Override
     public Symbol getSymbol() { return card.getSymbol(); }
 
-    @Override
-    public int getHash() {
-        return card.getHash();
-    }
-    public boolean equals(Object obj) {
-        return card.equals(obj);
-    }
-    @Override
-    public void setHash(int hash) {
-        card.setHash(hash);
-    }
+
 
     public String toString() { return card.toString(); }
 }
