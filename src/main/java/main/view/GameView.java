@@ -30,6 +30,7 @@ public class GameView implements AsuScene {
     private Pane cross;
     private TopCardColor topCardColor = new TopCardColor();
     private Rectangle topCardColorRectangle;
+    private ImageView home;
     public HashMap<Player,BotHandView> botHands = new HashMap<>();
     public EventFactory eventFactory;
     public Player mainPlayer;
@@ -58,6 +59,7 @@ public class GameView implements AsuScene {
         addPlayerHand();
         addBotsHands();
         addText();
+        addHomeButton();
     }
 
     @Override
@@ -73,7 +75,17 @@ public class GameView implements AsuScene {
         root.setId("gameBg");
         scene.setFill(Color.TRANSPARENT);
     }
+    private void addHomeButton() {
+        home = new ImageView("/home.png");
+        home.setFitHeight(20);
+        home.setFitWidth(20);
+        home.setTranslateY(-0.465* HEIGHT);
+        home.setTranslateX(-0.48*WIDTH);
+        home.setOnMouseEntered(mouseDragEvent -> home.setCursor(Cursor.HAND));
+        home.setOnMouseExited(mouseDragEvent -> home.setCursor(Cursor.DEFAULT));
+        root.getChildren().add(home);
 
+    }
     private void addDrawPileButton() {
         ReversView card = new ReversView();
         ImageView button = card.getImageView();
@@ -149,7 +161,6 @@ public class GameView implements AsuScene {
             playBounceAnimation(cardView, 0);
         });
         adjustCardSpacing();
-        sortCards();
     }
 
     private void playBounceAnimation(ImageView cardView, double toY) {
@@ -160,10 +171,9 @@ public class GameView implements AsuScene {
     public void removeCardFromRobotHand(Player player) {
         botHands.get(player).removeCard();
     }
-    public void addCardToRobotHand(Player player) {
-        botHands.get(player).addCard();
-        ;
-    }
+
+    public void addCardToRobotHand(Player player) {botHands.get(player).addCard();}
+
     public void removeCardFromPlayerHand(CardDisplay card) {
         for(int i = 0 ; i < cardContainer.getChildren().size() ; i++) {
             if(cardContainer.getChildren().get(i) instanceof ImageView v) {
@@ -194,11 +204,6 @@ public class GameView implements AsuScene {
             card.setLayoutX(startX + i * (CARD_WIDTH + spacing));
         }
     }
-
-    public void sortCards() {
-        // TODO
-    }
-
     private void addBotsHands() {
         for(int i = 1 ; i < playerList.size() ; i++) {
             botHands.put(playerList.get(i), new BotHandView());
@@ -251,5 +256,11 @@ public class GameView implements AsuScene {
         cross.setOnMouseClicked(event);
         cross.setOnMouseEntered(mouseDragEvent -> cross.setCursor(Cursor.HAND));
         cross.setOnMouseExited(mouseDragEvent -> cross.setCursor(Cursor.DEFAULT));
+    }
+    public void reset() {
+        cardContainer.getChildren().clear();
+        for(int i = 1 ; i < playerList.size() ; i++) {
+            botHands.get(playerList.get(i)).getCardContainer().getChildren().clear();
+        }
     }
 }

@@ -73,7 +73,18 @@ public class AppInit {
     public EventHandler<MouseEvent> getSceneChanger(SceneName name ) {
         return e -> stage.setScene(Scenes.get(name).getScene());
     }
-
+    public EventHandler<MouseEvent> getGameStarter() {
+        return e -> {
+            game.reset();
+            gameView.reset();
+            try {
+                game.startGame();
+            } catch(NoMoreCardsInDeck ex) {
+                throw new RuntimeException(ex);
+            }
+            stage.setScene(Scenes.get(SceneName.PLAY).getScene());
+        };
+    }
     public EventHandler<MouseEvent> getCloser() {
         return e -> stage.close();
     }

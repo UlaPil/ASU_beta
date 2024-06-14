@@ -15,7 +15,9 @@
      -fx-background-position: center center;
      -fx-background-radius: 30;
 }
-
+#home {
+    -fx-image : url("home.png");
+}
 #colorPicker {
     -fx-background-size: cover; /* lub contain */
     -fx-background-repeat: no-repeat;
