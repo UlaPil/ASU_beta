@@ -103,8 +103,8 @@ public class Game {
     public void playCard(Player player, Playable card) {
         if(gameOver) return;
         if(card.isPlayable(board.getTopCard().getSymbol(),board.getTopCard().getColor()) && player==currentPlayer) {
-            //if (blockCount > 0 && card.getSymbol() != block) return;
-            //if (plus2Count> 0 && card.getSymbol() != plusTwo) return;
+            if (blockCount > 0 && card.getSymbol() != block) return;
+            if (plus2Count> 0 && card.getSymbol() != plusTwo) return;
 
             if (card.getSymbol() == block) blockCount++;
             if (card.getSymbol() == plusTwo) plus2Count++;
@@ -137,7 +137,10 @@ public class Game {
                         public void run() {
                             playBot();
                             if(currentPlayer != getMainPlayer())
+                            {
+                                if (gameOver) return;
                                 czekaj(this, 1500);
+                            }
                         }}, 1500);
                 }
             }
@@ -192,7 +195,10 @@ public class Game {
                         public void run() {
                             playBot();
                             if(currentPlayer != getMainPlayer())
+                            {
+                                if (gameOver) return;
                                 czekaj(this, 1500);
+                            }
                         }}, 1500);
                 }
             }
