@@ -1,33 +1,33 @@
 package main.view;
+
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
-
 import static main.model.Color.*;
 
 public class TopCardColor {
     private Rectangle rectangle;
 
-    public TopCardColor(double width, double height) {
-        rectangle = new Rectangle(width, height);
-        rectangle.setArcWidth(20);
-        rectangle.setArcHeight(20);
+    public TopCardColor() {
+        rectangle = new Rectangle(30, 30);
+        rectangle.setArcWidth(8);
+        rectangle.setArcHeight(8);
+        rectangle.setStroke(Color.WHITE);
+        rectangle.setStrokeWidth(3);
     }
 
     public Rectangle getRectangle() {
         return rectangle;
     }
 
-    public void setColor(Color colorType) {
+    public void setColor(main.model.Color colorType) {
         if (colorType.equals(red)) {
             rectangle.setFill(Color.RED);
         } else if (colorType.equals(blue)) {
-            rectangle.setFill(Color.BLUE);
+            rectangle.setFill(Color.valueOf("#007BC7"));
         } else if (colorType.equals(green)) {
-            rectangle.setFill(Color.GREEN);
+            rectangle.setFill(Color.valueOf("#23AC38"));
         } else if (colorType.equals(yellow)) {
             rectangle.setFill(Color.YELLOW);
         }
     }
-
-
 }

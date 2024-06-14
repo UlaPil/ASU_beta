@@ -10,5 +10,6 @@ public class TopCardObserver {
     }
     public void notify( Playable card) {
         gameView.setTopCard(new CardDisplay(card));
+        gameView.setTopColor(card.getColor());
     }
 }

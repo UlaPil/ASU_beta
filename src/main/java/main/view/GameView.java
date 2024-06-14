@@ -26,7 +26,10 @@ public class GameView implements AsuScene {
     private final StackPane root = new StackPane();
     private HBox cardContainer;
     private ImageView topCard;
+    private main.model.Color topColor;
     private Pane cross;
+    private TopCardColor topCardColor = new TopCardColor();
+    private Rectangle topCardColorRectangle;
     public HashMap<Player,BotHandView> botHands = new HashMap<>();
     public EventFactory eventFactory;
     public Player mainPlayer;
@@ -42,8 +45,13 @@ public class GameView implements AsuScene {
         scene.getStylesheets().addAll(Objects.requireNonNull(
                 this.getClass().getResource("/style.css")).toExternalForm());
         topCard = card.getImageView();
+        topColor = card.getCard().getColor();
         topCard.setTranslateY(HEIGHT/30);
-        root.getChildren().addAll(topCard);
+        topCardColorRectangle = topCardColor.getRectangle();
+        topCardColor.setColor(topColor);
+        topCardColorRectangle.setTranslateX(-65);
+        topCardColorRectangle.setTranslateY(0);
+        root.getChildren().addAll(topCard, topCardColorRectangle);
         setBackground();
         addExit();
         addDrawPileButton();
@@ -104,7 +112,13 @@ public class GameView implements AsuScene {
     public void setTopCard(CardDisplay card) {
         root.getChildren().remove(topCard);
         topCard = card.getImageView();
+
         root.getChildren().addAll(topCard);
+    }
+
+    public void setTopColor(main.model.Color color) {
+        topColor = color;
+        topCardColor.setColor(topColor);
     }
 
     private void addPlayerHand() {
