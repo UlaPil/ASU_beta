@@ -18,11 +18,9 @@ public class BotHandView {
     public void addCard() {
         ReversView card = new ReversView();
         ImageView cardView = card.getImageView();
-        cardView.setTranslateY(40);  // Start with an offset of 20 on the Y-axis
+        cardView.setTranslateY(40); 
         cardContainer.getChildren().add(cardView);
         adjustCardSpacing();
-
-        // Play bounce animation to return to the original position
         playBounceAnimation(cardView, 0, () -> {});
     }
 

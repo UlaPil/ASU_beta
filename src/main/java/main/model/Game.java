@@ -126,8 +126,6 @@ public class Game {
                 }
                 return;
             }
-            if (card.getSymbol() == block) blockCount++;
-            if (card.getSymbol() == plusTwo) plus2Count++;
             player.playCard(card);
             board.playOnBoard(card);
             ifSpecial(card);
@@ -198,7 +196,6 @@ public class Game {
                         observer.notify(card, player, true);
                     }
                 }
-//                blockCount = 0;
             } else {
                 Playable card = board.drawFromPile();
                 player.draw(card);
@@ -223,13 +220,13 @@ public class Game {
 
     public void ifSpecial(Playable card) {
         if(card.getSymbol() == block) {
-//            blockCount++;
+            blockCount++;
         }
         if(card.getSymbol() == reverse) {
             reverseGameDirection();
         }
         if(card.getSymbol() == plusTwo) {
-            plus2Count++;
+            plus2Count+=2;
         }
         if(card.getSymbol() == changeColor && currentPlayer != getMainPlayer()) {
             // TODO: bot musi wybrac kolor i zmienić kolor top karty
