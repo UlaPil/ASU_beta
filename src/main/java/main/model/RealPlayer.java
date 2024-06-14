@@ -1,5 +1,7 @@
 package main.model;
 
+import java.util.ArrayList;
+
 public class RealPlayer implements Player{
     public RealPlayer(String name) {
         this.name = name;
@@ -41,5 +43,15 @@ public class RealPlayer implements Player{
     @Override
     public int getHandSize() {
         return myHand.getSize();
+    }
+
+    @Override
+    public Hand getHand() {
+        return myHand;
+    }
+
+    @Override
+    public void clearHand() {
+        myHand.clear();
     }
 }

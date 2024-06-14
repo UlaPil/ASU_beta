@@ -8,7 +8,7 @@ public class Hand {
 
     @Override
     public String toString() {
-        cards.sort(new Comparator<Playable>() {
+        cards.sort(new Comparator<>() {
             @Override
             public int compare(Playable card1, Playable card2) {
                 int colorsCompare = card1.getColor().compareTo(card2.getColor());
@@ -46,5 +46,10 @@ public class Hand {
     public void removeFromHand(Playable card) {
         cards.remove(card);
     }
-
+    public ArrayList<Playable> getCards() {
+        return cards;
+    }
+    public void clear() {
+        cards.clear();
+    }
 }

@@ -1,5 +1,7 @@
 package main.model;
 
+import java.util.ArrayList;
+
 public interface Player {
     String getName();
     boolean didIWin();
@@ -8,4 +10,6 @@ public interface Player {
     String toString();
     Playable getCard(int i);
     int getHandSize();
+    Hand getHand();
+    void clearHand();
 }
