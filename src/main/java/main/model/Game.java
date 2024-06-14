@@ -154,11 +154,10 @@ public class Game {
         }
     }
 
-    private void czekaj(Runnable function, int delay) {
+    private void wait(Runnable function, int delay) {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                //TimerTask task = this;
                 Platform.runLater(function);
             }
         }, delay);
@@ -167,14 +166,14 @@ public class Game {
     private void handleBotsTurn() {
         if(currentPlayer != getMainPlayer()) {
             if (gameOver) return;
-            czekaj(new Runnable() {
+            wait(new Runnable() {
                 @Override
                 public void run() {
                     playBot();
                     if(currentPlayer != getMainPlayer())
                     {
                         if (gameOver) return;
-                        czekaj(this, 1500);
+                        Game.this.wait(this, 1500);
                     }
                 }}, 1500);
         }
@@ -230,8 +229,12 @@ public class Game {
             plus2Count+=2;
         }
         if(card.getSymbol() == changeColor && currentPlayer != getMainPlayer()) {
-            // TODO: bot musi wybrac kolor i zmienić kolor top karty
+            botChooseColor();
         }
+    }
+
+    public Color botChooseColor() {
+
     }
 
     public boolean gameOver() {
