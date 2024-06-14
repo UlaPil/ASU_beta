@@ -1,7 +1,10 @@
 package main.view;
 
+import javafx.animation.TranslateTransition;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 
 public class BotHandView {
     private final HBox cardContainer;
@@ -14,13 +17,31 @@ public class BotHandView {
 
     public void addCard() {
         ReversView card = new ReversView();
-        cardContainer.getChildren().add(card.getImageView());
+        ImageView cardView = card.getImageView();
+        cardView.setTranslateY(40);  // Start with an offset of 20 on the Y-axis
+        cardContainer.getChildren().add(cardView);
         adjustCardSpacing();
+
+        // Play bounce animation to return to the original position
+        playBounceAnimation(cardView, 0, () -> {});
+    }
+
+    private void playBounceAnimation(Node cardView, double toY, Runnable onFinished) {
+        TranslateTransition transition = new TranslateTransition(Duration.millis(300), cardView);
+        transition.setToY(toY);
+        transition.setOnFinished(event -> onFinished.run());
+        transition.play();
     }
 
     public void removeCard() {
-        cardContainer.getChildren().remove(0);
-        adjustCardSpacing();
+        if (cardContainer.getChildren().isEmpty()) {
+            return;
+        }
+        Node cardView = cardContainer.getChildren().get(0);
+        playBounceAnimation(cardView, -40, () -> {
+            cardContainer.getChildren().remove(cardView);
+            adjustCardSpacing();
+        });
     }
 
     public HBox getCardContainer() {
