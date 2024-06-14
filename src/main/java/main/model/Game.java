@@ -132,9 +132,6 @@ public class Game {
             board.playOnBoard(card);
             ifSpecial(card);
             gameOver = currentPlayer.didIWin();
-            if(gameOver) {
-                gameEndManager.notify(currentIndex);
-            }
             currentIndex += gameDirection;
             if (blockList.get((currentIndex+4)%4) > 0) {
                 blockList.set((currentIndex+4)%4, blockList.get((currentIndex+4)%4) - 1);
@@ -147,6 +144,9 @@ public class Game {
             }
             for(HandManager observer : handObservers) {
                 observer.notify(card, player, false);
+            }
+            if(gameOver) {
+                gameEndManager.notify(currentIndex);
             }
             if(player.equals(playerList.get(0))) {
                 handleBotsTurn();
@@ -292,5 +292,19 @@ public class Game {
 
     public int getModulo() {
         return modulo;
+    }
+
+    public void reset() {
+        for(Player player : playerList) {
+            board.addToPile(player.getHand().getCards());
+            player.clearHand();
+        }
+        board.reset();
+        currentIndex = 0;
+        blockCount = 0;
+        plus2Count = 0;
+        gameDirection = 1;
+        gameOver = false;
+        blockList.replaceAll(e -> 0);
     }
 }
