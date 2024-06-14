@@ -17,18 +17,6 @@ public class Card implements Playable{
     public Color getColor() {
         return color;
     }
-    public int getHash() {return hash;}
-    public void setHash(int i) {
-        this.hash += i*512 ;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if(obj instanceof Card o) {
-            return getHash() == o.getHash();
-        }
-        return false;
-    }
 
     @Override
     public boolean isPlayable(Symbol symbol, Color color) {

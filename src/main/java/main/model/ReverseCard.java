@@ -23,15 +23,6 @@ public class ReverseCard implements Playable {
         return card.getSymbol();
     }
 
-    @Override
-    public int getHash() {
-        return card.getHash();
-    }
-
-    @Override
-    public void setHash(int hash) {
-        card.setHash(hash);
-    }
     public boolean equals(Object obj) {
         return card.equals(obj);
     }
