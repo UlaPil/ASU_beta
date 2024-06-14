@@ -22,76 +22,58 @@ public class GenerateCards {
         for (int j = 0; j < 2;  j++) {
             for (int i = 1; i < 10; i++) {
                 Playable card = new Card(one.getSymbolOfNumber(i), red);
-                //card.setHash(j);
                 cards.add(card);
             }
             for (int i = 1; i < 10; i++) {
                 Playable card = new Card(one.getSymbolOfNumber(i), blue);
-                //card.setHash(j);
                 cards.add(card);
 
             }
             for (int i = 1; i < 10; i++) {
                 Playable card = new Card(one.getSymbolOfNumber(i), yellow);
-                //card.setHash(j);
                 cards.add(card);
             }
             for (int i = 1; i < 10; i++) {
                 Playable card = new Card(one.getSymbolOfNumber(i), green);
-                //card.setHash(j);
                 cards.add(card);
             }
         }
-            /*for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 2; i++) {
                 Playable reverseCard = new ReverseCard(red);
-                reverseCard.setHash(j);
                 cards.add(reverseCard);
                 Playable blockCard = new BlockCard(red);
-                blockCard.setHash(j);
                 cards.add(blockCard);
                 Playable plusTwoCard = new PlusTwoCard(red);
-                plusTwoCard.setHash(j);
                 cards.add(plusTwoCard);
             }
             for (int i = 0; i < 2; i++) {
                 Playable reverseCard = new ReverseCard(blue);
-                reverseCard.setHash(j);
                 cards.add(reverseCard);
                 Playable blockCard = new BlockCard(blue);
-                blockCard.setHash(j);
                 cards.add(blockCard);
                 Playable plusTwoCard = new PlusTwoCard(blue);
-                plusTwoCard.setHash(j);
                 cards.add(plusTwoCard);
             }
             for (int i = 0; i < 2; i++) {
                 Playable reverseCard = new ReverseCard(yellow);
-                reverseCard.setHash(j);
                 cards.add(reverseCard);
                 Playable blockCard = new BlockCard(yellow);
-                blockCard.setHash(j);
                 cards.add(blockCard);
                 Playable plusTwoCard = new PlusTwoCard(yellow);
-                plusTwoCard.setHash(j);
                 cards.add(plusTwoCard);
             }
             for (int i = 0; i < 2; i++) {
                 Playable reverseCard = new ReverseCard(green);
-                reverseCard.setHash(j);
                 cards.add(reverseCard);
                 Playable blockCard = new BlockCard(green);
-                blockCard.setHash(j);
                 cards.add(blockCard);
                 Playable plusTwoCard = new PlusTwoCard(green);
-                plusTwoCard.setHash(j);
                 cards.add(plusTwoCard);
             }
-            for (int i = 0; i < 2; i++) {
+           /* for (int i = 0; i < 2; i++) {
                 Playable changeColorCard = new ChangeColorCard();
-                changeColorCard.setHash(j);
                 cards.add(changeColorCard);
                 Playable plusFourCard = new PlusFourCard();
-                plusFourCard.setHash(j);
                 cards.add(plusFourCard);
             }
         }*/
