@@ -26,27 +26,7 @@ public enum Symbol {
     public boolean isSpecial() {
         return special;
     }
-    public int getHash() {
-        switch (this) {
-            case zero -> {return 1;}
-            case one -> {return 2;}
-            case two -> {return 3;}
-            case three -> {return 4;}
-            case four -> {return 5;}
-            case five -> {return 6;}
-            case six -> {return 7;}
-            case seven -> {return 8;}
-            case eight -> {return 9;}
-            case nine -> {return 10;}
-            case block -> {return 11;}
-            case plusTwo -> {return 12;}
-            case plusFour -> {return 13;}
-            case changeColor -> {return 14;}
-            case reverse -> {return 15;}
-            default -> {return -1;}
-        }
 
-    }
     public Symbol getSymbolOfNumber(int i) {
         if(i == 0) return zero;
         if(i == 1) return one;
