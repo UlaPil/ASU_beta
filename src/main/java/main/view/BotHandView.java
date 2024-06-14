@@ -18,7 +18,7 @@ public class BotHandView {
     public void addCard() {
         ReversView card = new ReversView();
         ImageView cardView = card.getImageView();
-        cardView.setTranslateY(40); 
+        cardView.setTranslateY(40);
         cardContainer.getChildren().add(cardView);
         adjustCardSpacing();
         playBounceAnimation(cardView, 0, () -> {});
