@@ -21,7 +21,6 @@ public class Game {
     private GameEndManager gameEndManager;
     private ArrayList<Player> playerList;
     private ArrayList<Integer> blockList;
-
     private Board board;
     private static List<Playable> cards = GenerateCards.getCardsList();
     public Player currentPlayer;
@@ -262,31 +261,17 @@ public class Game {
         cardObservers.add(observer);
     }
 
-    public void deleteCardObserver(TopCardManager observer) {
-        cardObservers.remove(observer);
-    }
-    public void addEndObserver(GameEndManager observer) {
-        endObservers.add(observer);
-    }
-    public void deleteEndObserver(GameEndManager observer) {
-        endObservers.remove(observer);
-    }
-
     public void addHandObserver(HandManager observer) {
         handObservers.add(observer);
-    }
-
-    public void deleteHandObserver(HandManager observer) {
-        handObservers.remove(observer);
     }
 
     public void setTopCard(Color color) {
         board.setTopColor(color);
     }
+
     public Playable getTopCard() {
         return board.getTopCard();
     }
-
 
     public Player getCurrentPlayer() {
         return currentPlayer;
