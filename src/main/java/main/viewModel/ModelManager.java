@@ -1,5 +1,6 @@
 package main.viewModel;
 
+import main.model.Color;
 import main.model.Game;
 import main.model.Playable;
 import main.model.Player;
@@ -17,6 +18,10 @@ public class ModelManager {
         try {
             game.drawCard(player);
         } catch (Exception e) {}
+    }
+
+    public void changeTopColor(Color color) {
+        game.setTopCard(color);
     }
 
 }

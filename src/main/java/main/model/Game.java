@@ -142,7 +142,7 @@ public class Game {
                 observer.notify(card, player, false);
             }
             for(TopCardManager observer : cardObservers) {
-                observer.notify(card);
+                observer.notify(board.getTopCard());
             }
             if(player.equals(playerList.get(0))) {
                 handleBotsTurn();
@@ -226,7 +226,8 @@ public class Game {
             plus2Count+=2;
         }
         if(card.getSymbol() == changeColor && currentPlayer != getMainPlayer()) {
-            botChooseColor();
+            Color color = botChooseColor();
+            board.setTopColor(color);
         }
     }
 
@@ -244,12 +245,13 @@ public class Game {
                 case red -> map.replace(red, map.get(red) + 1);
                 case green -> map.replace(green, map.get(green) + 1);
                 case yellow -> map.replace(yellow, map.get(yellow) + 1);
+                default -> {}
             }
             i++;
         }
         Color colorMaximum = blue;
         for(Color color :Color.values()) {
-            if(map.get(colorMaximum) < map.get(color)) colorMaximum = color;
+            if(color != wild && map.get(colorMaximum) < map.get(color)) colorMaximum = color;
         }
         return colorMaximum;
     }

@@ -70,13 +70,12 @@ public class GenerateCards {
                 Playable plusTwoCard = new PlusTwoCard(green);
                 cards.add(plusTwoCard);
             }
-           /* for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 4; i++) {
                 Playable changeColorCard = new ChangeColorCard();
                 cards.add(changeColorCard);
-                Playable plusFourCard = new PlusFourCard();
-                cards.add(plusFourCard);
+//                Playable plusFourCard = new PlusFourCard();
+//                cards.add(plusFourCard);
             }
-        }*/
         return cards;
     }
 }

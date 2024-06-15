@@ -122,6 +122,10 @@ public class GameView implements AsuScene {
         }
     }
 
+    public main.model.Color showColorPicker() {
+        return main.model.Color.blue;
+    }
+
     public void setTopCard(CardDisplay card) {
         root.getChildren().remove(topCard);
         topCard = card.getImageView();
