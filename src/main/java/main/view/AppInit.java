@@ -40,10 +40,11 @@ public class AppInit {
         //Menu
         Menu scene = (Menu)Scenes.get(SceneName.MENU);
         scene.setEvent(Menu.But.EXIT, getCloser());
-        scene.setEvent(Menu.But.PLAY, getSceneChanger(SceneName.PLAY));
+        scene.setEvent(Menu.But.PLAY, getGameStarter());
         //scene.setEvent(Menu.But.HISTORY, getSceneChanger(SceneName.HISTORY));
         GameView scene2 = (GameView)Scenes.get(SceneName.PLAY);
         scene2.defineExit(getCloser());
+        scene2.defineHome(getSceneChanger(SceneName.MENU));
     }
     private void initializeObservers() {
         viewModel.getTopCardManager().addObserver(new TopCardObserver(gameView));
