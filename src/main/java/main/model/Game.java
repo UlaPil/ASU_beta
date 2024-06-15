@@ -138,13 +138,12 @@ public class Game {
             }
             currentIndex = (currentIndex+4)%4;
             currentPlayer = playerList.get(currentIndex);
-            for(TopCardManager observer : cardObservers) {
-                observer.notify(card);
-            }
             for(HandManager observer : handObservers) {
                 observer.notify(card, player, false);
             }
-
+            for(TopCardManager observer : cardObservers) {
+                observer.notify(card);
+            }
             if(player.equals(playerList.get(0))) {
                 handleBotsTurn();
             }
@@ -171,9 +170,9 @@ public class Game {
                     if(currentPlayer != getMainPlayer())
                     {
                         if (gameOver) return;
-                        Game.this.wait(this, 1500);
+                        Game.this.wait(this, 1800);
                     }
-                }}, 1500);
+                }}, 1800);
         }
     }
 
