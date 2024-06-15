@@ -5,11 +5,9 @@ import main.viewModel.GameEndManager;
 import main.viewModel.HandManager;
 import main.viewModel.TopCardManager;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
+import static main.model.Color.*;
 import static main.model.Symbol.*;
 
 public class Game {
@@ -140,13 +138,12 @@ public class Game {
             }
             currentIndex = (currentIndex+4)%4;
             currentPlayer = playerList.get(currentIndex);
-            for(TopCardManager observer : cardObservers) {
-                observer.notify(card);
-            }
             for(HandManager observer : handObservers) {
                 observer.notify(card, player, false);
             }
-
+            for(TopCardManager observer : cardObservers) {
+                observer.notify(card);
+            }
             if(player.equals(playerList.get(0))) {
                 handleBotsTurn();
             }
@@ -154,11 +151,10 @@ public class Game {
         }
     }
 
-    private void czekaj(Runnable function, int delay) {
+    private void wait(Runnable function, int delay) {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                //TimerTask task = this;
                 Platform.runLater(function);
             }
         }, delay);
@@ -167,16 +163,16 @@ public class Game {
     private void handleBotsTurn() {
         if(currentPlayer != getMainPlayer()) {
             if (gameOver) return;
-            czekaj(new Runnable() {
+            wait(new Runnable() {
                 @Override
                 public void run() {
                     playBot();
                     if(currentPlayer != getMainPlayer())
                     {
                         if (gameOver) return;
-                        czekaj(this, 1500);
+                        Game.this.wait(this, 1800);
                     }
-                }}, 1500);
+                }}, 1800);
         }
     }
 
@@ -230,8 +226,32 @@ public class Game {
             plus2Count+=2;
         }
         if(card.getSymbol() == changeColor && currentPlayer != getMainPlayer()) {
-            // TODO: bot musi wybrac kolor i zmienić kolor top karty
+            botChooseColor();
         }
+    }
+
+    public Color botChooseColor() {
+        int i = 0;
+        HashMap<Color, Integer> map = new HashMap<>();
+        map.put(blue, 0);
+        map.put(red, 0);
+        map.put(yellow, 0);
+        map.put(green, 0);
+
+        while (i < currentPlayer.getHandSize()) {
+            switch (currentPlayer.getCard(i).getColor()) {
+                case blue -> map.replace(blue, map.get(blue) + 1);
+                case red -> map.replace(red, map.get(red) + 1);
+                case green -> map.replace(green, map.get(green) + 1);
+                case yellow -> map.replace(yellow, map.get(yellow) + 1);
+            }
+            i++;
+        }
+        Color colorMaximum = blue;
+        for(Color color :Color.values()) {
+            if(map.get(colorMaximum) < map.get(color)) colorMaximum = color;
+        }
+        return colorMaximum;
     }
 
     public boolean gameOver() {

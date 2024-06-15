@@ -21,11 +21,11 @@ public class BotHandView {
         cardView.setTranslateY(40);
         cardContainer.getChildren().add(cardView);
         adjustCardSpacing();
-        playBounceAnimation(cardView, 0, () -> {});
+        playBounceAnimation(cardView, 0, () -> {}, 300);
     }
 
-    private void playBounceAnimation(Node cardView, double toY, Runnable onFinished) {
-        TranslateTransition transition = new TranslateTransition(Duration.millis(300), cardView);
+    private void playBounceAnimation(Node cardView, double toY, Runnable onFinished, int time) {
+        TranslateTransition transition = new TranslateTransition(Duration.millis(time), cardView);
         transition.setToY(toY);
         transition.setOnFinished(event -> onFinished.run());
         transition.play();
@@ -36,10 +36,10 @@ public class BotHandView {
             return;
         }
         Node cardView = cardContainer.getChildren().get(0);
-        playBounceAnimation(cardView, -40, () -> {
+        playBounceAnimation(cardView, -60, () -> {
             cardContainer.getChildren().remove(cardView);
             adjustCardSpacing();
-        });
+        }, 500);
     }
 
     public HBox getCardContainer() {
