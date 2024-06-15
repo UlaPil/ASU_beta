@@ -1,11 +1,9 @@
 package main.view;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -13,15 +11,16 @@ import javafx.stage.StageStyle;
 
 import java.util.Objects;
 
-public class ColorPick extends Application {
+public class ColorPick extends Stage {
     private GridPane gridPane = new GridPane();
-    Scene scene;
-    @Override
-    public void start(Stage primaryStage) {
-        Button redButton = createColorButton("red", "-fx-background-color: red; -fx-font-weight: bold; -fx-text-fill: red;");
-        Button blueButton = createColorButton("blue", "-fx-background-color: blue; -fx-font-weight: bold; -fx-text-fill: blue;");
-        Button greenButton = createColorButton("green", "-fx-background-color: green; -fx-font-weight: bold; -fx-text-fill: green;");
-        Button yellowButton = createColorButton("yellow", "-fx-background-color: yellow; -fx-font-weight: bold; -fx-text-fill: yellow;");
+    private Scene scene;
+    private main.model.Color selectedColor;
+
+    public ColorPick() {
+        Button redButton = createColorButton("red", "-fx-background-color: red; -fx-font-weight: bold; -fx-text-fill: red;", main.model.Color.red);
+        Button blueButton = createColorButton("blue", "-fx-background-color: blue; -fx-font-weight: bold; -fx-text-fill: blue;", main.model.Color.blue);
+        Button greenButton = createColorButton("green", "-fx-background-color: green; -fx-font-weight: bold; -fx-text-fill: green;", main.model.Color.green);
+        Button yellowButton = createColorButton("yellow", "-fx-background-color: yellow; -fx-font-weight: bold; -fx-text-fill: yellow;", main.model.Color.yellow);
 
         int buttonSize = 150;
         redButton.setPrefSize(buttonSize, buttonSize);
@@ -43,11 +42,10 @@ public class ColorPick extends Application {
 
         scene = new Scene(gridPane, 300, 300);
         scene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("/style.css")).toExternalForm());
-        primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        this.setScene(scene);
+        this.initStyle(StageStyle.UNDECORATED);
+        this.initStyle(StageStyle.TRANSPARENT);
         setBackground();
-        primaryStage.show();
     }
 
     private void setBackground() {
@@ -59,16 +57,17 @@ public class ColorPick extends Application {
         scene.setFill(Color.TRANSPARENT);
     }
 
-    private Button createColorButton(String colorName, String style) {
+    private Button createColorButton(String colorName, String style, main.model.Color color) {
         Button button = new Button(colorName);
         button.setStyle(style + " -fx-cursor: hand;");
         button.setOnAction(event -> {
+            selectedColor = color;
             ((Stage) button.getScene().getWindow()).close();
         });
         return button;
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public main.model.Color getSelectedColor() {
+        return selectedColor;
     }
 }

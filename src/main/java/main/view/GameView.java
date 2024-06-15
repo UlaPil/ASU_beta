@@ -123,7 +123,9 @@ public class GameView implements AsuScene {
     }
 
     public main.model.Color showColorPicker() {
-        return main.model.Color.blue;
+        ColorPick colorPick = new ColorPick();
+        colorPick.showAndWait();
+        return colorPick.getSelectedColor();
     }
 
     public void setTopCard(CardDisplay card) {
