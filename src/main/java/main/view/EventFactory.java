@@ -2,6 +2,7 @@ package main.view;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import main.model.Color;
 import main.model.Player;
 import main.viewModel.ModelManager;
 
@@ -16,5 +17,8 @@ public class EventFactory {
     }
     public EventHandler<MouseEvent> getDrawEvent( Player player) {
         return e-> modelManager.addToPlayerHand(player);
+    }
+    public void changeTopColor(Color color) {
+        modelManager.changeTopColor(color);
     }
 }
