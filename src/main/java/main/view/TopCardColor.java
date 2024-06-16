@@ -21,13 +21,13 @@ public class TopCardColor {
 
     public void setColor(main.model.Color colorType) {
         if (colorType.equals(red)) {
-            rectangle.setFill(Color.RED);
+            rectangle.setFill(Color.valueOf("#E83428"));
         } else if (colorType.equals(blue)) {
             rectangle.setFill(Color.valueOf("#007BC7"));
         } else if (colorType.equals(green)) {
             rectangle.setFill(Color.valueOf("#23AC38"));
         } else if (colorType.equals(yellow)) {
-            rectangle.setFill(Color.YELLOW);
+            rectangle.setFill(Color.valueOf("#FFF100"));
         }
     }
 }

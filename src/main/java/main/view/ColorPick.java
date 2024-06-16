@@ -17,10 +17,10 @@ public class ColorPick extends Stage {
     private main.model.Color selectedColor;
 
     public ColorPick() {
-        Button redButton = createColorButton("red", "-fx-background-color: red; -fx-font-weight: bold; -fx-text-fill: red;", main.model.Color.red);
-        Button blueButton = createColorButton("blue", "-fx-background-color: blue; -fx-font-weight: bold; -fx-text-fill: blue;", main.model.Color.blue);
-        Button greenButton = createColorButton("green", "-fx-background-color: green; -fx-font-weight: bold; -fx-text-fill: green;", main.model.Color.green);
-        Button yellowButton = createColorButton("yellow", "-fx-background-color: yellow; -fx-font-weight: bold; -fx-text-fill: yellow;", main.model.Color.yellow);
+        Button redButton = createColorButton("red", "-fx-background-color: #E83428; -fx-font-weight: bold; -fx-text-fill: #E83428;", main.model.Color.red);
+        Button blueButton = createColorButton("blue", "-fx-background-color: #007BC7; -fx-font-weight: bold; -fx-text-fill: #007BC7;", main.model.Color.blue);
+        Button greenButton = createColorButton("green", "-fx-background-color: #23AC38; -fx-font-weight: bold; -fx-text-fill: #23AC38;", main.model.Color.green);
+        Button yellowButton = createColorButton("yellow", "-fx-background-color: #FFF100; -fx-font-weight: bold; -fx-text-fill: #FFF100;", main.model.Color.yellow);
 
         int buttonSize = 150;
         redButton.setPrefSize(buttonSize, buttonSize);
