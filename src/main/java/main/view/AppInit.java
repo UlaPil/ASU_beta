@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.model.Game;
 import main.model.NoMoreCardsInDeck;
+import main.view.Game.*;
+import main.view.Menu.HistoryView;
+import main.view.Menu.Menu;
 import main.viewModel.TopCardManager;
 import main.viewModel.ViewModelMain;
 

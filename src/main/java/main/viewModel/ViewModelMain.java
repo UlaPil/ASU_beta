@@ -1,7 +1,6 @@
 package main.viewModel;
 
 import main.model.Game;
-import main.view.GameView;
 
 public class ViewModelMain {
     private final HandManager handManager;

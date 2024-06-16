@@ -1,14 +1,17 @@
 package main.model;
 
 import javafx.application.Platform;
+import main.model.Cards.Color;
+import main.model.Cards.GenerateCards;
+import main.model.Cards.Playable;
 import main.viewModel.GameEndManager;
 import main.viewModel.HandManager;
 import main.viewModel.TopCardManager;
 
 import java.util.*;
 
-import static main.model.Color.*;
-import static main.model.Symbol.*;
+import static main.model.Cards.Color.*;
+import static main.model.Cards.Symbol.*;
 
 public class Game {
     private final Timer timer = new Timer();

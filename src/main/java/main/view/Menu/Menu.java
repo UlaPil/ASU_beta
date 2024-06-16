@@ -1,4 +1,4 @@
-package main.view;
+package main.view.Menu;
 
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -8,6 +8,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import main.view.AsuScene;
+import main.view.ExitButtonView;
 
 import java.util.*;
 

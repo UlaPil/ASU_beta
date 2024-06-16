@@ -1,4 +1,4 @@
-package main.view;
+package main.view.Game;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -14,13 +14,13 @@ import java.util.Objects;
 public class ColorPick extends Stage {
     private final GridPane gridPane = new GridPane();
     private final Scene scene;
-    private main.model.Color selectedColor;
+    private main.model.Cards.Color selectedColor;
 
     public ColorPick() {
-        Button redButton = createColorButton("red", "-fx-background-color: #E83428; -fx-font-weight: bold; -fx-text-fill: #E83428;", main.model.Color.red);
-        Button blueButton = createColorButton("blue", "-fx-background-color: #007BC7; -fx-font-weight: bold; -fx-text-fill: #007BC7;", main.model.Color.blue);
-        Button greenButton = createColorButton("green", "-fx-background-color: #23AC38; -fx-font-weight: bold; -fx-text-fill: #23AC38;", main.model.Color.green);
-        Button yellowButton = createColorButton("yellow", "-fx-background-color: #FFF100; -fx-font-weight: bold; -fx-text-fill: #FFF100;", main.model.Color.yellow);
+        Button redButton = createColorButton("red", "-fx-background-color: #E83428; -fx-font-weight: bold; -fx-text-fill: #E83428;", main.model.Cards.Color.red);
+        Button blueButton = createColorButton("blue", "-fx-background-color: #007BC7; -fx-font-weight: bold; -fx-text-fill: #007BC7;", main.model.Cards.Color.blue);
+        Button greenButton = createColorButton("green", "-fx-background-color: #23AC38; -fx-font-weight: bold; -fx-text-fill: #23AC38;", main.model.Cards.Color.green);
+        Button yellowButton = createColorButton("yellow", "-fx-background-color: #FFF100; -fx-font-weight: bold; -fx-text-fill: #FFF100;", main.model.Cards.Color.yellow);
 
         int buttonSize = 150;
         redButton.setPrefSize(buttonSize, buttonSize);
@@ -57,7 +57,7 @@ public class ColorPick extends Stage {
         scene.setFill(Color.TRANSPARENT);
     }
 
-    private Button createColorButton(String colorName, String style, main.model.Color color) {
+    private Button createColorButton(String colorName, String style, main.model.Cards.Color color) {
         Button button = new Button(colorName);
         button.setStyle(style + " -fx-cursor: hand;");
         button.setOnAction(event -> {
@@ -67,7 +67,7 @@ public class ColorPick extends Stage {
         return button;
     }
 
-    public main.model.Color getSelectedColor() {
+    public main.model.Cards.Color getSelectedColor() {
         return selectedColor;
     }
 }

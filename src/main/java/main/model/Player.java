@@ -1,5 +1,7 @@
 package main.model;
 
+import main.model.Cards.Playable;
+
 public interface Player {
     String getName();
     boolean didIWin();

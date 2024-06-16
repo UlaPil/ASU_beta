@@ -1,4 +1,4 @@
-package main.model;
+package main.model.Cards;
 
 public enum Color {
     red,

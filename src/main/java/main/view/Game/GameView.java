@@ -1,4 +1,4 @@
-package main.view;
+package main.view.Game;
 
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -11,6 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import main.model.Player;
+import main.view.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -21,11 +23,11 @@ public class GameView implements AsuScene {
     private PlayerHandDisplay playerHandDisplay;
     private final StackPane root = new StackPane();
     private ImageView topCard;
-    private main.model.Color topColor;
+    private main.model.Cards.Color topColor;
     private Pane cross;
     private final TopCardColor topCardColor = new TopCardColor();
     private ImageView home;
-    public HashMap<Player,BotHandView> botHands = new HashMap<>();
+    public HashMap<Player, BotHandView> botHands = new HashMap<>();
     public EventFactory eventFactory;
     public Player mainPlayer;
     public List<Player> playerList;
@@ -110,7 +112,7 @@ public class GameView implements AsuScene {
         }
     }
 
-    public main.model.Color showColorPicker() {
+    public main.model.Cards.Color showColorPicker() {
         ColorPick colorPick = new ColorPick();
         colorPick.showAndWait();
         return colorPick.getSelectedColor();
@@ -123,7 +125,7 @@ public class GameView implements AsuScene {
         root.getChildren().addAll(topCard);
     }
 
-    public void setTopColor(main.model.Color color) {
+    public void setTopColor(main.model.Cards.Color color) {
         topColor = color;
         topCardColor.setColor(topColor);
     }

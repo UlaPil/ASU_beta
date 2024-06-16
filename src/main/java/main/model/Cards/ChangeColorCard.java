@@ -1,11 +1,11 @@
-package main.model;
+package main.model.Cards;
 
-import static main.model.Color.wild;
-import static main.model.Symbol.plusFour;
+import static main.model.Cards.Color.wild;
+import static main.model.Cards.Symbol.changeColor;
 
-public class PlusFourCard implements Playable {
+public class ChangeColorCard implements Playable {
     private final Card card;
-    public PlusFourCard() { card = new Card(plusFour, wild); }
+    public ChangeColorCard() { card = new Card(changeColor, wild) ; }
 
     @Override
     public boolean isPlayable(Symbol symbol, Color color) { return true; }
@@ -16,6 +16,7 @@ public class PlusFourCard implements Playable {
     @Override
     public Symbol getSymbol() { return card.getSymbol(); }
 
-    @Override
+
+
     public String toString() { return card.toString(); }
 }

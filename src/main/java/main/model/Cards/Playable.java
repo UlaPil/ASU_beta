@@ -1,4 +1,4 @@
-package main.model;
+package main.model.Cards;
 //symbole : 0-9 cyfry
 
 public interface Playable {

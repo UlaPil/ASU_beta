@@ -1,4 +1,4 @@
-package main.view;
+package main.view.Game;
 
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
@@ -7,12 +7,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import main.model.Playable;
+import main.model.Cards.Playable;
 import main.model.Player;
+import main.view.EventFactory;
 
 import static main.view.AsuScene.HEIGHT;
 import static main.view.AsuScene.WIDTH;
-import static main.view.GameView.CARD_WIDTH;
+import static main.view.Game.GameView.CARD_WIDTH;
 
 import java.util.HashMap;
 

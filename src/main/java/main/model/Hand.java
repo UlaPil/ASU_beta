@@ -1,5 +1,7 @@
 package main.model;
 
+import main.model.Cards.Playable;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 

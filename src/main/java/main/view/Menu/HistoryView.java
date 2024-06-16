@@ -1,4 +1,4 @@
-package main.view;
+package main.view.Menu;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -11,11 +11,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
 import main.model.History;
+import main.view.AsuScene;
+import main.view.ExitButtonView;
+import main.view.HomeButton;
 import main.viewModel.HistorySerializer;
 
 import java.util.Objects;
 
-public class HistoryView implements AsuScene{
+public class HistoryView implements AsuScene {
     private final Pane root = new Pane();
     private final ScrollPane scrollPane = new ScrollPane();
     private final VBox content = new VBox();

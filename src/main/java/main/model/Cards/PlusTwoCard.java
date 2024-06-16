@@ -1,6 +1,6 @@
-package main.model;
+package main.model.Cards;
 
-import static main.model.Symbol.plusTwo;
+import static main.model.Cards.Symbol.plusTwo;
 
 public class PlusTwoCard implements Playable {
     private final Card card;

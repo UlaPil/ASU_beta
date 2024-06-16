@@ -1,6 +1,6 @@
-package main.model;
+package main.model.Cards;
 
-public class Card implements Playable{
+public class Card implements Playable {
     private final Symbol symbol;
     private final Color color;
     public Card(Symbol symbol, Color color) {

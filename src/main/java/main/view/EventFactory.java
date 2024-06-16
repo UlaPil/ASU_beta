@@ -2,8 +2,9 @@ package main.view;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import main.model.Color;
+import main.model.Cards.Color;
 import main.model.Player;
+import main.view.Game.CardDisplay;
 import main.viewModel.ModelManager;
 
 

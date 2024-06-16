@@ -1,6 +1,8 @@
 package main.model;
 
 
+import main.model.Cards.Playable;
+
 public class RealPlayer implements Player{
     public RealPlayer(String name) {
         this.name = name;

@@ -1,6 +1,6 @@
 package main.viewModel;
 
-import main.view.GameEndObserver;
+import main.view.Game.GameEndObserver;
 
 import java.time.LocalDateTime;
 

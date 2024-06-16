@@ -12,4 +12,9 @@ module ASU.beta {
     opens main.view to javafx.fxml;
     exports main.viewModel;
     opens main.viewModel to javafx.fxml;
+    exports main.view.Game;
+    opens main.view.Game to javafx.fxml;
+    exports main.view.Menu;
+    opens main.view.Menu to javafx.fxml;
+    exports main.model.Cards;
 }

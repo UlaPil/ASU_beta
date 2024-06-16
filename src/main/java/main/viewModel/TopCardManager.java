@@ -1,9 +1,9 @@
 package main.viewModel;
 
 
-import main.model.Playable;
-import main.view.GameView;
-import main.view.TopCardObserver;
+import main.model.Cards.Playable;
+import main.view.Game.GameView;
+import main.view.Game.TopCardObserver;
 
 import java.util.ArrayList;
 import java.util.List;

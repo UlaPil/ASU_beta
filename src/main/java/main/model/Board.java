@@ -1,8 +1,12 @@
 package main.model;
 
+import main.model.Cards.Card;
+import main.model.Cards.Color;
+import main.model.Cards.Playable;
+
 import java.util.*;
 
-import static main.model.Symbol.*;
+import static main.model.Cards.Symbol.*;
 
 public class Board {
     private final ArrayList<Playable> drawPile;

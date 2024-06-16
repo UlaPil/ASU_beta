@@ -1,11 +1,11 @@
-package main.model;
+package main.model.Cards;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static main.model.Color.*;
-import static main.model.Color.green;
-import static main.model.Symbol.one;
+import static main.model.Cards.Color.*;
+import static main.model.Cards.Color.green;
+import static main.model.Cards.Symbol.one;
 
 public class GenerateCards {
     private GenerateCards() {}

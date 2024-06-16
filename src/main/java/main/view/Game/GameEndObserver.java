@@ -1,4 +1,4 @@
-package main.view;
+package main.view.Game;
 
 public class GameEndObserver {
     private final Winner winner;

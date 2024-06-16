@@ -1,6 +1,6 @@
 package main.viewModel;
 
-import main.model.Color;
+import main.model.Cards.Color;
 import main.model.Game;
 
 public class TopColorManager {

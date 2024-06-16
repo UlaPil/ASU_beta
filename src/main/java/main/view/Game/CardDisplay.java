@@ -1,8 +1,8 @@
-package main.view;
+package main.view.Game;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
-import main.model.Playable;
+import main.model.Cards.Playable;
 
 public class CardDisplay {
     private final ImageView imageView;
