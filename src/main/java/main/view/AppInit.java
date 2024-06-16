@@ -46,7 +46,7 @@ public class AppInit {
         Menu scene = (Menu)Scenes.get(SceneName.MENU);
         scene.setEvent(Menu.But.EXIT, getCloser());
         scene.setEvent(Menu.But.PLAY, getGameStarter());
-        scene.setEvent(Menu.But.HISTORY, getSceneChanger(SceneName.HISTORY));
+        scene.setEvent(Menu.But.HISTORY, getHistoryOpener());
         //GameView
         GameView scene2 = (GameView)Scenes.get(SceneName.PLAY);
         scene2.defineExit(getCloser());
