@@ -12,8 +12,8 @@ import javafx.stage.StageStyle;
 import java.util.Objects;
 
 public class ColorPick extends Stage {
-    private GridPane gridPane = new GridPane();
-    private Scene scene;
+    private final GridPane gridPane = new GridPane();
+    private final Scene scene;
     private main.model.Color selectedColor;
 
     public ColorPick() {

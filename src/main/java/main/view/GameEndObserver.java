@@ -1,7 +1,5 @@
 package main.view;
 
-import main.model.Player;
-
 public class GameEndObserver {
     int index;
     Winner winner;

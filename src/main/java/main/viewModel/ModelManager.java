@@ -4,7 +4,6 @@ import main.model.Color;
 import main.model.Game;
 import main.model.Playable;
 import main.model.Player;
-import main.view.CardDisplay;
 
 public class ModelManager {
     public Game game;
@@ -17,7 +16,7 @@ public class ModelManager {
     public void addToPlayerHand(Player player) {
         try {
             game.drawCard(player);
-        } catch (Exception e) {}
+        } catch (Exception ignored) {}
     }
 
     public void changeTopColor(Color color) {

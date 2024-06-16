@@ -1,7 +1,5 @@
 package main.model;
 
-import java.util.ArrayList;
-
 public interface Player {
     String getName();
     boolean didIWin();

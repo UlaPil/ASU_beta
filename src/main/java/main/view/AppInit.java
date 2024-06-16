@@ -6,9 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.model.Game;
-import main.model.History;
 import main.model.NoMoreCardsInDeck;
-import main.viewModel.ModelManager;
 import main.viewModel.TopCardManager;
 import main.viewModel.ViewModelMain;
 
@@ -44,7 +42,7 @@ public class AppInit {
         Menu scene = (Menu)Scenes.get(SceneName.MENU);
         scene.setEvent(Menu.But.EXIT, getCloser());
         scene.setEvent(Menu.But.PLAY, getGameStarter());
-        scene.setEvent(Menu.But.HISTORY, getSceneChanger(SceneName.HISTORY));
+        scene.setEvent(Menu.But.HISTORY, getHistoryOpener());
         //GameView
         GameView scene2 = (GameView)Scenes.get(SceneName.PLAY);
         scene2.defineExit(getCloser());
