@@ -1,5 +1,6 @@
 package main.view.Menu;
 
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -48,10 +49,12 @@ public class HistoryView implements AsuScene {
         scrollPane.setId("scroll-pane");
         content.setId("content");
 
+        scrollPane.addEventFilter(MouseEvent.ANY, Event::consume);
+
         history = HistorySerializer.getHistory();
         for (Pair<String, Boolean> data : history.getHistory()) {
             MenuElement element = new MenuElement(data.getKey() + "                    " + (data.getValue() ? "VICTORY" : "DEFEAT"), 30);
-            element.setBgColor(data.getValue() ? Color.LIMEGREEN : Color.DARKRED);
+            element.setBgColor(data.getValue() ? Color.valueOf("#48C420") : Color.valueOf("#E81818"));
             element.setBgWidth(4 * WIDTH / 5 - 20);
             element.setBgHeight(HEIGHT / 9);
             content.getChildren().add(element);
@@ -62,7 +65,6 @@ public class HistoryView implements AsuScene {
     }
 
     private void setBg() {
-//        root.setId("bg");
         root.setStyle("-fx-background-color: #34353B;");
         Rectangle rectangle = new Rectangle(WIDTH, HEIGHT);
         rectangle.setArcHeight(60.0);
@@ -107,9 +109,9 @@ public class HistoryView implements AsuScene {
         content.getChildren().clear();
         history = HistorySerializer.getHistory();
         for (Pair<String, Boolean> data : history.getHistory()) {
-            MenuElement element = new MenuElement(data.getKey() + "                    " + (data.getValue() ? "VICTORY" : "DEFEAT"), 50);
-            element.setBgColor(data.getValue() ? Color.LIMEGREEN : Color.DARKRED);
-            element.setBgWidth(4 * WIDTH / 5);
+            MenuElement element = new MenuElement(data.getKey() + "                    " + (data.getValue() ? "VICTORY" : "DEFEAT"), 30);
+            element.setBgColor(data.getValue() ? Color.valueOf("#48C420") : Color.valueOf("#E81818"));
+            element.setBgWidth(4 * WIDTH / 5 - 20);
             element.setBgHeight(HEIGHT / 9);
             content.getChildren().add(element);
         }
