@@ -1,4 +1,4 @@
-package main.view;
+package main.view.Game;
 
 import main.model.Player;
 

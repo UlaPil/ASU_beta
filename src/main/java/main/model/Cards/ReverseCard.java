@@ -1,11 +1,12 @@
-package main.model;
+package main.model.Cards;
 
-import static main.model.Symbol.block;
+import static main.model.Cards.Symbol.reverse;
 
-public class BlockCard implements Playable{
-    Card card;
-    public BlockCard(Color color) {
-        card = new Card(block, color) ;
+public class ReverseCard implements Playable {
+    private final Card card;
+    public ReverseCard(Color color) {
+        card = new Card(reverse, color);
+
     }
     @Override
     public boolean isPlayable(Symbol symbol, Color color) {
@@ -22,6 +23,6 @@ public class BlockCard implements Playable{
         return card.getSymbol();
     }
 
-
-    public String toString() { return card.toString(); }
+    @Override
+    public String toString () { return card.toString(); }
 }

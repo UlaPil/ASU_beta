@@ -1,13 +1,12 @@
 package main.viewModel;
 
-import main.model.Color;
+import main.model.Cards.Color;
 import main.model.Game;
-import main.model.Playable;
+import main.model.Cards.Playable;
 import main.model.Player;
-import main.view.CardDisplay;
 
 public class ModelManager {
-    public Game game;
+    public final Game game;
     public ModelManager(Game game) { this.game = game;}
 
     public void removeFromPlayerHand(Player player, Playable card) {
@@ -17,7 +16,7 @@ public class ModelManager {
     public void addToPlayerHand(Player player) {
         try {
             game.drawCard(player);
-        } catch (Exception e) {}
+        } catch (Exception ignored) {}
     }
 
     public void changeTopColor(Color color) {

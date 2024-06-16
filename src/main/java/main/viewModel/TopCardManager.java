@@ -1,19 +1,18 @@
 package main.viewModel;
 
 
-import main.model.Playable;
-import main.view.GameView;
-import main.view.TopCardObserver;
+import main.model.Cards.Playable;
+import main.view.Game.GameView;
+import main.view.Game.TopCardObserver;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TopCardManager{
-    List<TopCardObserver> observers;
-    GameView gameView;
+    private final List<TopCardObserver> observers;
+
     public TopCardManager(GameView gameView) {
         observers = new ArrayList<>();
-        this.gameView = gameView;
     }
     public void addObserver(TopCardObserver observer) {observers.add(observer);}
     public void removeObserver(TopCardObserver observer) {observers.remove(observer);}

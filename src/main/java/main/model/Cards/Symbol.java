@@ -1,4 +1,4 @@
-package main.model;
+package main.model.Cards;
 
 public enum Symbol {
     block(true),
@@ -17,7 +17,7 @@ public enum Symbol {
     eight(false),
     nine(false);
 
-    boolean special;
+    final boolean special;
 
     Symbol(boolean spec) {
         special = spec;

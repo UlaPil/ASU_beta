@@ -1,6 +1,6 @@
 package main.viewModel;
 
-import main.model.Color;
+import main.model.Cards.Color;
 import main.model.Game;
 
 public class TopColorManager {
@@ -9,6 +9,6 @@ public class TopColorManager {
         this.game = game;
     }
     public void getTopColor(Color  color) {
-        game.getBoard().setTopColor(color);;
+        game.getBoard().setTopColor(color);
     }
 }

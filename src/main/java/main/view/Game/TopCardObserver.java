@@ -1,14 +1,14 @@
-package main.view;
+package main.view.Game;
 
 
-import main.model.Card;
-import main.model.Color;
-import main.model.Playable;
-import main.model.Symbol;
+import main.model.Cards.Card;
+import main.model.Cards.Color;
+import main.model.Cards.Playable;
+import main.model.Cards.Symbol;
 
 public class TopCardObserver {
-    GameView gameView;
-    TopCardObserver(GameView gameView) {
+    private final GameView gameView;
+    public TopCardObserver(GameView gameView) {
         this.gameView = gameView;
     }
     public void notify(Playable card) {

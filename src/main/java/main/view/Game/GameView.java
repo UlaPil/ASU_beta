@@ -1,4 +1,4 @@
-package main.view;
+package main.view.Game;
 
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import main.model.Player;
+import main.view.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,16 +19,15 @@ import java.util.Objects;
 
 public class GameView implements AsuScene {
     static final double CARD_WIDTH = 80;
-    Scene scene;
+    private final Scene scene;
     private PlayerHandDisplay playerHandDisplay;
     private final StackPane root = new StackPane();
     private ImageView topCard;
-    private main.model.Color topColor;
+    private main.model.Cards.Color topColor;
     private Pane cross;
-    private TopCardColor topCardColor = new TopCardColor();
-    private Rectangle topCardColorRectangle;
+    private final TopCardColor topCardColor = new TopCardColor();
     private ImageView home;
-    public HashMap<Player,BotHandView> botHands = new HashMap<>();
+    public HashMap<Player, BotHandView> botHands = new HashMap<>();
     public EventFactory eventFactory;
     public Player mainPlayer;
     public List<Player> playerList;
@@ -44,7 +44,7 @@ public class GameView implements AsuScene {
         topCard = card.getImageView();
         topColor = card.getCard().getColor();
         topCard.setTranslateY(HEIGHT/30);
-        topCardColorRectangle = topCardColor.getRectangle();
+        Rectangle topCardColorRectangle = topCardColor.getRectangle();
         topCardColor.setColor(topColor);
         topCardColorRectangle.setTranslateX(-65);
         topCardColorRectangle.setTranslateY(0);
@@ -76,11 +76,11 @@ public class GameView implements AsuScene {
         home = new HomeButton().get();
         home.setTranslateY(-0.465* HEIGHT);
         home.setTranslateX(-0.48*WIDTH);
+        root.getChildren().add(home);
     }
     private void addDrawPileButton() {
         ReversView card = new ReversView();
         ImageView button = card.getImageView();
-        double width = button.getFitWidth();
         double height = button.getFitHeight();
         StackPane stackPane = new StackPane(button);
         root.getChildren().add(stackPane);
@@ -112,7 +112,7 @@ public class GameView implements AsuScene {
         }
     }
 
-    public main.model.Color showColorPicker() {
+    public main.model.Cards.Color showColorPicker() {
         ColorPick colorPick = new ColorPick();
         colorPick.showAndWait();
         return colorPick.getSelectedColor();
@@ -125,7 +125,7 @@ public class GameView implements AsuScene {
         root.getChildren().addAll(topCard);
     }
 
-    public void setTopColor(main.model.Color color) {
+    public void setTopColor(main.model.Cards.Color color) {
         topColor = color;
         topCardColor.setColor(topColor);
     }

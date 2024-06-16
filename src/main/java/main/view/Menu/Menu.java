@@ -1,4 +1,4 @@
-package main.view;
+package main.view.Menu;
 
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -8,7 +8,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Rotate;
+import main.view.AsuScene;
+import main.view.ExitButtonView;
 
 import java.util.*;
 
@@ -21,7 +22,6 @@ public class Menu implements AsuScene {
     }
     private final Map<But, Node> Buttons = new HashMap<>();
     private final StackPane root = new StackPane();
-
     private final StackPane menuPanel = new StackPane();
     private final Scene scene = new Scene(root,WIDTH,HEIGHT);
     public Menu() {

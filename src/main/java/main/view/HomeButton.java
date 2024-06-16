@@ -4,7 +4,7 @@ import javafx.scene.Cursor;
 import javafx.scene.image.ImageView;
 
 public class HomeButton {
-        private ImageView home;
+    private final ImageView home;
     public HomeButton() {
         home = new ImageView("/home.png");
         home.setFitHeight(20);

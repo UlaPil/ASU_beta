@@ -1,17 +1,16 @@
-package main.view;
+package main.view.Game;
 
 import main.model.Player;
 
-import java.util.Observer;
 
-public class PlayerHandObserver implements HandObserver{
+public class PlayerHandObserver implements HandObserver {
     GameView view;
     Player player;
-    PlayerHandObserver(GameView view, Player player) {
+    public PlayerHandObserver(GameView view, Player player) {
         this.view = view;
         this.player = player;
     }
-    public void notify(CardDisplay card,Player player, boolean add) {
+    public void notify(CardDisplay card, Player player, boolean add) {
         if(!this.player.equals(player)) {
             return;
         }

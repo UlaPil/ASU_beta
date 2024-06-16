@@ -1,13 +1,12 @@
-package main.view;
+package main.view.Game;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
-import main.model.Color;
-import main.model.Playable;
+import main.model.Cards.Playable;
 
 public class CardDisplay {
-    ImageView imageView;
-    Playable card;
+    private final ImageView imageView;
+    private final Playable card;
     public CardDisplay(Playable card) {
        StringBuilder builder = new StringBuilder("/");
        builder.append(card.getColor().toString().charAt(0)).append("_");
@@ -30,7 +29,7 @@ public class CardDisplay {
        try {
            imageView = new ImageView(builder.toString());
        } catch(IllegalArgumentException e) {
-           throw new RuntimeException(builder.toString() + " spowodowal wywalenie programu");
+           throw new RuntimeException(builder + " spowodowal wywalenie programu");
        }
        imageView.setFitWidth(80);
        imageView.setPreserveRatio(true);

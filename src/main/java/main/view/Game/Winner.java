@@ -1,4 +1,4 @@
-package main.view;
+package main.view.Game;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -30,7 +30,7 @@ public class Winner {
             label.setText("Congratulations! You are the winner");
             imageView = new ImageView("winner.png");
         } else {
-            label.setText("I'm sorry, the winner is Bot " + i.toString());
+            label.setText("I'm sorry, the winner is Bot " + i);
             imageView = new ImageView("loser.png");
         }
         imageView.setFitHeight(150);
@@ -56,15 +56,4 @@ public class Winner {
         window.setScene(scene);
         window.showAndWait();
     }
-
-
-
-//    public static class DummyApp extends Application {
-//        @Override
-//        public void start(Stage primaryStage) {
-//            Winner.show(0);
-//            primaryStage.close();
-//        }
-//    }
-
 }

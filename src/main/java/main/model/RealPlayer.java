@@ -1,6 +1,7 @@
 package main.model;
 
-import java.util.ArrayList;
+
+import main.model.Cards.Playable;
 
 public class RealPlayer implements Player{
     public RealPlayer(String name) {
@@ -8,7 +9,7 @@ public class RealPlayer implements Player{
         myHand = new Hand();
     }
     private final String name;
-    private Hand myHand;
+    private final Hand myHand;
 
     @Override
     public String getName() {
@@ -21,7 +22,7 @@ public class RealPlayer implements Player{
     }
 
     @Override
-    public void draw(Playable card) throws NoMoreCardsInDeck {
+    public void draw(Playable card) {
         myHand.putInHand(card);
     }
 

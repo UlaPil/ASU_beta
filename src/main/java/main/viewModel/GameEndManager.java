@@ -1,11 +1,11 @@
 package main.viewModel;
 
-import main.view.GameEndObserver;
+import main.view.Game.GameEndObserver;
 
 import java.time.LocalDateTime;
 
 public class GameEndManager {
-    GameEndObserver gameEndObserver;
+    private final GameEndObserver gameEndObserver;
     public GameEndManager() {
         gameEndObserver = new GameEndObserver();
     }

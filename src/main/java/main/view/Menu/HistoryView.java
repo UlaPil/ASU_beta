@@ -1,4 +1,4 @@
-package main.view;
+package main.view.Menu;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -14,6 +14,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Pair;
 import main.model.History;
+import main.view.AsuScene;
+import main.view.ExitButtonView;
+import main.view.HomeButton;
 import main.viewModel.HistorySerializer;
 
 import java.util.Objects;

@@ -1,9 +1,8 @@
-package main.model;
+package main.model.Cards;
 
-public class Card implements Playable{
-    private Symbol symbol;
-    private Color color;
-    private int hash;
+public class Card implements Playable {
+    private final Symbol symbol;
+    private final Color color;
     public Card(Symbol symbol, Color color) {
         this.symbol = symbol;
         this.color = color;
@@ -19,10 +18,7 @@ public class Card implements Playable{
 
     @Override
     public boolean isPlayable(Symbol symbol, Color color) {
-        if(this.color.equals(color) || this.symbol.equals(symbol)) {
-            return true;
-        }
-        return false;
+        return this.color.equals(color) || this.symbol.equals(symbol);
     }
 
     @Override

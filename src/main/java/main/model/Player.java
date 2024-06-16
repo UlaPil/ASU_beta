@@ -1,6 +1,6 @@
 package main.model;
 
-import java.util.ArrayList;
+import main.model.Cards.Playable;
 
 public interface Player {
     String getName();

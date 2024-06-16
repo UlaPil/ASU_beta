@@ -1,4 +1,4 @@
-package main.view;
+package main.view.Menu;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;

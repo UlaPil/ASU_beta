@@ -1,13 +1,15 @@
 package main.view;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.model.Game;
-import main.model.History;
 import main.model.NoMoreCardsInDeck;
-import main.viewModel.ModelManager;
+import main.view.Game.*;
+import main.view.Menu.HistoryView;
+import main.view.Menu.Menu;
 import main.viewModel.TopCardManager;
 import main.viewModel.ViewModelMain;
 
@@ -25,7 +27,8 @@ public class AppInit {
     private final Game game;
     private final ViewModelMain viewModel;
     private final GameView gameView;
-    Stage stage;
+    private final Stage stage;
+
     public AppInit(Stage stage) {
         this.stage = stage;
         game = new Game("");
@@ -43,7 +46,7 @@ public class AppInit {
         Menu scene = (Menu)Scenes.get(SceneName.MENU);
         scene.setEvent(Menu.But.EXIT, getCloser());
         scene.setEvent(Menu.But.PLAY, getGameStarter());
-        scene.setEvent(Menu.But.HISTORY, getSceneChanger(SceneName.HISTORY));
+        scene.setEvent(Menu.But.HISTORY, getHistoryOpener());
         //GameView
         GameView scene2 = (GameView)Scenes.get(SceneName.PLAY);
         scene2.defineExit(getCloser());
@@ -65,6 +68,7 @@ public class AppInit {
                 }
         }
         game.addHandObserver(viewModel.getHandManager());
+        game.addEndObserver(viewModel.getGameEndManager());
     }
     public void init() {
         stage.setScene(Scenes.get(SceneName.MENU).getScene());
@@ -81,6 +85,13 @@ public class AppInit {
     public EventHandler<MouseEvent> getSceneChanger(SceneName name ) {
         return e -> stage.setScene(Scenes.get(name).getScene());
     }
+    public EventHandler<MouseEvent> getHistoryOpener() {
+        return e -> {
+            HistoryView historyView = (HistoryView)Scenes.get(SceneName.HISTORY);
+            historyView.update();
+            stage.setScene(historyView.getScene());
+        };
+    }
     public EventHandler<MouseEvent> getGameStarter() {
         return e -> {
             game.reset();
@@ -94,7 +105,7 @@ public class AppInit {
         };
     }
     public EventHandler<MouseEvent> getCloser() {
-        return e -> stage.close();
+        return e -> {Platform.exit(); System.exit(0);};
     }
 
 }

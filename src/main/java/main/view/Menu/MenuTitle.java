@@ -1,4 +1,4 @@
-package main.view;
+package main.view.Menu;
 
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Pane;
@@ -20,11 +20,5 @@ public class MenuTitle extends Pane {
         text.setFill(Color.ANTIQUEWHITE);
         text.setEffect(new DropShadow(50, Color.WHITE));
         getChildren().addAll(text);
-    }
-    public double getTitleWidth() {
-        return text.getLayoutBounds().getWidth();
-    }
-    public double getTitleHeight() {
-        return text.getLayoutBounds().getHeight();
     }
 }

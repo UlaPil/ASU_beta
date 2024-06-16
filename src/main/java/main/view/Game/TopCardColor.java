@@ -1,11 +1,11 @@
-package main.view;
+package main.view.Game;
 
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
-import static main.model.Color.*;
+import static main.model.Cards.Color.*;
 
 public class TopCardColor {
-    private Rectangle rectangle;
+    private final Rectangle rectangle;
 
     public TopCardColor() {
         rectangle = new Rectangle(30, 30);
@@ -19,7 +19,7 @@ public class TopCardColor {
         return rectangle;
     }
 
-    public void setColor(main.model.Color colorType) {
+    public void setColor(main.model.Cards.Color colorType) {
         if (colorType.equals(red)) {
             rectangle.setFill(Color.valueOf("#E83428"));
         } else if (colorType.equals(blue)) {
