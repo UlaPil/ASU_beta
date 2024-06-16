@@ -40,7 +40,6 @@ public class Game {
         board = new Board(cards);
         playerList = new ArrayList<>();
         blockList = new ArrayList<>();
-        gameEndManager = new GameEndManager();
         playerList.add(new RealPlayer(player));
         playerList.add(new RealPlayer("Bot1"));
         playerList.add(new RealPlayer("Bot2"));
