@@ -10,7 +10,8 @@ public class GameEndManager {
         gameEndObserver = new GameEndObserver();
     }
     public void notify(int index) {
-        HistorySerializer.addMatch(LocalDateTime.now().toString(), index == 0 );
+        LocalDateTime now = LocalDateTime.now();
+        HistorySerializer.addMatch(now.getYear() + "." + now.getMonthValue() + "." + now.getDayOfMonth() + " " + now.getHour() + ":" + now.getMinute(), index == 0 );
         gameEndObserver.notify(index);
     }
 }

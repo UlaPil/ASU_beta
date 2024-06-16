@@ -1,5 +1,8 @@
 # ASU_beta
-Autorzy: Anna Krzaczkowska grupa zajęciowa: 2 Szymon Trofimiec grupa zajęciowa: 3 Urszula Pilśniak grupa zajęciowa: 2
+Autorzy:\
+Anna Krzaczkowska grupa zajęciowa:\
+2 Szymon Trofimiec grupa zajęciowa: 3\
+Urszula Pilśniak grupa zajęciowa: 2\
 
 Opis Projektu: Naszym projektem jest gra karciana inspirowana "UNO"
 
@@ -10,9 +13,20 @@ Nasza aplikacja będzie implementowała grę w ASU single-player ( z trzema robo
 Funkcjonalności które udało się dodac:
 -
 - Estetyczny ekran Menu zawierający 2 przyciski : "Game" i "History" oraz customowy przycisk wyjscia z aplikacji
-- W pełni funkcjonalną grę w uno zawierającą wszystkie karty dostępne w oryginalnej grze,
+- W pełni funkcjonalną grę w uno zawierającą wszystkie karty dostępne w oryginalnej wersji gry,
 - Możliwość wyswietlania historii rozgrywki
+
+Informacje:
+-
+- W historii znajdują się 2 rozgrywki zagrane przez nas aby pokazać, jak wygląda historia. Aby zresetowac historie wystarczy usunac plik *src/main/resources/history.txt*. Przy zagraniu kolejnej gry plik utworzy się automatycznie.
+- Podczas rozgrywki po tym jak bot zagra karte blokujaca/ sprawiajaca ze gracz dobiera, w przypadku bycia celem tej karty należy nacisnąć na stos do dobierania aby kontynuować rozgrywkę.
+
+
+
 
 
 Biblioteki/Framework JavaFX
+
+
+Dziekujemy za uwage i życzymy wspaniałej rozgrywki w ASU.
 

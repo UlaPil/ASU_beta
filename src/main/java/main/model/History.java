@@ -14,6 +14,7 @@ public class History implements Serializable {
         history = new ArrayList<>();
     }
     public void add(String date, boolean ifWin) {
+
         history.add(new Pair<>(date, ifWin));
     }
     public ArrayList<Pair<String, Boolean>> getHistory() {
