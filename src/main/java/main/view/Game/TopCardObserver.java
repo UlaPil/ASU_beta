@@ -8,7 +8,7 @@ import main.model.Cards.Symbol;
 
 public class TopCardObserver {
     private final GameView gameView;
-    TopCardObserver(GameView gameView) {
+    public TopCardObserver(GameView gameView) {
         this.gameView = gameView;
     }
     public void notify(Playable card) {

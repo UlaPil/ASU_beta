@@ -6,7 +6,7 @@ import main.model.Player;
 public class PlayerHandObserver implements HandObserver {
     GameView view;
     Player player;
-    PlayerHandObserver(GameView view, Player player) {
+    public PlayerHandObserver(GameView view, Player player) {
         this.view = view;
         this.player = player;
     }

@@ -5,7 +5,7 @@ import main.model.Player;
 public class RobotHandObserver implements HandObserver {
     private final GameView view;
     private final Player player;
-    RobotHandObserver(GameView view, Player player) {
+    public RobotHandObserver(GameView view, Player player) {
         this.view = view;
         this.player = player;
     }
