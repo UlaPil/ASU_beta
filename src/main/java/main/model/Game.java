@@ -203,6 +203,7 @@ public class Game {
             else if (plus2Count > 0 || plus4Count > 0) {
                 int temp = plus2Count == 0 ? plus4Count : plus2Count;
                 plus2Count = 0;
+                plus4Count = 0;
                 for (int i = 0; i < temp; i++) {
                     Playable card = board.drawFromPile();
                     player.draw(card);
@@ -244,7 +245,7 @@ public class Game {
             plus2Count += 2;
         }
         if(card.getSymbol() == plusFour) {
-            plus2Count += 4;
+            plus4Count += 4;
         }
         if((card.getSymbol() == changeColor || card.getSymbol() == plusFour) && currentPlayer != getMainPlayer()) {
             Color color = botChooseColor();
