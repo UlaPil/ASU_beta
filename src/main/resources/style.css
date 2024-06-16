@@ -8,6 +8,15 @@
     -fx-background-color: transparent;
 }
 
+#scroll-pane {
+    -fx-background: #34353B;
+    -fx-background-color: #34353B;
+}
+
+#content {
+    -fx-background-color: #34353B;
+}
+
 #gameBg {
      -fx-background-image: url("GameBG.png");
      -fx-background-size: cover; /* lub contain */

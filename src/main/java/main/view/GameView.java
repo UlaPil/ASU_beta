@@ -1,8 +1,6 @@
 package main.view;
 
-import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
@@ -12,8 +10,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
-import main.model.Playable;
 import main.model.Player;
 
 import java.util.HashMap;
