@@ -5,7 +5,7 @@ import main.view.GameEndObserver;
 import java.time.LocalDateTime;
 
 public class GameEndManager {
-    GameEndObserver gameEndObserver;
+    private final GameEndObserver gameEndObserver;
     public GameEndManager() {
         gameEndObserver = new GameEndObserver();
     }

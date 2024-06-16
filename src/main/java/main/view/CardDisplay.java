@@ -5,8 +5,8 @@ import javafx.scene.shape.Rectangle;
 import main.model.Playable;
 
 public class CardDisplay {
-    ImageView imageView;
-    Playable card;
+    private final ImageView imageView;
+    private final Playable card;
     public CardDisplay(Playable card) {
        StringBuilder builder = new StringBuilder("/");
        builder.append(card.getColor().toString().charAt(0)).append("_");

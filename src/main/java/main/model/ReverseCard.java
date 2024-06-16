@@ -3,7 +3,7 @@ package main.model;
 import static main.model.Symbol.reverse;
 
 public class ReverseCard implements Playable {
-    Card card;
+    private final Card card;
     public ReverseCard(Color color) {
         card = new Card(reverse, color);
 

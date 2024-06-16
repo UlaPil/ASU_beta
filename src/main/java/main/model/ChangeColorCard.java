@@ -4,7 +4,7 @@ import static main.model.Color.wild;
 import static main.model.Symbol.changeColor;
 
 public class ChangeColorCard implements Playable{
-    Card card;
+    private final Card card;
     public ChangeColorCard() { card = new Card(changeColor, wild) ; }
 
     @Override

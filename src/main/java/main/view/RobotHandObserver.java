@@ -3,8 +3,8 @@ package main.view;
 import main.model.Player;
 
 public class RobotHandObserver implements HandObserver {
-    GameView view;
-    Player player;
+    private final GameView view;
+    private final Player player;
     RobotHandObserver(GameView view, Player player) {
         this.view = view;
         this.player = player;

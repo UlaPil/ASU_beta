@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TopCardManager{
-    List<TopCardObserver> observers;
-    GameView gameView;
+    private final List<TopCardObserver> observers;
+
     public TopCardManager(GameView gameView) {
         observers = new ArrayList<>();
-        this.gameView = gameView;
     }
     public void addObserver(TopCardObserver observer) {observers.add(observer);}
     public void removeObserver(TopCardObserver observer) {observers.remove(observer);}

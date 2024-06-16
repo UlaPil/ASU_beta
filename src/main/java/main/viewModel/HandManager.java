@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HandManager {
-    List<HandObserver> handObservers;
+    private final List<HandObserver> handObservers;
     public HandManager() {
         handObservers = new ArrayList<>();
     }
