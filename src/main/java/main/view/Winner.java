@@ -1,11 +1,9 @@
 package main.view;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -15,11 +13,10 @@ import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import javafx.stage.StageStyle;
 
-import java.util.Objects;
 
 public class Winner {
 
-    public static void show(Integer i) {
+    public void show(Integer i) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setHeight(300);
@@ -62,12 +59,12 @@ public class Winner {
 
 
 
-    public static class DummyApp extends Application {
-        @Override
-        public void start(Stage primaryStage) {
-            Winner.show(0);
-            primaryStage.close();
-        }
-    }
+//    public static class DummyApp extends Application {
+//        @Override
+//        public void start(Stage primaryStage) {
+//            Winner.show(0);
+//            primaryStage.close();
+//        }
+//    }
 
 }
