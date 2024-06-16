@@ -19,6 +19,7 @@ public class Game {
     private int blockCount;
     private int plus2Count;
     private int plus4Count;
+    private GameEndManager gameEndManager;
     private ArrayList<Player> playerList;
     private ArrayList<Integer> blockList;
     private Board board;
@@ -40,6 +41,7 @@ public class Game {
         board = new Board(cards);
         playerList = new ArrayList<>();
         blockList = new ArrayList<>();
+        gameEndManager = new GameEndManager();
         playerList.add(new RealPlayer(player));
         playerList.add(new RealPlayer("Bot1"));
         playerList.add(new RealPlayer("Bot2"));
