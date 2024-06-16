@@ -27,7 +27,8 @@ public class MenuElement extends Pane{
 
     public double getBgWidth() { return bg.getWidth(); }
     public double getBgHeight() { return bg.getHeight(); }
-
+    public void setBgWidth(double width) { bg.setWidth(width); }
+    public void setBgHeight(double height) { bg.setHeight(height); }
     public void setBgColor(Color color) {bg.setFill(color);}
 
 }

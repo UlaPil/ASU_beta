@@ -5,6 +5,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.model.Game;
+import main.model.History;
 import main.model.NoMoreCardsInDeck;
 import main.viewModel.ModelManager;
 import main.viewModel.TopCardManager;
@@ -29,10 +30,11 @@ public class AppInit {
         this.stage = stage;
         game = new Game("");
         viewModel = new ViewModelMain(game);
-        Scenes.put(SceneName.MENU, new Menu());
         gameView = new GameView(new CardDisplay(game.getTopCard()),new EventFactory(viewModel.getModelManager()), game.getPlayerList());
         viewModel.setTopCardManager(new TopCardManager(gameView));
+        Scenes.put(SceneName.MENU, new Menu());
         Scenes.put(SceneName.PLAY, gameView );
+        Scenes.put(SceneName.HISTORY, new HistoryView());
         initializeScenes();
         initializeObservers();
     }
@@ -41,10 +43,15 @@ public class AppInit {
         Menu scene = (Menu)Scenes.get(SceneName.MENU);
         scene.setEvent(Menu.But.EXIT, getCloser());
         scene.setEvent(Menu.But.PLAY, getGameStarter());
-        //scene.setEvent(Menu.But.HISTORY, getSceneChanger(SceneName.HISTORY));
+        scene.setEvent(Menu.But.HISTORY, getSceneChanger(SceneName.HISTORY));
+        //GameView
         GameView scene2 = (GameView)Scenes.get(SceneName.PLAY);
         scene2.defineExit(getCloser());
         scene2.defineHome(getSceneChanger(SceneName.MENU));
+        //History
+        HistoryView scene3 = (HistoryView)Scenes.get(SceneName.HISTORY);
+        scene3.defineExit(getCloser());
+        scene3.defineHome(getSceneChanger(SceneName.MENU));
     }
     private void initializeObservers() {
         viewModel.getTopCardManager().addObserver(new TopCardObserver(gameView));
