@@ -18,7 +18,7 @@ public class Game {
     private int gameDirection;
     private int blockCount;
     private int plus2Count;
-    private GameEndManager gameEndManager;
+    private int plus4Count;
     private ArrayList<Player> playerList;
     private ArrayList<Integer> blockList;
     private Board board;
@@ -36,6 +36,7 @@ public class Game {
         currentIndex = 0;
         blockCount = 0;
         plus2Count = 0;
+        plus4Count = 0;
         board = new Board(cards);
         playerList = new ArrayList<>();
         blockList = new ArrayList<>();
@@ -90,6 +91,15 @@ public class Game {
             }
             return null;
         }
+        if (plus4Count > 0) {
+            while (i < player.getHandSize()) {
+                if (player.getCard(i).getSymbol().equals(plusFour)) {
+                    return player.getCard(i);
+                }
+                i++;
+            }
+            return null;
+        }
         if (blockCount > 0) {
             while (i < player.getHandSize()) {
                 if (player.getCard(i).getSymbol().equals(block)) {
@@ -118,6 +128,12 @@ public class Game {
                 return;
             }
             if (plus2Count> 0 && card.getSymbol() != plusTwo) {
+                if(player.equals(playerList.get(0))) {
+                    handleBotsTurn();
+                }
+                return;
+            }
+            if (plus4Count> 0 && card.getSymbol() != plusFour) {
                 if(player.equals(playerList.get(0))) {
                     handleBotsTurn();
                 }
@@ -192,7 +208,17 @@ public class Game {
                         observer.notify(card, player, true);
                     }
                 }
-            } else {
+            } else if (plus4Count > 0) {
+            int temp = plus4Count;
+            plus4Count = 0;
+            for (int i = 0; i < temp; i++) {
+                Playable card = board.drawFromPile();
+                player.draw(card);
+                for(HandManager observer : handObservers) {
+                    observer.notify(card, player, true);
+                }
+            }
+        } else {
                 Playable card = board.drawFromPile();
                 player.draw(card);
                 for(HandManager observer : handObservers) {
@@ -224,7 +250,10 @@ public class Game {
         if(card.getSymbol() == plusTwo) {
             plus2Count+=2;
         }
-        if(card.getSymbol() == changeColor && currentPlayer != getMainPlayer()) {
+        if(card.getSymbol() == plusFour) {
+            plus2Count+=4;
+        }
+        if((card.getSymbol() == changeColor || card.getSymbol() == plusFour) && currentPlayer != getMainPlayer()) {
             Color color = botChooseColor();
             board.setTopColor(color);
         }
