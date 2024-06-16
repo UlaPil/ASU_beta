@@ -23,7 +23,7 @@ public class GenerateCards {
             for (int j = 1; j < 10; j++) {
                 for(Color x : Color.values()) {
                     if(x == wild) continue;
-                    Playable card = new Card(one.getSymbolOfNumber(i), x);
+                    Playable card = new Card(one.getSymbolOfNumber(j), x);
                     cards.add(card);
                 }
             }
