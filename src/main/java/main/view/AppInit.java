@@ -24,7 +24,8 @@ public class AppInit {
     private final Game game;
     private final ViewModelMain viewModel;
     private final GameView gameView;
-    Stage stage;
+    private final Stage stage;
+
     public AppInit(Stage stage) {
         this.stage = stage;
         game = new Game("");

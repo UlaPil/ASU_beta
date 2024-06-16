@@ -7,7 +7,7 @@ import main.model.Playable;
 import main.model.Symbol;
 
 public class TopCardObserver {
-    GameView gameView;
+    private final GameView gameView;
     TopCardObserver(GameView gameView) {
         this.gameView = gameView;
     }

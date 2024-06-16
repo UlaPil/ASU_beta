@@ -3,7 +3,7 @@ package main.model;
 import static main.model.Symbol.block;
 
 public class BlockCard implements Playable{
-    Card card;
+    private final Card card;
     public BlockCard(Color color) {
         card = new Card(block, color) ;
     }

@@ -8,7 +8,7 @@ import main.viewModel.ModelManager;
 
 
 public class EventFactory {
-    ModelManager modelManager;
+    private final ModelManager modelManager;
     EventFactory(ModelManager modelManager) {
         this.modelManager = modelManager;
     }

@@ -4,7 +4,7 @@ import static main.model.Color.wild;
 import static main.model.Symbol.plusFour;
 
 public class PlusFourCard implements Playable {
-    Card card;
+    private final Card card;
     public PlusFourCard() { card = new Card(plusFour, wild); }
 
     @Override

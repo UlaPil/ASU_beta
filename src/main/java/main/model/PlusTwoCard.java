@@ -3,7 +3,7 @@ package main.model;
 import static main.model.Symbol.plusTwo;
 
 public class PlusTwoCard implements Playable {
-    Card card;
+    private final Card card;
     public PlusTwoCard(Color color) { card = new Card(plusTwo, color); }
 
     @Override

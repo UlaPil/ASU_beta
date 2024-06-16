@@ -17,14 +17,13 @@ import java.util.Objects;
 
 public class GameView implements AsuScene {
     static final double CARD_WIDTH = 80;
-    Scene scene;
+    private final Scene scene;
     private PlayerHandDisplay playerHandDisplay;
     private final StackPane root = new StackPane();
     private ImageView topCard;
     private main.model.Color topColor;
     private Pane cross;
     private final TopCardColor topCardColor = new TopCardColor();
-    private final Rectangle topCardColorRectangle;
     private ImageView home;
     public HashMap<Player,BotHandView> botHands = new HashMap<>();
     public EventFactory eventFactory;
@@ -43,7 +42,7 @@ public class GameView implements AsuScene {
         topCard = card.getImageView();
         topColor = card.getCard().getColor();
         topCard.setTranslateY(HEIGHT/30);
-        topCardColorRectangle = topCardColor.getRectangle();
+        Rectangle topCardColorRectangle = topCardColor.getRectangle();
         topCardColor.setColor(topColor);
         topCardColorRectangle.setTranslateX(-65);
         topCardColorRectangle.setTranslateY(0);
@@ -80,7 +79,6 @@ public class GameView implements AsuScene {
     private void addDrawPileButton() {
         ReversView card = new ReversView();
         ImageView button = card.getImageView();
-        double width = button.getFitWidth();
         double height = button.getFitHeight();
         StackPane stackPane = new StackPane(button);
         root.getChildren().add(stackPane);

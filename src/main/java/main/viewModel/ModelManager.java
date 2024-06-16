@@ -6,7 +6,7 @@ import main.model.Playable;
 import main.model.Player;
 
 public class ModelManager {
-    public Game game;
+    public final Game game;
     public ModelManager(Game game) { this.game = game;}
 
     public void removeFromPlayerHand(Player player, Playable card) {

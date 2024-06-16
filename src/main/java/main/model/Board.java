@@ -5,9 +5,9 @@ import java.util.*;
 import static main.model.Symbol.*;
 
 public class Board {
-    ArrayList<Playable> drawPile;
-    ArrayList<Playable> playPile;
-    Color topColor;
+    private final ArrayList<Playable> drawPile;
+    private final ArrayList<Playable> playPile;
+    private Color topColor;
 
     public Board(Collection<Playable> cards) {
         drawPile = new ArrayList<>();

@@ -21,10 +21,4 @@ public class MenuTitle extends Pane {
         text.setEffect(new DropShadow(50, Color.WHITE));
         getChildren().addAll(text);
     }
-    public double getTitleWidth() {
-        return text.getLayoutBounds().getWidth();
-    }
-    public double getTitleHeight() {
-        return text.getLayoutBounds().getHeight();
-    }
 }
