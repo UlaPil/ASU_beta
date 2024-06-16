@@ -1,5 +1,6 @@
 package main.view;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -65,6 +66,7 @@ public class AppInit {
                 }
         }
         game.addHandObserver(viewModel.getHandManager());
+        game.addEndObserver(viewModel.getGameEndManager());
     }
     public void init() {
         stage.setScene(Scenes.get(SceneName.MENU).getScene());
@@ -81,6 +83,13 @@ public class AppInit {
     public EventHandler<MouseEvent> getSceneChanger(SceneName name ) {
         return e -> stage.setScene(Scenes.get(name).getScene());
     }
+    public EventHandler<MouseEvent> getHistoryOpener() {
+        return e -> {
+            HistoryView historyView = (HistoryView)Scenes.get(SceneName.HISTORY);
+            historyView.update();
+            stage.setScene(historyView.getScene());
+        };
+    }
     public EventHandler<MouseEvent> getGameStarter() {
         return e -> {
             game.reset();
@@ -94,7 +103,7 @@ public class AppInit {
         };
     }
     public EventHandler<MouseEvent> getCloser() {
-        return e -> stage.close();
+        return e -> {Platform.exit(); System.exit(0);};
     }
 
 }

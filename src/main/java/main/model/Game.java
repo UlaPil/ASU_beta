@@ -11,20 +11,20 @@ import static main.model.Color.*;
 import static main.model.Symbol.*;
 
 public class Game {
-    private Timer timer = new Timer();
-    private ArrayList<TopCardManager> cardObservers;
-    private ArrayList<HandManager> handObservers;
-    private ArrayList<GameEndManager> endObservers;
+    private final Timer timer = new Timer();
+    private final ArrayList<TopCardManager> cardObservers;
+    private final ArrayList<HandManager> handObservers;
+    private final ArrayList<GameEndManager> endObservers;
     private int gameDirection;
     private int blockCount;
     private int plus2Count;
     private int plus4Count;
-    private ArrayList<Player> playerList;
-    private ArrayList<Integer> blockList;
-    private Board board;
-    private static List<Playable> cards = GenerateCards.getCardsList();
+    private final ArrayList<Player> playerList;
+    private final ArrayList<Integer> blockList;
+    private final Board board;
+    private final static List<Playable> cards = GenerateCards.getCardsList();
     public Player currentPlayer;
-    private int modulo;
+    private final int modulo;
     public int currentIndex;
     public boolean gameOver = false;
 
@@ -143,14 +143,16 @@ public class Game {
             ifSpecial(card);
             gameOver = currentPlayer.didIWin();
             if(gameOver) {
-                gameEndManager.notify(currentIndex);
+                for(GameEndManager gameEndManager : endObservers) {
+                    gameEndManager.notify(currentIndex);
+                }
             }
             currentIndex += gameDirection;
-            if (blockList.get((currentIndex+4)%4) > 0) {
-                blockList.set((currentIndex+4)%4, blockList.get((currentIndex+4)%4) - 1);
+            if (blockList.get((currentIndex + modulo) % modulo) > 0) {
+                blockList.set((currentIndex + modulo) % modulo, blockList.get((currentIndex + modulo) % modulo) - 1);
                 currentIndex += gameDirection;
             }
-            currentIndex = (currentIndex+4)%4;
+            currentIndex = (currentIndex + modulo) % modulo;
             currentPlayer = playerList.get(currentIndex);
             for(HandManager observer : handObservers) {
                 observer.notify(card, player, false);
@@ -197,8 +199,9 @@ public class Game {
             if (blockCount > 0) {
                 blockList.set(currentIndex, blockList.get(currentIndex) + blockCount - 1);
                 blockCount = 0;
-            } else if (plus2Count > 0) {
-                int temp = plus2Count;
+            }
+            else if (plus2Count > 0 || plus4Count > 0) {
+                int temp = plus2Count == 0 ? plus4Count : plus2Count;
                 plus2Count = 0;
                 for (int i = 0; i < temp; i++) {
                     Playable card = board.drawFromPile();
@@ -207,17 +210,8 @@ public class Game {
                         observer.notify(card, player, true);
                     }
                 }
-            } else if (plus4Count > 0) {
-            int temp = plus4Count;
-            plus4Count = 0;
-            for (int i = 0; i < temp; i++) {
-                Playable card = board.drawFromPile();
-                player.draw(card);
-                for(HandManager observer : handObservers) {
-                    observer.notify(card, player, true);
-                }
             }
-        } else {
+            else {
                 Playable card = board.drawFromPile();
                 player.draw(card);
                 for(HandManager observer : handObservers) {
@@ -225,11 +219,11 @@ public class Game {
                 }
             }
             currentIndex += gameDirection;
-            if (blockList.get((currentIndex+4)%4) > 0) {
+            if (blockList.get((currentIndex + modulo) % modulo) > 0) {
                 currentIndex += gameDirection;
-                blockList.set((currentIndex+4)%4, blockList.get((currentIndex+4)%4) - 1);
+                blockList.set((currentIndex + modulo) % modulo, blockList.get((currentIndex + modulo) % modulo) - 1);
             }
-            currentIndex = (currentIndex+4)%4;
+            currentIndex = (currentIndex + modulo) % modulo;
             currentPlayer = playerList.get(currentIndex);
             if(player.equals(playerList.get(0))) {
                 handleBotsTurn();
@@ -247,10 +241,10 @@ public class Game {
             reverseGameDirection();
         }
         if(card.getSymbol() == plusTwo) {
-            plus2Count+=2;
+            plus2Count += 2;
         }
         if(card.getSymbol() == plusFour) {
-            plus2Count+=4;
+            plus2Count += 4;
         }
         if((card.getSymbol() == changeColor || card.getSymbol() == plusFour) && currentPlayer != getMainPlayer()) {
             Color color = botChooseColor();
@@ -294,7 +288,9 @@ public class Game {
     public void addHandObserver(HandManager observer) {
         handObservers.add(observer);
     }
-
+    public void addEndObserver(GameEndManager observer) {
+        endObservers.add(observer);
+    }
     public void setTopCard(Color color) {
         board.setTopColor(color);
     }
@@ -323,9 +319,6 @@ public class Game {
         return board;
     }
 
-    public int getModulo() {
-        return modulo;
-    }
 
     public void reset() {
         for(Player player : playerList) {
@@ -338,6 +331,6 @@ public class Game {
         plus2Count = 0;
         gameDirection = 1;
         gameOver = false;
-        blockList.replaceAll(e -> 0);
+        Collections.fill(blockList, 0);
     }
 }

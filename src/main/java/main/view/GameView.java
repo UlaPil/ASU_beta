@@ -80,6 +80,7 @@ public class GameView implements AsuScene {
         home = new HomeButton().get();
         home.setTranslateY(-0.465* HEIGHT);
         home.setTranslateX(-0.48*WIDTH);
+        root.getChildren().add(home);
     }
     private void addDrawPileButton() {
         ReversView card = new ReversView();

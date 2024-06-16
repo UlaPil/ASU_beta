@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class Hand {
-    private ArrayList<Playable> cards = new ArrayList<>();
+    private final ArrayList<Playable> cards = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -29,7 +29,7 @@ public class Hand {
 
     public void putInHand(Playable card) {
         cards.add(card);
-        cards.sort(new Comparator<Playable>() {
+        cards.sort(new Comparator<>() {
             @Override
             public int compare(Playable card1, Playable card2) {
                 int colorsCompare = card1.getColor().compareTo(card2.getColor());

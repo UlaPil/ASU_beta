@@ -8,9 +8,9 @@ import static main.model.Color.green;
 import static main.model.Symbol.one;
 
 public class GenerateCards {
-    private static List<Playable> cards = new ArrayList<>();
     private GenerateCards() {}
     public static List<Playable> getCardsList() {
+        List<Playable> cards = new ArrayList<>();
         Playable cardR = new Card(one.getSymbolOfNumber(0), red);
         cards.add(cardR);
         Playable cardB = new Card(one.getSymbolOfNumber(0), blue);
@@ -19,63 +19,30 @@ public class GenerateCards {
         cards.add(cardY);
         Playable cardG = new Card(one.getSymbolOfNumber(0), green);
         cards.add(cardG);
-        for (int j = 0; j < 2;  j++) {
-            for (int i = 1; i < 10; i++) {
-                Playable card = new Card(one.getSymbolOfNumber(i), red);
-                cards.add(card);
-            }
-            for (int i = 1; i < 10; i++) {
-                Playable card = new Card(one.getSymbolOfNumber(i), blue);
-                cards.add(card);
-
-            }
-            for (int i = 1; i < 10; i++) {
-                Playable card = new Card(one.getSymbolOfNumber(i), yellow);
-                cards.add(card);
-            }
-            for (int i = 1; i < 10; i++) {
-                Playable card = new Card(one.getSymbolOfNumber(i), green);
-                cards.add(card);
+        for (int i = 0; i < 2;  i++) {
+            for (int j = 1; j < 10; j++) {
+                for(Color x : Color.values()) {
+                    if(x == wild) continue;
+                    Playable card = new Card(one.getSymbolOfNumber(i), x);
+                    cards.add(card);
+                }
             }
         }
-            for (int i = 0; i < 2; i++) {
-                Playable reverseCard = new ReverseCard(red);
-                cards.add(reverseCard);
-                Playable blockCard = new BlockCard(red);
-                cards.add(blockCard);
-                Playable plusTwoCard = new PlusTwoCard(red);
-                cards.add(plusTwoCard);
+        for (int i = 0; i < 2; i++) {
+            for (Color x : Color.values()) {
+                if(x == wild) continue;
+                Playable reverseCard = new ReverseCard(x);
+                Playable blockCard = new BlockCard(x);
+                Playable plusTwoCard = new PlusTwoCard(x);
+                cards.addAll(List.of(reverseCard, blockCard, plusTwoCard));
             }
-            for (int i = 0; i < 2; i++) {
-                Playable reverseCard = new ReverseCard(blue);
-                cards.add(reverseCard);
-                Playable blockCard = new BlockCard(blue);
-                cards.add(blockCard);
-                Playable plusTwoCard = new PlusTwoCard(blue);
-                cards.add(plusTwoCard);
-            }
-            for (int i = 0; i < 2; i++) {
-                Playable reverseCard = new ReverseCard(yellow);
-                cards.add(reverseCard);
-                Playable blockCard = new BlockCard(yellow);
-                cards.add(blockCard);
-                Playable plusTwoCard = new PlusTwoCard(yellow);
-                cards.add(plusTwoCard);
-            }
-            for (int i = 0; i < 2; i++) {
-                Playable reverseCard = new ReverseCard(green);
-                cards.add(reverseCard);
-                Playable blockCard = new BlockCard(green);
-                cards.add(blockCard);
-                Playable plusTwoCard = new PlusTwoCard(green);
-                cards.add(plusTwoCard);
-            }
-            for (int i = 0; i < 4; i++) {
-                Playable changeColorCard = new ChangeColorCard();
-                cards.add(changeColorCard);
-//                Playable plusFourCard = new PlusFourCard();
-//                cards.add(plusFourCard);
-            }
+        }
+        for (int i = 0; i < 4; i++) {
+            Playable changeColorCard = new ChangeColorCard();
+            cards.add(changeColorCard);
+            Playable plusFourCard = new PlusFourCard();
+            cards.add(plusFourCard);
+        }
         return cards;
     }
 }

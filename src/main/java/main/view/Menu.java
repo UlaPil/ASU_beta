@@ -21,7 +21,6 @@ public class Menu implements AsuScene {
     }
     private final Map<But, Node> Buttons = new HashMap<>();
     private final StackPane root = new StackPane();
-
     private final StackPane menuPanel = new StackPane();
     private final Scene scene = new Scene(root,WIDTH,HEIGHT);
     public Menu() {
