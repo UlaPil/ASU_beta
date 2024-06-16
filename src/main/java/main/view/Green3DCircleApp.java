@@ -20,7 +20,6 @@ public class Green3DCircleApp extends Application {
 
     private Circle circle;
     private RadialGradient gradient;
-    private Text text;
 
     @Override
     public void start(Stage primaryStage) {
@@ -34,7 +33,7 @@ public class Green3DCircleApp extends Application {
         circle.setCenterY(150);
 
         // Tworzenie tekstu i ustawienie go na środku koła
-        text = new Text("ASU");
+        Text text = new Text("ASU");
         text.setFont(new Font(35));
         text.setStyle("-fx-font-weight : bold");
         text.setFill(Color.WHITE);

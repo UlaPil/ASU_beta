@@ -4,11 +4,11 @@ import main.model.Game;
 import main.view.GameView;
 
 public class ViewModelMain {
-    private HandManager handManager;
-    private ModelManager modelManager;
+    private final HandManager handManager;
+    private final ModelManager modelManager;
     private TopCardManager topCardManager;
-    private TopColorManager topColorManager;
-    private GameEndManager gameEndManager;
+    private final TopColorManager topColorManager;
+    private final GameEndManager gameEndManager;
     public ViewModelMain(Game game) {
         handManager = new HandManager();
         modelManager = new ModelManager(game);

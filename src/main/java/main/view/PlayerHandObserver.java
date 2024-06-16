@@ -2,7 +2,6 @@ package main.view;
 
 import main.model.Player;
 
-import java.util.Observer;
 
 public class PlayerHandObserver implements HandObserver{
     GameView view;

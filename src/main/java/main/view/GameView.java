@@ -1,8 +1,6 @@
 package main.view;
 
-import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
@@ -12,10 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
-import main.model.Playable;
 import main.model.Player;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -28,8 +23,8 @@ public class GameView implements AsuScene {
     private ImageView topCard;
     private main.model.Color topColor;
     private Pane cross;
-    private TopCardColor topCardColor = new TopCardColor();
-    private Rectangle topCardColorRectangle;
+    private final TopCardColor topCardColor = new TopCardColor();
+    private final Rectangle topCardColorRectangle;
     private ImageView home;
     public HashMap<Player,BotHandView> botHands = new HashMap<>();
     public EventFactory eventFactory;

@@ -18,10 +18,10 @@ import java.util.HashMap;
 
 
 public class PlayerHandDisplay {
-    private Player mainPlayer;
-    private HBox cardContainer;
-    private EventFactory eventFactory;
-    private HashMap<ImageView, Playable> cardMap = new HashMap<>();
+    private final Player mainPlayer;
+    private final HBox cardContainer;
+    private final EventFactory eventFactory;
+    private final HashMap<ImageView, Playable> cardMap = new HashMap<>();
     public PlayerHandDisplay(EventFactory eventFactory, Player mainPlayer) {
         this.mainPlayer = mainPlayer;
         this.eventFactory = eventFactory;

@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import static main.model.Color.*;
 
 public class TopCardColor {
-    private Rectangle rectangle;
+    private final Rectangle rectangle;
 
     public TopCardColor() {
         rectangle = new Rectangle(30, 30);

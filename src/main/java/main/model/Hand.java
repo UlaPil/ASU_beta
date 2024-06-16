@@ -5,17 +5,10 @@ import java.util.Comparator;
 
 public class Hand {
     private final ArrayList<Playable> cards = new ArrayList<>();
-
+    private final Comparator<Playable> comparator = (a,b) -> a.getColor().compareTo(b.getColor()) == 0 ? a.getSymbol().compareTo(b.getSymbol()) : a.getColor().compareTo(b.getColor());
     @Override
     public String toString() {
-        cards.sort(new Comparator<>() {
-            @Override
-            public int compare(Playable card1, Playable card2) {
-                int colorsCompare = card1.getColor().compareTo(card2.getColor());
-                if (colorsCompare != 0) return colorsCompare;
-                return card1.getSymbol().compareTo(card2.getSymbol());
-            }
-        });
+        cards.sort(comparator);
         StringBuilder a = new StringBuilder();
         for(int i = 0 ; i < cards.size() ; i++) {
             a.append(i + 1).append(": ").append(cards.get(i)).append("\n");
@@ -29,14 +22,7 @@ public class Hand {
 
     public void putInHand(Playable card) {
         cards.add(card);
-        cards.sort(new Comparator<>() {
-            @Override
-            public int compare(Playable card1, Playable card2) {
-                int colorsCompare = card1.getColor().compareTo(card2.getColor());
-                if (colorsCompare != 0) return colorsCompare;
-                return card1.getSymbol().compareTo(card2.getSymbol());
-            }
-        });
+        cards.sort(comparator);
     }
 
     public Playable getFromHand(int index) {

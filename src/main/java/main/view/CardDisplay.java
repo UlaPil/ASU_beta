@@ -2,7 +2,6 @@ package main.view;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
-import main.model.Color;
 import main.model.Playable;
 
 public class CardDisplay {
@@ -30,7 +29,7 @@ public class CardDisplay {
        try {
            imageView = new ImageView(builder.toString());
        } catch(IllegalArgumentException e) {
-           throw new RuntimeException(builder.toString() + " spowodowal wywalenie programu");
+           throw new RuntimeException(builder + " spowodowal wywalenie programu");
        }
        imageView.setFitWidth(80);
        imageView.setPreserveRatio(true);

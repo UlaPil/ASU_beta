@@ -9,6 +9,6 @@ public class TopColorManager {
         this.game = game;
     }
     public void getTopColor(Color  color) {
-        game.getBoard().setTopColor(color);;
+        game.getBoard().setTopColor(color);
     }
 }
